@@ -1,10 +1,10 @@
 public class Character {
   private String name;
+  private String DATA;
   private PImage rightpos;
   private PImage leftpos; 
   private PImage uppos;
   private PImage downpos;
-  private PImage spritesheet;
   private float x, y;
 
   public Character(){
@@ -12,27 +12,36 @@ public class Character {
   }
   
   public Character(String name_){
-     setName(name);
+     setName(name_);
+  
   }
   
-  public void display(){
-    image(downpos,x,y);
+  public void display(int dir){
+    if (dir==37){
+      image(leftpos,x,y);
+    }else if (dir==38){
+      image(uppos,x,y);
+    }else if (dir==39){
+      image(rightpos,x,y);
+    }else if (dir==40){
+      image(downpos,x,y);
+    }
   }
   
-  public void setPosR(){
-    rightpos=spritesheet.get(0,0,0,500);
+  public void setPosR(int form){
+    rightpos=loadImage(name+"Data/"+name+"RightPosData/"+form+".png");
   }
   
-  public void setPosL(){
-    leftpos=spritesheet.get(0,0,50,100);
+  public void setPosL(int form){
+    leftpos=loadImage(name+"Data/"+name+"LeftPosData/"+form+".png");
   }
   
-  public void setPosU(){
-    uppos=spritesheet.get(0,0,50,100);
+  public void setPosU(int form){
+    uppos=loadImage(name+"Data/"+name+"UpPosData/"+form+".png");
   }
   
-  public void setPosD(int x, int y, int w, int h){
-    downpos=spritesheet.get(x,y,w,h);
+  public void setPosD(int form){
+    downpos=loadImage(name+"Data/"+name+"DownPosData/"+form+".png");
   }
   
   public void setX(float X){
@@ -47,10 +56,7 @@ public class Character {
     name=name_;
   }
   
-  public void setSpriteSheet(String sheetPath){
-    PImage sheet=loadImage(sheetPath);
-    spritesheet=sheet;
-  }
+ 
   
   public float getX(){
     return x;
