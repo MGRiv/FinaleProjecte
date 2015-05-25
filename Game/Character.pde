@@ -7,24 +7,32 @@ public class Character {
   private PImage spritesheet;
   private float x, y;
 
-  public Player(String name_){
+  public Character(){
+    this("Bob");
+  }
+  
+  public Character(String name_){
      setName(name);
   }
   
-  public void moveRight(){
-    rightpos=spritesheet.get(0,0,50,100);
+  public void display(){
+    image(downpos,x,y);
   }
   
-  public void ifMoveLeft(){
+  public void setPosR(){
+    rightpos=spritesheet.get(0,0,0,500);
+  }
+  
+  public void setPosL(){
     leftpos=spritesheet.get(0,0,50,100);
   }
   
-  public void ifMoveUp(){
+  public void setPosU(){
     uppos=spritesheet.get(0,0,50,100);
   }
   
-  public void ifMoveDown(){
-    downpos=spritesheet.get(0,0,50,100);
+  public void setPosD(int x, int y, int w, int h){
+    downpos=spritesheet.get(x,y,w,h);
   }
   
   public void setX(float X){
@@ -39,7 +47,8 @@ public class Character {
     name=name_;
   }
   
-  public void setSpriteSheet(PImage sheet){
+  public void setSpriteSheet(String sheetPath){
+    PImage sheet=loadImage(sheetPath);
     spritesheet=sheet;
   }
   
