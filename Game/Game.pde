@@ -2,18 +2,19 @@ private Player you;
 private boolean rightPressed, leftPressed, upPressed, downPressed;
 private boolean rightReleased, leftReleased, upReleased, downReleased;
 private int pos;
+//private float cx,cy;
 
 void setup() {
   you=new Player("Link");
   System.out.println(you.getName());
   pos=0;
-  size(800, 600);
+  size(600, 600);
 }
 
 void draw() {
   System.out.println(keyCode);
   processKeys();  
-  you.display(keyCode);
+  //you.display(keyCode);
   clear();
   you.display(keyCode);
   /*
@@ -29,35 +30,30 @@ void draw() {
 void processKeys() {
   if (downPressed) {
     you.setY(you.getY()+2.0);
-    you.setPosD(pos);
     pos++;
-    if (pos==9) {
-      pos=0;
-    }
   }
   if (upPressed) {
     you.setY(you.getY()-2.0);
-    you.setPosU(pos);
     pos++;
-    if (pos==9) {
-      pos=0;
-    }
   }
   if (rightPressed) {
     you.setX(you.getX()+2.0);
-    you.setPosR(pos);
     pos++;
-    if (pos==9) {
-      pos=0;
-    }
   }
   if (leftPressed) {
     you.setX(you.getX()-2.0);
-    you.setPosL(pos);
     pos++;
-    if (pos==9) {
-      pos=0;
-    }
+  }
+  
+  if (you.getA() > you.getX()) {
+    you.setPosL(pos % 10);
+  }else if(you.getA() < you.getX()){
+    you.setPosR(pos % 10);
+  }
+  if(you.getB() > you.getY()){
+    you.setPosU(pos % 10);
+  }else if(you.getB() < you.getY()){
+    you.setPosD(pos % 10);
   }
 }
 
@@ -79,16 +75,14 @@ void keyReleased() {
 void keyPressed() {
   if (keyCode==37) {
     leftPressed=true;
-  }
-  if (keyCode==38) {
+  } else if (keyCode==38) {
     upPressed=true;
-  }
-  if (keyCode==39) {
+  } else if (keyCode==39) {
     rightPressed=true;
-  }
-  if (keyCode==40) {
+  } else if (keyCode==40) {
     downPressed=true;
+  } else {
+    downPressed =  rightPressed = leftPressed = upPressed = false;
   }
-  
 }
 

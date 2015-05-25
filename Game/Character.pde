@@ -5,6 +5,7 @@ public class Character {
   private PImage leftpos; 
   private PImage uppos;
   private PImage downpos;
+  private float lastx,lasty;
   private float x, y;
 
   public Character(){
@@ -45,10 +46,12 @@ public class Character {
   }
   
   public void setX(float X){
+    lastx = x;
     x=X;
   }
   
   public void setY(float Y){
+    lasty = y;
     y=Y;
   }
   
@@ -57,6 +60,14 @@ public class Character {
   }
   
  
+  public float getA(){
+    return lastx;
+  }
+  
+  public float getB(){
+   return lasty; 
+  }
+  
   
   public float getX(){
     return x;
