@@ -2,7 +2,8 @@ public class Button {
   int xcor, ycor, h, w, radius;
   String title;
   boolean isClicked;
-  color c;
+  color bc,hc;
+  boolean hover;
 
 
   public Button() {
@@ -23,13 +24,16 @@ public class Button {
     c=255;
   }
 
-  void display() {
-    fill(c);
-    rect(xcor, ycor, w, h, radius);
-
-
+  void display(int q, int d) {
+    if (hover) {
+      fill(c);
+    } else {
+      fill(d);
+      rect(xcor, ycor, w, h, radius);
+    }
     textSize(h/4);
-    fill(0);
+
+    fill(q);
     text(title, xcor+xcor/128, ycor+ycor/64, w, h);
   }
 
@@ -47,6 +51,14 @@ public class Button {
 
   void setColor(color hue) {
     c=hue;
+  }
+
+  void highlight() {
+    fill(c);
+  }
+
+  void setHover(boolean mode) {
+    hover=mode;
   }
 
   boolean inRange() {
