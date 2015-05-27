@@ -11,8 +11,8 @@ Daily Log
 	
 	5/26
 
-		Fixed Bug with animation
-		Don't know what Tony is doing with the menu, but he's working on it
+		Michael-Fixed Bug with animation
+		Tony-Menu was a bit laggy, made it a bit smoother, added a button class.
 	
 Goals
 
