@@ -13,10 +13,13 @@ void setup() {
 
 void draw() {
   System.out.println(keyCode);
-  processKeys();  
+
   //you.display(keyCode);
   clear();
-  you.display(keyCode);
+  you.setDir(keyCode);
+
+  you.display();
+  processKeys(); 
   /*
   for (int x=15; x<320; x+=30) {
    you.setPosD(x, 75, 33, 33);
@@ -31,28 +34,36 @@ void processKeys() {
   if (downPressed) {
     you.setY(you.getY()+2.0);
     pos++;
+    for (int i=0; i<30; i++) {
+    }
   }
   if (upPressed) {
     you.setY(you.getY()-2.0);
     pos++;
+    for (int i=0; i<30; i++) {
+    }
   }
   if (rightPressed) {
     you.setX(you.getX()+2.0);
     pos++;
+    for (int i=0; i<30; i++) {
+    }
   }
   if (leftPressed) {
     you.setX(you.getX()-2.0);
     pos++;
+    for (int i=0; i<30; i++) {
+    }
   }
-  
+
   if (you.getA() > you.getX()) {
     you.setPosL(pos % 10);
-  }else if(you.getA() < you.getX()){
+  } else if (you.getA() < you.getX()) {
     you.setPosR(pos % 10);
   }
-  if(you.getB() > you.getY()){
+  if (you.getB() > you.getY()) {
     you.setPosU(pos % 10);
-  }else if(you.getB() < you.getY()){
+  } else if (you.getB() < you.getY()) {
     you.setPosD(pos % 10);
   }
 }
@@ -60,14 +71,11 @@ void processKeys() {
 void keyReleased() {
   if (keyCode==37) {
     leftPressed=false;
-  }
-  if (keyCode==38) {
+  } else if (keyCode==38) {
     upPressed=false;
-  }
-  if (keyCode==39) {
+  } else if (keyCode==39) {
     rightPressed=false;
-  }
-  if (keyCode==40) {
+  } else if (keyCode==40) {
     downPressed=false;
   }
 }
