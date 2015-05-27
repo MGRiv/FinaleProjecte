@@ -5,7 +5,6 @@ public class Character {
   private PImage leftpos; 
   private PImage uppos;
   private PImage downpos;
-  private float lastx, lasty;
   private float x, y;
   private int dir;
 
@@ -45,14 +44,12 @@ public class Character {
     downpos=loadImage(name+"Data/"+name+"DownPosData/"+form+".png");
   }
 
-  public void setX(float X) {
-    lastx = x;
-    x=X;
+  public void setX(float Nx) {
+    x=Nx;
   }
 
-  public void setY(float Y) {
-    lasty = y;
-    y=Y;
+  public void setY(float Ny) {
+    y=Ny;
   }
 
   public void setName(String name_) {
@@ -62,15 +59,9 @@ public class Character {
   public void setDir(int d){
     dir=d;
   }
-
-  public float getA() {
-    return lastx;
+  public int getDir(){
+   return dir; 
   }
-
-  public float getB() {
-    return lasty;
-  }
-
 
   public float getX() {
     return x;

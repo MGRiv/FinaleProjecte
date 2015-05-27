@@ -2,6 +2,7 @@ private Player you;
 private boolean rightPressed, leftPressed, upPressed, downPressed;
 private boolean rightReleased, leftReleased, upReleased, downReleased;
 private int pos;
+private int dirc;
 //private float cx,cy;
 
 void setup() {
@@ -12,12 +13,12 @@ void setup() {
 }
 
 void draw() {
-  System.out.println(keyCode);
+  //System.out.println(keyCode);
 
   //you.display(keyCode);
   clear();
-  you.setDir(keyCode);
-
+  //you.setDir(keyCode);
+  
   you.display();
   processKeys(); 
   /*
@@ -34,38 +35,45 @@ void processKeys() {
   if (downPressed) {
     you.setY(you.getY()+2.0);
     pos++;
-    for (int i=0; i<30; i++) {
-    }
+    dirc = 40;
+    //for (int i=0; i<30; i++) {
+    //}
   }
   if (upPressed) {
     you.setY(you.getY()-2.0);
     pos++;
-    for (int i=0; i<30; i++) {
-    }
+    dirc = 38;
+    //for (int i=0; i<30; i++) {
+    //}
   }
   if (rightPressed) {
     you.setX(you.getX()+2.0);
     pos++;
-    for (int i=0; i<30; i++) {
-    }
+    dirc = 39;
+    //for (int i=0; i<30; i++) {
+    //}
   }
   if (leftPressed) {
     you.setX(you.getX()-2.0);
     pos++;
-    for (int i=0; i<30; i++) {
-    }
+    dirc = 37;
+    //for (int i=0; i<30; i++) {
+    //}
   }
 
-  if (you.getA() > you.getX()) {
+  if (dirc == 37) {
     you.setPosL(pos % 10);
-  } else if (you.getA() < you.getX()) {
+    //System.out.println(you.getDir());
+  }else if (dirc == 39) {
     you.setPosR(pos % 10);
-  }
-  if (you.getB() > you.getY()) {
+    //System.out.println(you.getDir());
+  }else if(dirc == 38) {
     you.setPosU(pos % 10);
-  } else if (you.getB() < you.getY()) {
+  } else if (dirc == 40) {
     you.setPosD(pos % 10);
   }
+  you.setDir(dirc);
+  System.out.println(you.getDir());
 }
 
 void keyReleased() {
