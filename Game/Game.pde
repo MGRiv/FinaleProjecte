@@ -3,6 +3,7 @@ private boolean rightPressed, leftPressed, upPressed, downPressed;
 private boolean rightReleased, leftReleased, upReleased, downReleased;
 private int pos;
 private int dirc;
+private boolean moved;
 //private float cx,cy;
 
 void setup() {
@@ -10,29 +11,22 @@ void setup() {
   System.out.println(you.getName());
   pos=0;
   size(600, 600);
+  background(254);
+  you.setX(width/2);
+  you.setY(height/2);
+  you.setPosD(0);
+  dirc = 40;
 }
 
 void draw() {
-  //System.out.println(keyCode);
-
-  //you.display(keyCode);
-  clear();
-  //you.setDir(keyCode);
-  
+  background(254);
   you.display();
   processKeys(); 
-  /*
-  for (int x=15; x<320; x+=30) {
-   you.setPosD(x, 75, 33, 33);
-   you.setX(x);
-   // you.setY(165);
-   you.display();
-   }
-   */
 }
 
 void processKeys() {
   if (downPressed) {
+    if(you.getY() <= 576)
     you.setY(you.getY()+2.0);
     pos++;
     dirc = 40;
@@ -40,6 +34,7 @@ void processKeys() {
     //}
   }
   if (upPressed) {
+    if(you.getY() > 0)
     you.setY(you.getY()-2.0);
     pos++;
     dirc = 38;
@@ -47,6 +42,7 @@ void processKeys() {
     //}
   }
   if (rightPressed) {
+    if(you.getX() <= 578)
     you.setX(you.getX()+2.0);
     pos++;
     dirc = 39;
@@ -54,6 +50,7 @@ void processKeys() {
     //}
   }
   if (leftPressed) {
+    if(you.getX() > 0)
     you.setX(you.getX()-2.0);
     pos++;
     dirc = 37;
@@ -73,7 +70,7 @@ void processKeys() {
     you.setPosD(pos % 10);
   }
   you.setDir(dirc);
-  System.out.println(you.getDir());
+  System.out.println("" + (int)you.getX() + "," + (int)you.getY());
 }
 
 void keyReleased() {
