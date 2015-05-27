@@ -4,17 +4,15 @@ Team InsertTeamName
 
 Daily Log
 
-5/24-5/25
+	5/24-5/25
 
-	Semi-successful movement/animation
-	Semi-sucessful menu w/ temp art
+		Semi-successful movement/animation
+		Semi-sucessful menu w/ temp art
 	
-5/26
+	5/26
 
-	Fixed Bug with animation
-	Don't know what Tony is doing with the menu, but he's working on it
-	
-	
+		Fixed Bug with animation
+		Don't know what Tony is doing with the menu, but he's working on it
 	
 Goals
 
@@ -22,9 +20,6 @@ Goals
 	Cutscenes w/ appropriate data structure & code to read files
 	Half decent story
 	Art (maybe)
-	
-
-
 
 Current Achievements
 
