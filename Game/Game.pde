@@ -4,9 +4,11 @@ private boolean rightReleased, leftReleased, upReleased, downReleased;
 private int pos;
 private int dirc;
 private boolean moved;
+private Location current; 
 //private float cx,cy;
 
 void setup() {
+  current = new Location();
   you=new Player("Link");
   System.out.println(you.getName());
   pos=0;
@@ -26,7 +28,7 @@ void draw() {
 
 void processKeys() {
   if (downPressed) {
-    if(you.getY() <= 576)
+    if(you.getY() < current.getBD())
     you.setY(you.getY()+2.0);
     pos++;
     dirc = 40;
@@ -34,7 +36,7 @@ void processKeys() {
     //}
   }
   if (upPressed) {
-    if(you.getY() > 0)
+    if(you.getY() > current.getBU())
     you.setY(you.getY()-2.0);
     pos++;
     dirc = 38;
@@ -42,7 +44,7 @@ void processKeys() {
     //}
   }
   if (rightPressed) {
-    if(you.getX() <= 578)
+    if(you.getX() < current.getBR())
     you.setX(you.getX()+2.0);
     pos++;
     dirc = 39;
@@ -50,7 +52,7 @@ void processKeys() {
     //}
   }
   if (leftPressed) {
-    if(you.getX() > 0)
+    if(you.getX() > current.getBL())
     you.setX(you.getX()-2.0);
     pos++;
     dirc = 37;
