@@ -13,6 +13,10 @@ Daily Log
 
 		Michael-Fixed Bug with animation
 		Tony-Menu was a bit laggy, made it a bit smoother, added a button class.
+		
+	5/27
+		Michael-Added location class, began work on cutscene file reading
+		Tony-Cleaned up menu, transitions smoothed out, highlighting better (i think, just kinda glanced at it)
 	
 Goals
 
