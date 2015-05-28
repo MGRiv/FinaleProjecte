@@ -74,5 +74,24 @@ public class Character {
   public String getName() {
     return name;
   }
+  public void move(int a, int b){
+    while(Math.abs(x - a) != 0 || Math.abs(y - b) != 0){
+     if(Math.abs(x - a) != 0){
+       if(x > a){
+        x -= 2; 
+       }else{
+        x += 2;
+       }
+     }
+     if(Math.abs(y - b) != 0){
+       if(y > b){
+         y -= 2;
+       }else{
+         y += 2;
+       }
+     }
+     wait(17);
+    }
+  }
 }
 

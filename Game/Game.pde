@@ -1,3 +1,7 @@
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+
 private Player you;
 private boolean rightPressed, leftPressed, upPressed, downPressed;
 private boolean rightReleased, leftReleased, upReleased, downReleased;
@@ -118,7 +122,7 @@ void runFile() {
     String[] action = split(commands[q], ",");
     if (action[0].equals("MOVE")) {
       Character temp = findCharacter(action[1]);
-      temp.move((int)action[2], (int)action[3]);
+      temp.move(valueOf(action[2]), valueOf(action[3]));
     } else {
     }
   }
@@ -133,5 +137,10 @@ public Character findCharacter(String name) {
     }
   }
   return you;
+}
+
+public static void wait(int t) {
+  int s = millis();
+  while(millis() - s < t);
 }
 
