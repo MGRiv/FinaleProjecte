@@ -4,7 +4,10 @@ private boolean rightReleased, leftReleased, upReleased, downReleased;
 private int pos;
 private int dirc;
 private boolean moved;
-private Location current; 
+private Location current;
+private BufferedReader file;
+private String line;
+private int fcount;
 //private float cx,cy;
 
 void setup() {
@@ -23,37 +26,42 @@ void setup() {
 void draw() {
   background(254);
   you.display();
-  processKeys(); 
+  processKeys();
+  if (current.getScene()) {
+    current.setScene(false);
+    runFile();
+    fcount++;
+  }
 }
 
 void processKeys() {
   if (downPressed) {
-    if(you.getY() < current.getBD())
-    you.setY(you.getY()+2.0);
+    if (you.getY() < current.getBD())
+      you.setY(you.getY()+2.0);
     pos++;
     dirc = 40;
     //for (int i=0; i<30; i++) {
     //}
   }
   if (upPressed) {
-    if(you.getY() > current.getBU())
-    you.setY(you.getY()-2.0);
+    if (you.getY() > current.getBU())
+      you.setY(you.getY()-2.0);
     pos++;
     dirc = 38;
     //for (int i=0; i<30; i++) {
     //}
   }
   if (rightPressed) {
-    if(you.getX() < current.getBR())
-    you.setX(you.getX()+2.0);
+    if (you.getX() < current.getBR())
+      you.setX(you.getX()+2.0);
     pos++;
     dirc = 39;
     //for (int i=0; i<30; i++) {
     //}
   }
   if (leftPressed) {
-    if(you.getX() > current.getBL())
-    you.setX(you.getX()-2.0);
+    if (you.getX() > current.getBL())
+      you.setX(you.getX()-2.0);
     pos++;
     dirc = 37;
     //for (int i=0; i<30; i++) {
@@ -63,10 +71,10 @@ void processKeys() {
   if (dirc == 37) {
     you.setPosL(pos % 10);
     //System.out.println(you.getDir());
-  }else if (dirc == 39) {
+  } else if (dirc == 39) {
     you.setPosR(pos % 10);
     //System.out.println(you.getDir());
-  }else if(dirc == 38) {
+  } else if (dirc == 38) {
     you.setPosU(pos % 10);
   } else if (dirc == 40) {
     you.setPosD(pos % 10);
@@ -99,5 +107,31 @@ void keyPressed() {
   } else {
     downPressed =  rightPressed = leftPressed = upPressed = false;
   }
+}
+
+void runFile() {
+  file = createReader("scene"+fcount+".txt");
+  line = file.readLine();
+  String[] commands = split(line, "\n");
+  int q = 0;
+  while (q < commands.length) {
+    String[] action = split(commands[q], ",");
+    if (action[0].equals("MOVE")) {
+      Character temp = findCharacter(action[1]);
+      temp.move((int)action[2], (int)action[3]);
+    } else {
+    }
+  }
+}
+
+
+public Character findCharacter(String name) {
+  Character[] l = current.getNPC();
+  for (int p = 0; p < l.length; p++) {
+    if (l[p].getName().equals(name)) {
+      return l[p];
+    }
+  }
+  return you;
 }
 
