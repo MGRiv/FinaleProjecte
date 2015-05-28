@@ -70,21 +70,19 @@ void processButtons() {
 
 void processHovers() {
   if (START.inRange()) {
-    System.out.println(START.c+"");
+  
     START.setHover(true);
-    START.setColor(#1CFF00);
-    System.out.println(START.c+"");
+    START.setHighlight(#1CFF00);
+
   } else if (HELP.inRange()) {
     HELP.setHover(true);
-    HELP.setColor(#0035FF);
+    HELP.setHighlight(#0035FF);
   }
   if (!START.inRange()) {
     START.setHover(false);
-    START.setColor(255);
   }
   if (!HELP.inRange()) {
     HELP.setHover(false);
-    HELP.setColor(255);
   }
 }
 
