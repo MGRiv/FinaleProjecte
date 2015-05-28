@@ -4,6 +4,8 @@ String words;
 boolean zPressed;
 int nextset;
 ArrayList<String> sets;
+int mode;
+
 void setup() {
   sets=new ArrayList<String>(1);
   lastTime=millis();
@@ -12,6 +14,7 @@ void setup() {
   background(#FFFFFF);
   dialogue(words);
   nextset=0;
+  mode=0;
 }
 
 void draw() {
@@ -20,16 +23,20 @@ void draw() {
   // stroke(255, 300);
   // strokeWeight(4);
   // rect(width/24, height*3/4, width-width/12, height/5, 30);
-  fill(0);
-  stroke(255, 300);
-  strokeWeight(4);
-  rect(width/24, height*3/4, width-width/12, height/5, 30);
-  fill(255);
-  textSize(24);
-  text("YAY:", width/24+30, height*3/4+70);
-  textSize(16);
+  if (mode==0) {
+    fill(0);
+    stroke(255, 300);
+    strokeWeight(4);
+    rect(width/24, height*3/4, width-width/12, height/5, 30);
+    fill(255);
+    textSize(24);
+    text("YAY:", width/24+30, height*3/4+70);
+    textSize(16);
 
-  text(sets.get(nextset), width/24+100, height*3/4+30);
+    text(sets.get(nextset), width/24+100, height*3/4+30);
+  }else if (mode==1){
+    
+  }
   processKeys();
   // textSize(16);
   //text("zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz", width/24+100, height*3/4+30);
@@ -67,7 +74,12 @@ void processKeys() {
   if (zPressed) {
     zPressed=false;
     nextset++;
-    text(sets.get(nextset), width/24+100, height*3/4+30);
+    if (nextset==sets.size()){
+      mode=1;
+    }
+    if (mode==0){
+      text(sets.get(nextset), width/24+100, height*3/4+30);
+    }
   }
 }
 
