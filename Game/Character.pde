@@ -1,6 +1,7 @@
 public class Character {
   private String name;
   private String DATA;
+  private String text;
   private PImage rightpos;
   private PImage leftpos; 
   private PImage uppos;
@@ -59,6 +60,15 @@ public class Character {
   public void setDir(int d){
     dir=d;
   }
+  
+  public void setText(String t){
+    text=t;
+  }
+  
+  public String getText(){
+    return text;
+  }
+  
   public int getDir(){
    return dir; 
   }
