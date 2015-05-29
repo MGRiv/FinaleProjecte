@@ -19,8 +19,8 @@ Daily Log
 		Tony-Cleaned up menu, transitions smoothed out, highlighting better (i think, just kinda glanced at it), made dialogue demo.
 		
 	5/28
-		Continued file reading, and proceeded to merge menu and dialogue demo into the game file
-	
+		Michael-Continued file reading, and proceeded to merge menu and dialogue demo into the game file
+		Tony-added more sprites and attempted to attempt dialogue interaction.
 Goals
 
 	Fully functioning movement w/ animation & Interaction system w/ NPC's
