@@ -21,6 +21,7 @@ private Location current;
 private Scanner file;
 private String line;
 private int fcount;
+private Character[] firstNPCs;
 //-------------------------DIALOGUE
 long lastTime;
 String words;
@@ -31,8 +32,12 @@ ArrayList<String> sets;
 
 void setup() {
   //---------------------------GAMEPLAY
+  firstNPCs=new Character[10];
+  firstNPCs[0]=new Character("Boy1");
+  firstNPCs[0].setX(200);
+  firstNPCs[0].setY(200);
   size(600, 600);
-  current = new Location();
+  current = new Location(0,578,0,580);
   you=new Player("Link");
   System.out.println(you.getName());
   pos=0;
@@ -82,6 +87,11 @@ void draw() {
     HELP.display(bcolor, tcolor);
   } else if (mode == 1) {
     background(254);
+    PImage bg=loadImage("Locations/0.png");
+    image(bg,0,0,600,600);
+    firstNPCs[0].setDir(40);
+    firstNPCs[0].setPosD(0);
+    firstNPCs[0].display();
     you.display();
     processKeys();
     if (current.getScene()) {
