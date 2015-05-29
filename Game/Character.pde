@@ -90,8 +90,11 @@ public class Character {
          y += 2;
        }
      }
-     wait(17);
+     waitC(17);
     }
   }
 }
-
+public void waitC(int t) {
+  int s = millis();
+  while (millis () - s < t);
+}
