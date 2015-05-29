@@ -22,6 +22,7 @@ private Scanner file;
 private String line;
 private int fcount;
 private Character[] firstNPCs;
+private String zbutton;
 //-------------------------DIALOGUE
 long lastTime;
 String words;
@@ -36,8 +37,13 @@ void setup() {
   firstNPCs[0]=new Character("Boy1");
   firstNPCs[0].setX(200);
   firstNPCs[0].setY(200);
+  firstNPCs[0].setDir(40);
+  firstNPCs[0].setPosD(0);
+  firstNPCs[0].setText("Hi my name is Boy1. I am the first guinea pig of this world. Hi my name is Boy1. I am the first guinea pig of this world. Hi my name is Boy1. I am the first guinea pig of this world. Hi my name is Boy1. I am the first guinea pig of this world.");
+
+  zbutton="DoNothing";
   size(600, 600);
-  current = new Location(0,578,0,580);
+  current = new Location(0, 578, 0, 580);
   you=new Player("Link");
   System.out.println(you.getName());
   pos=0;
@@ -58,6 +64,7 @@ void setup() {
   textAlign(CENTER, CENTER);
   //-----------------------------DIALOGUE
   sets=new ArrayList<String>(1);
+  dialogue(firstNPCs[0].getText()); 
   lastTime=millis();
   nextset=0;
 }
@@ -88,12 +95,19 @@ void draw() {
   } else if (mode == 1) {
     background(254);
     PImage bg=loadImage("Locations/0.png");
-    image(bg,0,0,600,600);
-    firstNPCs[0].setDir(40);
-    firstNPCs[0].setPosD(0);
+    image(bg, 0, 0, 600, 600);
+
     firstNPCs[0].display();
+
     you.display();
     processKeys();
+    interact();
+    if (zbutton=="Talk") {
+      newTextBox(firstNPCs[0].getName());
+
+      text(sets.get(nextset), width/24+100, height*3/4+30);
+      talk();
+    }
     if (current.getScene()) {
       current.setScene(false);
       runFile();
@@ -143,41 +157,38 @@ void mouseReleased() {
 //--------------------------------------GAME STUFF
 
 void processKeys() {
+
   if (downPressed) {
-    if (you.getY() < current.getBD())
+    if (you.getY() < current.getBD()) {
       you.setY(you.getY()+2.0);
-    pos++;
-    dirc = 40;
+      pos++;
+      dirc = 40;
+    }
   }
   if (upPressed) {
-    if (you.getY() > current.getBU())
+    if (you.getY() > current.getBU()) {
       you.setY(you.getY()-2.0);
-    pos++;
-    dirc = 38;
+      pos++;
+      dirc = 38;
+    }
   }
   if (rightPressed) {
-    if (you.getX() < current.getBR())
+    if (you.getX() < current.getBR()) {
       you.setX(you.getX()+2.0);
-    pos++;
-    dirc = 39;
+      pos++;
+      dirc = 39;
+    }
   }
   if (leftPressed) {
-    if (you.getX() > current.getBL())
+    if (you.getX() > current.getBL()) {
       you.setX(you.getX()-2.0);
-    pos++;
-    dirc = 37;
+      pos++;
+      dirc = 37;
+    }
   }
   if (zPressed) {
-    zPressed=false;
-    nextset++;
-    if (nextset==sets.size()) {
-      mode=1;
-    }
-    if (mode==0) {
-      text(sets.get(nextset), width/24+100, height*3/4+30);
-    }
+    interact();
   }
-
   if (dirc == 37) {
     you.setPosL(pos % 10);
   } else if (dirc == 39) {
@@ -188,7 +199,7 @@ void processKeys() {
     you.setPosD(pos % 10);
   }
   you.setDir(dirc);
-  System.out.println("" + (int)you.getX() + "," + (int)you.getY());
+  System.out.println("" + (int)you.getX() + ", " + (int)you.getY());
 }
 
 void keyReleased() {
@@ -225,7 +236,7 @@ void runFile() {
   file = new Scanner("scene"+fcount+".txt");
   while (file.hasNextLine ()) {
     line = file.nextLine();
-    String[] commands = split(line, ",");
+    String[] commands = split(line, ", ");
     if (commands[0].equals("MOVE")) {
       Character temp = findCharacter(commands[1]);
       temp.move(Integer.valueOf(commands[2]), Integer.valueOf(commands[3]));
@@ -264,6 +275,19 @@ void dialogue(String text) {
   }
 }
 
+void talk() {
+  if (zPressed) {
+    zPressed=false;
+    nextset++;
+    if (nextset==sets.size()) {
+      zbutton="DoNothing";
+    }
+    if (zbutton=="Interact") {
+      text(sets.get(nextset), width/24+100, height*3/4+30);
+    }
+  }
+}
+
 void newTextBox(String person) {
   fill(0);
   stroke(255, 300);
@@ -272,6 +296,47 @@ void newTextBox(String person) {
   fill(255);
   textSize(24);
   text(person + ":", width/24+30, height*3/4+70);
+}
+
+void interact() {
+
+  if (you.getDir()==37) { //if you're facing left
+    if (firstNPCs[0].getX()==you.getX()-24 &&
+      firstNPCs[0].getY()<=you.getY()+14 && firstNPCs[0].getY()>=you.getY()-14) {
+
+
+      firstNPCs[0].setPosR(0);
+      firstNPCs[0].setDir(39);
+      zbutton="Talk";
+    }
+  } else if (you.getDir()==38) { //if you're facing up
+    if (firstNPCs[0].getY()==you.getY()-24 && 
+      firstNPCs[0].getX()<=you.getX()+14 && firstNPCs[0].getX()>=you.getX()-14) {
+
+
+      firstNPCs[0].setPosD(0);
+      firstNPCs[0].setDir(40);
+      zbutton="Talk";
+    }
+  } else if (you.getDir()==39) { //if you're facing right
+    if (firstNPCs[0].getX()==you.getX()+24 && 
+      firstNPCs[0].getY()<=you.getY()+14 && firstNPCs[0].getY()>=you.getY()-14) {
+
+
+      firstNPCs[0].setPosL(0);
+      firstNPCs[0].setDir(37);
+      zbutton="Talk";
+    }
+  } else if (you.getDir()==40) { //if you're facing down
+    if (firstNPCs[0].getY()==you.getY()+24 && 
+      firstNPCs[0].getX()<=you.getX()+14 && firstNPCs[0].getX()>=you.getX()-14) {
+
+
+      firstNPCs[0].setPosU(0);
+      firstNPCs[0].setDir(38);
+      zbutton="Talk";
+    }
+  }
 }
 
 public Character findCharacter(String name) {
