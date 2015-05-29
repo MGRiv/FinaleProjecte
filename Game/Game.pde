@@ -281,10 +281,15 @@ void talk() {
     nextset++;
     if (nextset==sets.size()) {
       zbutton="DoNothing";
+      nextset=0;
+     // sets=new ArrayList<String>(1);
     }
+    /*
     if (zbutton=="Interact") {
+      
       text(sets.get(nextset), width/24+100, height*3/4+30);
     }
+    */
   }
 }
 
