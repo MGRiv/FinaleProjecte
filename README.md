@@ -17,6 +17,9 @@ Daily Log
 	5/27
 		Michael-Added location class, began work on cutscene file reading
 		Tony-Cleaned up menu, transitions smoothed out, highlighting better (i think, just kinda glanced at it), made dialogue demo.
+		
+	5/28
+		Continued file reading, and proceeded to merge menu and dialogue demo into the game file
 	
 Goals
 
