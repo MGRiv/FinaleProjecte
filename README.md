@@ -21,6 +21,10 @@ Daily Log
 	5/28
 		Michael-Continued file reading, and proceeded to merge menu and dialogue demo into the game file
 		Tony-added more sprites and attempted to attempt dialogue interaction.
+		
+	5/29
+		Michael-Edited Text Alignment
+		Tony-expanded work on dialogue interaction
 Goals
 
 	Fully functioning movement w/ animation & Interaction system w/ NPC's
