@@ -104,8 +104,8 @@ void draw() {
     interact();
     if (zbutton=="Talk") {
       newTextBox(firstNPCs[0].getName());
-
-      text(sets.get(nextset), width/24+100, height*3/4+30);
+      textAlign(LEFT);
+      text(sets.get(nextset), width/24+75, height*3/4+30);
       talk();
     }
     if (current.getScene()) {
@@ -256,12 +256,12 @@ void dialogue(String text) {
   int counter=0;
   int lines=0;
   for (String word : list) {
-
-    if (word.length()+counter>=46) {
+    if (word.length()+counter>=38) {
       lines+=1;
       str+="\n";
       counter=0;
-    } else if (lines==3) {
+    }
+    if (lines>=3) {
       sets.add(str);
       counter=0;
       str="";
@@ -282,14 +282,9 @@ void talk() {
     if (nextset==sets.size()) {
       zbutton="DoNothing";
       nextset=0;
-     // sets=new ArrayList<String>(1);
+      textAlign(CENTER,CENTER);
+      // sets=new ArrayList<String>(1);
     }
-    /*
-    if (zbutton=="Interact") {
-      
-      text(sets.get(nextset), width/24+100, height*3/4+30);
-    }
-    */
   }
 }
 
@@ -300,7 +295,8 @@ void newTextBox(String person) {
   rect(width/24, height*3/4, width-width/12, height/5, 30);
   fill(255);
   textSize(24);
-  text(person + ":", width/24+30, height*3/4+70);
+  textAlign(CENTER);
+  text(person + ":", width/24+40, height*3/4 + 25);
 }
 
 void interact() {
