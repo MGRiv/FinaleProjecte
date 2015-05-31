@@ -103,16 +103,21 @@ void draw() {
     processKeys();
     interact();
     if (zbutton=="Talk") {
+      
       newTextBox(firstNPCs[0].getName());
       textAlign(LEFT);
       text(sets.get(nextset), width/24+75, height*3/4+30);
       talk();
     }
+    System.out.println(zbutton);
     if (current.getScene()) {
       current.setScene(false);
       runFile();
       fcount++;
     }
+  }else if (mode==2){
+    
+    loadInstructions();
   }
 }
 
@@ -123,7 +128,7 @@ void processButtons() {
   if (START.clicked()) {
     mode=1;
   } else if (HELP.clicked()) {
-    mode=1;
+    mode=2;
   }
 }
 
@@ -152,6 +157,10 @@ void mousePressed() {
 void mouseReleased() {
   START.leftreleased();
   HELP.leftreleased();
+}
+
+void loadInstructions(){
+  background(#A7BFFF);
 }
 
 //--------------------------------------GAME STUFF
@@ -250,7 +259,6 @@ void runFile() {
 }
 
 void dialogue(String text) {
-  //System.out.println("START...........................................................................................");
   String list[]=split(text, ' ');
   String str="";
   int counter=0;
