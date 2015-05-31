@@ -103,7 +103,7 @@ void draw() {
     processKeys();
     interact();
     if (zbutton=="Talk") {
-      
+
       newTextBox(firstNPCs[0].getName());
       textAlign(LEFT);
       text(sets.get(nextset), width/24+75, height*3/4+30);
@@ -115,9 +115,10 @@ void draw() {
       runFile();
       fcount++;
     }
-  }else if (mode==2){
-    
+  } else if (mode==2) {
     loadInstructions();
+    processButtons();
+    START.display(bcolor, tcolor);
   }
 }
 
@@ -159,8 +160,12 @@ void mouseReleased() {
   HELP.leftreleased();
 }
 
-void loadInstructions(){
+void loadInstructions() {
   background(#A7BFFF);
+  textSize(24);
+  text("Instructions", 100, 50);
+  textSize(16);
+  text("Use the arrow keys to move and Z to go to the next when talking to NPCs", 300, 200);
 }
 
 //--------------------------------------GAME STUFF
@@ -290,7 +295,7 @@ void talk() {
     if (nextset==sets.size()) {
       zbutton="DoNothing";
       nextset=0;
-      textAlign(CENTER,CENTER);
+      textAlign(CENTER, CENTER);
       // sets=new ArrayList<String>(1);
     }
   }
