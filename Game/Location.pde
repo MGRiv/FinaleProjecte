@@ -30,9 +30,15 @@ public class Location {
   public void setScene(boolean scene) {
     cutscene =  scene;
   }
-  
-  public Character[] getNPC(){
-   return NPC; 
+
+  public Character[] getNPC() {
+    return NPC;
+  }
+  public Character getNPC(int u) {
+    return NPC[u];
+  }
+  public PImage getBackground() {
+    return background;
   }
 
   public boolean getScene() {
@@ -50,6 +56,14 @@ public class Location {
   }
   public int getBR() {
     return br;
+  }
+  public boolean environment(float x, float y) {
+    for (Character e : NPC) {
+      if (Math.abs(x - e.getX()) < 12 && Math.abs(y - e.getY()) < 12) {
+        return false;
+      }
+    }
+    return true;
   }
 }
 
