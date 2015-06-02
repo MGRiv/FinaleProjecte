@@ -18,11 +18,13 @@ private int pos;
 private int dirc;
 private boolean moved;
 private Location current;
+private String prev;
 private Scanner file;
 private String line;
 private int fcount;
 private Character[] firstNPCs;
 private String zbutton;
+private Location[] maps;
 //-------------------------DIALOGUE
 long lastTime;
 String words;
@@ -43,7 +45,20 @@ void setup() {
   PImage bg=loadImage("Locations/0.png");
   zbutton="DoNothing";
   size(600, 600);
-  current = new Location(66, 502, 74, 502,firstNPCs,bg,false);
+  current = new Location(66, 502, 74, 502, firstNPCs, bg, false);
+  current.setName("Start");
+  
+  Location[] newLinks=new Location[1];
+  Location[] otherLinks=new Location[1];
+  otherLinks[0]=current;
+  otherLinks[0].setNodeX(100);
+  otherLinks[0].setNodeY(300);
+  newLinks[0]=new Location(66,502,74,502,firstNPCs,loadImage("Locations/1.png"),false);
+  newLinks[0].setName("class");
+  newLinks[0].setNodeX(500);
+  newLinks[0].setNodeY(300);
+  current.setLinks(newLinks);
+  newLinks[0].setLinks(otherLinks);
   you=new Player("Link");
   System.out.println(you.getName());
   pos=0;
@@ -51,6 +66,9 @@ void setup() {
   you.setY(height/2);
   you.setPosD(0);
   dirc = 40;
+  prev="";
+  maps=new Location[10];
+  
   //-----------------------------MENU
   START=new Button(width/4 - 60, 3*height/4 - 60, 2*buttonSize, 2*buttonSize, 5, "START");
   HELP=new Button(3*width/4 - 60, 3*height/4 - 60, 2*buttonSize, 2*buttonSize, 5, "HELP");
@@ -107,7 +125,9 @@ void draw() {
       text(sets.get(nextset), width/24+75, height*3/4+30);
       talk();
     }
-    System.out.println(zbutton);
+    if (inLink()){
+      reposition();
+    }
     if (current.getScene()) {
       current.setScene(false);
       runFile();
@@ -120,7 +140,7 @@ void draw() {
   }
 }
 
-//---------------------------MENU STUFF
+//---------------------------MENU STUFF--------------------------------------------------------------------------
 
 void processButtons() {
   processHovers();
@@ -166,41 +186,41 @@ void loadInstructions() {
   text("Use the arrow keys to move and Z to go to the next when talking to NPCs", 300, 200);
 }
 
-//--------------------------------------GAME STUFF
+//--------------------------------------GAME STUFF--------------------------------------------------------------------
 
 void processKeys() {
 
   if (downPressed) {
-    if (you.getY() < current.getBD() && current.environment(you.getX(),you.getY())) {
+    if (you.getY() < current.getBD() && current.environment(you.getX(), you.getY())) {
       you.setY(you.getY()+2.0);
-    }else{
+    } else {
       you.setY(you.getY()-2.0);
     }
     pos++;
     dirc = 40;
   }
   if (upPressed) {
-    if (you.getY() > current.getBU() && current.environment(you.getX(),you.getY())) {
+    if (you.getY() > current.getBU() && current.environment(you.getX(), you.getY())) {
       you.setY(you.getY()-2.0);
-    }else{
+    } else {
       you.setY(you.getY()+2.0);
     }
     pos++;
     dirc = 38;
   }
   if (rightPressed) {
-    if (you.getX() < current.getBR() && current.environment(you.getX(),you.getY())) {
+    if (you.getX() < current.getBR() && current.environment(you.getX(), you.getY())) {
       you.setX(you.getX()+2.0);
-    }else{
+    } else {
       you.setX(you.getX()-2.0);
     }
     pos++;
     dirc = 39;
   }
   if (leftPressed) {
-    if (you.getX() > current.getBL() && current.environment(you.getX(),you.getY())) {
+    if (you.getX() > current.getBL() && current.environment(you.getX(), you.getY())) {
       you.setX(you.getX()-2.0);
-    }else{
+    } else {
       you.setX(you.getX()+2.0);
     }
     pos++;
@@ -367,6 +387,27 @@ public Character findCharacter(String name) {
     }
   }
   return you;
+}
+
+public boolean inLink() {
+  for (Location door : current.getLinks ()) {
+    if (you.getX()>=door.getNodeX() && 
+      you.getY()>door.getNodeY() && you.getY()<door.getNodeY()+16) {
+      prev=current.getName();
+      current=door;
+      return true;
+    }
+  }
+  return false;
+}
+
+public void reposition() {
+  for (Location door : current.getLinks ()) {
+    if (door.getName()==prev) {
+      you.setX(door.getNodeX());
+      you.setY(door.getNodeY());
+    }
+  }
 }
 
 public void wait(int t) {
