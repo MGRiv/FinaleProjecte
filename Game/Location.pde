@@ -59,7 +59,7 @@ public class Location {
   }
   public boolean environment(float x, float y) {
     for (Character e : NPC) {
-      if (Math.abs(x - e.getX()) < 12 && Math.abs(y - e.getY()) < 12) {
+      if (Math.abs(x - e.getX()) <= 12 && Math.abs(y - e.getY()) <= 12) {
         return false;
       }
     }

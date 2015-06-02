@@ -171,36 +171,36 @@ void loadInstructions() {
 void processKeys() {
 
   if (downPressed) {
-    if (you.getY() < current.getBD() && current.environment(you.getX(),you.getY())) {
+    if (you.getY() < current.getBD() && current.environment(you.getX(),you.getY() + 4)) {
       you.setY(you.getY()+2.0);
-    }else{
+    }else if(!current.environment(you.getX(),you.getY())){
       you.setY(you.getY()-2.0);
     }
     pos++;
     dirc = 40;
   }
   if (upPressed) {
-    if (you.getY() > current.getBU() && current.environment(you.getX(),you.getY())) {
+    if (you.getY() > current.getBU() && current.environment(you.getX(),you.getY() - 4)) {
       you.setY(you.getY()-2.0);
-    }else{
+    }else if(!current.environment(you.getX(),you.getY())){
       you.setY(you.getY()+2.0);
     }
     pos++;
     dirc = 38;
   }
   if (rightPressed) {
-    if (you.getX() < current.getBR() && current.environment(you.getX(),you.getY())) {
+    if (you.getX() < current.getBR() && current.environment(you.getX() + 4,you.getY())) {
       you.setX(you.getX()+2.0);
-    }else{
+    }else if(!current.environment(you.getX(),you.getY())){
       you.setX(you.getX()-2.0);
     }
     pos++;
     dirc = 39;
   }
   if (leftPressed) {
-    if (you.getX() > current.getBL() && current.environment(you.getX(),you.getY())) {
+    if (you.getX() > current.getBL() && current.environment(you.getX() - 4,you.getY())) {
       you.setX(you.getX()-2.0);
-    }else{
+    }else if(!current.environment(you.getX(),you.getY())){
       you.setX(you.getX()+2.0);
     }
     pos++;
