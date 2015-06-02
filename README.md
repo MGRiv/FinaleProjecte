@@ -29,6 +29,9 @@ Daily Log
 	5/31
 		Michael-Adjusted boundaries, moved test NPC to location class, and added glitchy character collisions
 		Tony-Added instruction page
+		
+	6/1
+		Michael-Fixed character collisions
 Goals
 
 	Fully functioning movement w/ animation & Interaction system w/ NPC's
