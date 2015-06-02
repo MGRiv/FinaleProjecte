@@ -32,6 +32,7 @@ Daily Log
 		
 	6/1
 		Michael-Fixed character collisions
+		Tony-going to another location works, but works terribly
 Goals
 
 	Fully functioning movement w/ animation & Interaction system w/ NPC's
