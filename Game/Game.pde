@@ -47,13 +47,13 @@ void setup() {
   size(600, 600);
   current = new Location(66, 502, 74, 502, firstNPCs, bg, false);
   current.setName("Start");
-  
+
   Location[] newLinks=new Location[1];
   Location[] otherLinks=new Location[1];
   otherLinks[0]=current;
   otherLinks[0].setNodeX(100);
   otherLinks[0].setNodeY(300);
-  newLinks[0]=new Location(66,502,74,502,firstNPCs,loadImage("Locations/1.png"),false);
+  newLinks[0]=new Location(66, 502, 74, 502, firstNPCs, loadImage("Locations/1.png"), false);
   newLinks[0].setName("class");
   newLinks[0].setNodeX(500);
   newLinks[0].setNodeY(300);
@@ -68,7 +68,7 @@ void setup() {
   dirc = 40;
   prev="";
   maps=new Location[10];
-  
+
   //-----------------------------MENU
   START=new Button(width/4 - 60, 3*height/4 - 60, 2*buttonSize, 2*buttonSize, 5, "START");
   HELP=new Button(3*width/4 - 60, 3*height/4 - 60, 2*buttonSize, 2*buttonSize, 5, "HELP");
@@ -125,7 +125,7 @@ void draw() {
       text(sets.get(nextset), width/24+75, height*3/4+30);
       talk();
     }
-    if (inLink()){
+    if (inLink()) {
       reposition();
     }
     if (current.getScene()) {
@@ -189,65 +189,60 @@ void loadInstructions() {
 //--------------------------------------GAME STUFF--------------------------------------------------------------------
 
 void processKeys() {
-
   if (downPressed) {
-<<<<<<< HEAD
-    if (you.getY() < current.getBD() && current.environment(you.getX(),you.getY() + 4)) {
+    if (you.getY() < current.getBD() && current.environment(you.getX(), you.getY() + 4)) {
       you.setY(you.getY()+2.0);
-    }else if(!current.environment(you.getX(),you.getY())){
-=======
-    if (you.getY() < current.getBD() && current.environment(you.getX(), you.getY())) {
-      you.setY(you.getY()+2.0);
-    } else {
->>>>>>> tonydev
-      you.setY(you.getY()-2.0);
+    } else if (!current.environment(you.getX(), you.getY())) {
+      if (you.getY() < current.getBD() && current.environment(you.getX(), you.getY())) {
+        you.setY(you.getY()+2.0);
+      } else {
+        you.setY(you.getY()-2.0);
+      }
     }
     pos++;
     dirc = 40;
   }
   if (upPressed) {
-<<<<<<< HEAD
-    if (you.getY() > current.getBU() && current.environment(you.getX(),you.getY() - 4)) {
+    if (you.getY() > current.getBU() && current.environment(you.getX(), you.getY() - 4)) {
       you.setY(you.getY()-2.0);
-    }else if(!current.environment(you.getX(),you.getY())){
-=======
-    if (you.getY() > current.getBU() && current.environment(you.getX(), you.getY())) {
-      you.setY(you.getY()-2.0);
-    } else {
->>>>>>> tonydev
-      you.setY(you.getY()+2.0);
+    } else if (!current.environment(you.getX(), you.getY())) {
+      if (you.getY() > current.getBU() && current.environment(you.getX(), you.getY())) {
+        you.setY(you.getY()-2.0);
+      } else {
+        you.setY(you.getY()+2.0);
+      }
     }
     pos++;
     dirc = 38;
   }
   if (rightPressed) {
-<<<<<<< HEAD
-    if (you.getX() < current.getBR() && current.environment(you.getX() + 4,you.getY())) {
+
+    if (you.getX() < current.getBR() && current.environment(you.getX() + 4, you.getY())) {
       you.setX(you.getX()+2.0);
-    }else if(!current.environment(you.getX(),you.getY())){
-=======
-    if (you.getX() < current.getBR() && current.environment(you.getX(), you.getY())) {
-      you.setX(you.getX()+2.0);
-    } else {
->>>>>>> tonydev
-      you.setX(you.getX()-2.0);
+    } else if (!current.environment(you.getX(), you.getY())) {
+
+      if (you.getX() < current.getBR() && current.environment(you.getX(), you.getY())) {
+        you.setX(you.getX()+2.0);
+      } else {
+
+        you.setX(you.getX()-2.0);
+      }
     }
     pos++;
     dirc = 39;
   }
   if (leftPressed) {
-<<<<<<< HEAD
-    if (you.getX() > current.getBL() && current.environment(you.getX() - 4,you.getY())) {
+    if (you.getX() > current.getBL() && current.environment(you.getX() - 4, you.getY())) {
       you.setX(you.getX()-2.0);
-    }else if(!current.environment(you.getX(),you.getY())){
-=======
-    if (you.getX() > current.getBL() && current.environment(you.getX(), you.getY())) {
-      you.setX(you.getX()-2.0);
-    } else {
->>>>>>> tonydev
-      you.setX(you.getX()+2.0);
+    } else if (!current.environment(you.getX(), you.getY())) {
+      if (you.getX() > current.getBL() && current.environment(you.getX(), you.getY())) {
+        you.setX(you.getX()-2.0);
+      } else {
+        you.setX(you.getX()+2.0);
+      }
     }
     pos++;
+    System.out.println("FFFFFFFFFFFFFFFFFFFFFF");
     dirc = 37;
   }
   if (zPressed) {
@@ -263,7 +258,7 @@ void processKeys() {
     you.setPosD(pos % 10);
   }
   you.setDir(dirc);
-  System.out.println("" + (int)you.getX() + ", " + (int)you.getY());
+  System.out.println("" + (int)you.getX() + ", " + (int)you.getY()+" "+pos);
 }
 
 void keyReleased() {
