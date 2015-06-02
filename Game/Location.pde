@@ -1,8 +1,12 @@
 public class Location {
+  
   private Character[] NPC;
   private PImage background;
   private int bu, bd, bl, br;
   private boolean cutscene;
+  private Location[] Links;
+  private String name;
+  private int nodeX,nodeY;
 
   public Location() {
     bu = 0;
@@ -30,6 +34,22 @@ public class Location {
   public void setScene(boolean scene) {
     cutscene =  scene;
   }
+  
+  public void setNodeX(int x){
+    nodeX=x;
+  }
+  
+  public void setNodeY(int y){
+    nodeY=y;
+  }
+  
+  public void setLinks(Location[] l){
+    Links=l;
+  }
+  
+  public void setName(String n){
+    name=n;
+  }
 
   public Character[] getNPC() {
     return NPC;
@@ -45,6 +65,14 @@ public class Location {
     return cutscene;
   }
 
+  public int getNodeX(){
+    return nodeX;
+  }
+  
+  public int getNodeY(){
+    return nodeY;
+  }
+  
   public int getBU() {
     return bu;
   }
@@ -57,6 +85,7 @@ public class Location {
   public int getBR() {
     return br;
   }
+  
   public boolean environment(float x, float y) {
     for (Character e : NPC) {
       if (Math.abs(x - e.getX()) <= 12 && Math.abs(y - e.getY()) <= 12) {
@@ -64,6 +93,14 @@ public class Location {
       }
     }
     return true;
+  }
+  
+  public String getName(){
+    return name;
+  }
+  
+  public Location[] getLinks(){
+    return Links;
   }
 }
 
