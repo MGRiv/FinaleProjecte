@@ -33,6 +33,10 @@ Daily Log
 	6/1
 		Michael-Fixed character collisions
 		Tony-going to another location works, but works terribly
+
+	6/2
+		
+		Tony-basic algorithm will work, if the maps were more consistent
 Goals
 
 	Fully functioning movement w/ animation & Interaction system w/ NPC's
