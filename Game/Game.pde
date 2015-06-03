@@ -51,11 +51,11 @@ void setup() {
   Location[] newLinks=new Location[1];
   Location[] otherLinks=new Location[1];
   otherLinks[0]=current;
-  otherLinks[0].setNodeX(100);
+  otherLinks[0].setNodeX(140);
   otherLinks[0].setNodeY(300);
   newLinks[0]=new Location(66, 502, 74, 502, firstNPCs, loadImage("Locations/1.png"), false);
   newLinks[0].setName("class");
-  newLinks[0].setNodeX(500);
+  newLinks[0].setNodeX(502);
   newLinks[0].setNodeY(300);
   current.setLinks(newLinks);
   newLinks[0].setLinks(otherLinks);
@@ -410,7 +410,7 @@ public Character findCharacter(String name) {
 
 public boolean inLink() {
   for (Location door : current.getLinks ()) {
-    if (you.getX()>=door.getNodeX() && 
+    if (you.getX()==door.getNodeX() && 
       you.getY()>door.getNodeY() && you.getY()<door.getNodeY()+16) {
       prev=current.getName();
       current=door;
