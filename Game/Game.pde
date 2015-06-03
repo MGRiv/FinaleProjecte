@@ -51,12 +51,12 @@ void setup() {
   Location[] newLinks=new Location[1];
   Location[] otherLinks=new Location[1];
   otherLinks[0]=current;
-  otherLinks[0].setNodeX(140);
-  otherLinks[0].setNodeY(300);
-  newLinks[0]=new Location(66, 502, 74, 502, firstNPCs, loadImage("Locations/1.png"), false);
+  otherLinks[0].setNodeX(60);
+  otherLinks[0].setNodeY(285);
+  newLinks[0]=new Location(92, 464, 62, 524, firstNPCs, loadImage("Locations/1.png"), false);
   newLinks[0].setName("class");
-  newLinks[0].setNodeX(502);
-  newLinks[0].setNodeY(300);
+  newLinks[0].setNodeX(504);
+  newLinks[0].setNodeY(205);
   current.setLinks(newLinks);
   newLinks[0].setLinks(otherLinks);
   you=new Player("Link");
@@ -410,8 +410,7 @@ public Character findCharacter(String name) {
 
 public boolean inLink() {
   for (Location door : current.getLinks ()) {
-    if (you.getX()==door.getNodeX() && 
-      you.getY()>door.getNodeY() && you.getY()<door.getNodeY()+16) {
+    if (door.checkdoor((int)you.getX(),(int)you.getY())) {
       prev=current.getName();
       current=door;
       return true;
@@ -423,8 +422,21 @@ public boolean inLink() {
 public void reposition() {
   for (Location door : current.getLinks ()) {
     if (door.getName()==prev) {
-      you.setX(door.getNodeX());
-      you.setY(door.getNodeY());
+      if(Math.abs(((door.getBD() + door.getBU())/2) - door.getNodeY()) < Math.abs(((door.getBR() + door.getBL())/2) - door.getNodeX())){
+        if(door.getNodeX() > ((door.getBR() + door.getBL())/2)){
+          you.setX(door.getNodeX() - 32);
+        }else{
+          you.setX(door.getNodeX() + 32);
+        }
+        you.setY(door.getNodeY());
+      }else{
+        if(door.getNodeY() > ((door.getBD() + door.getBU())/2)){
+          you.setY(door.getNodeY() - 32);
+        }else{
+          
+        }
+        you.setX(door.getNodeX() + 32);
+      }
     }
   }
 }

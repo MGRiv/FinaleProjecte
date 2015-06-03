@@ -1,12 +1,12 @@
 public class Location {
-  
+
   private Character[] NPC;
   private PImage background;
   private int bu, bd, bl, br;
   private boolean cutscene;
   private Location[] Links;
   private String name;
-  private int nodeX,nodeY;
+  private int nodeX, nodeY;
 
   public Location() {
     bu = 0;
@@ -34,20 +34,20 @@ public class Location {
   public void setScene(boolean scene) {
     cutscene =  scene;
   }
-  
-  public void setNodeX(int x){
+
+  public void setNodeX(int x) {
     nodeX=x;
   }
-  
-  public void setNodeY(int y){
+
+  public void setNodeY(int y) {
     nodeY=y;
   }
-  
-  public void setLinks(Location[] l){
+
+  public void setLinks(Location[] l) {
     Links=l;
   }
-  
-  public void setName(String n){
+
+  public void setName(String n) {
     name=n;
   }
 
@@ -65,14 +65,14 @@ public class Location {
     return cutscene;
   }
 
-  public int getNodeX(){
+  public int getNodeX() {
     return nodeX;
   }
-  
-  public int getNodeY(){
+
+  public int getNodeY() {
     return nodeY;
   }
-  
+
   public int getBU() {
     return bu;
   }
@@ -85,7 +85,7 @@ public class Location {
   public int getBR() {
     return br;
   }
-  
+
   public boolean environment(float x, float y) {
     for (Character e : NPC) {
       if (Math.abs(x - e.getX()) <= 12 && Math.abs(y - e.getY()) <= 12) {
@@ -94,13 +94,25 @@ public class Location {
     }
     return true;
   }
-  
-  public String getName(){
+
+  public String getName() {
     return name;
   }
-  
-  public Location[] getLinks(){
+
+  public Location[] getLinks() {
     return Links;
+  }
+  public boolean checkdoor(int x, int y) {
+    if (Math.abs(((bd + bu)/2) - y) < Math.abs(((br + bl)/2) - x)) {
+      if (Math.abs(x - nodeX) < 6 && Math.abs(y - nodeY) < 18) {
+        return true;
+      }
+    } else {
+      if (Math.abs(x - nodeX) < 18 && Math.abs(y - nodeY) < 6) {
+        return true;
+      }
+    }
+    return false;
   }
 }
 
