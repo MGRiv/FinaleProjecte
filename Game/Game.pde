@@ -25,6 +25,7 @@ private int fcount;
 private Character[] firstNPCs;
 private String zbutton;
 private Location[] maps;
+private ArrayList<Item> testItems;
 //-------------------------DIALOGUE
 long lastTime;
 String words;
@@ -68,6 +69,11 @@ void setup() {
   dirc = 40;
   prev="";
   maps=new Location[10];
+  testItems=new ArrayList<Item>(1);
+  testItems.add(new Item("J", loadImage("Letters/0.png"), 75, 75));
+  testItems.add(new Item("O", loadImage("Letters/1.png"), 100, 100));
+  testItems.add(new Item("H", loadImage("Letters/2.png"), 150, 150));
+  testItems.add(new Item("N", loadImage("Letters/3.png"), 400, 200));
 
   //-----------------------------MENU
   START=new Button(width/4 - 60, 3*height/4 - 60, 2*buttonSize, 2*buttonSize, 5, "START");
@@ -114,7 +120,9 @@ void draw() {
     background(254);
     image(current.getBackground(), 0, 0, 600, 600);
     current.getNPC(0).display();
-
+    for (Item i : testItems) {
+      i.display();
+    }
     you.display();
     processKeys();
     interact();
@@ -410,7 +418,7 @@ public Character findCharacter(String name) {
 
 public boolean inLink() {
   for (Location door : current.getLinks ()) {
-    if (door.checkdoor((int)you.getX(),(int)you.getY())) {
+    if (door.checkdoor((int)you.getX(), (int)you.getY())) {
       prev=current.getName();
       current=door;
       return true;
@@ -422,23 +430,29 @@ public boolean inLink() {
 public void reposition() {
   for (Location door : current.getLinks ()) {
     if (door.getName()==prev) {
-      if(Math.abs(((door.getBD() + door.getBU())/2) - door.getNodeY()) < Math.abs(((door.getBR() + door.getBL())/2) - door.getNodeX())){
-        if(door.getNodeX() > ((door.getBR() + door.getBL())/2)){
+      if (Math.abs(((door.getBD() + door.getBU())/2) - door.getNodeY()) < Math.abs(((door.getBR() + door.getBL())/2) - door.getNodeX())) {
+        if (door.getNodeX() > ((door.getBR() + door.getBL())/2)) {
           you.setX(door.getNodeX() - 32);
-        }else{
+        } else {
           you.setX(door.getNodeX() + 32);
         }
         you.setY(door.getNodeY());
-      }else{
-        if(door.getNodeY() > ((door.getBD() + door.getBU())/2)){
+      } else {
+        if (door.getNodeY() > ((door.getBD() + door.getBU())/2)) {
           you.setY(door.getNodeY() - 32);
-        }else{
-          
+        } else {
         }
         you.setX(door.getNodeX() + 32);
       }
     }
   }
+}
+
+public void pickup(){
+}
+
+public boolean nearItem(){
+ 
 }
 
 public void wait(int t) {
