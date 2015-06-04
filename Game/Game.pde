@@ -6,7 +6,7 @@ import java.lang.*;
 int mode;
 Button START, HELP;
 int buttonSize = 60;
-boolean start, hover;
+boolean start, hover, open;
 int counter, c2;
 int tcolor, bcolor;
 PImage img1;
@@ -26,6 +26,7 @@ private Character[] firstNPCs;
 private String zbutton;
 private Location[] maps;
 private ArrayList<Item> testItems;
+private ArrayList<Item> inventory;
 //-------------------------DIALOGUE
 long lastTime;
 String words;
@@ -69,6 +70,7 @@ void setup() {
   dirc = 40;
   prev="";
   maps=new Location[10];
+  inventory=new ArrayList<Item>(1);
   testItems=new ArrayList<Item>(1);
   testItems.add(new Item("J", loadImage("Letters/0.png"), 75, 75));
   testItems.add(new Item("O", loadImage("Letters/1.png"), 100, 100));
@@ -94,6 +96,7 @@ void setup() {
 }
 
 void draw() {
+  System.out.println(keyCode);
   if (mode == 0) {
     c2++;
     if (c2 % 180 == 179) {
@@ -120,12 +123,19 @@ void draw() {
     background(254);
     image(current.getBackground(), 0, 0, 600, 600);
     current.getNPC(0).display();
-    for (Item i : testItems) {
-      i.display();
+    for (int i=0; i< testItems.size (); i++) {
+      testItems.get(i).display();
+      if (you.getX()>=testItems.get(i).getX()-25 && you.getX()<=testItems.get(i).getX()+25 &&
+        you.getY()>=testItems.get(i).getY()-25 && you.getY()<=testItems.get(i).getY()+25) {
+        Item temp=testItems.get(i);
+        testItems.remove(testItems.get(i));
+        inventory.add(temp);
+      }
     }
     you.display();
     processKeys();
     interact();
+
     if (zbutton=="Talk") {
 
       newTextBox(current.getNPC(0).getName());
@@ -253,9 +263,7 @@ void processKeys() {
     System.out.println("FFFFFFFFFFFFFFFFFFFFFF");
     dirc = 37;
   }
-  if (zPressed) {
-    interact();
-  }
+
   if (dirc == 37) {
     you.setPosL(pos % 10);
   } else if (dirc == 39) {
@@ -267,6 +275,13 @@ void processKeys() {
   }
   you.setDir(dirc);
   System.out.println("" + (int)you.getX() + ", " + (int)you.getY()+" "+pos);
+  if (zPressed) {
+    interact();
+  }
+  if (open) {
+
+    openInv();
+  }
 }
 
 void keyReleased() {
@@ -280,7 +295,7 @@ void keyReleased() {
     downPressed=false;
   } else if (keyCode==90) {
     zPressed=false;
-  }
+  } 
 }
 
 void keyPressed() {
@@ -294,6 +309,8 @@ void keyPressed() {
     downPressed=true;
   } else if (keyCode==90) {
     zPressed=true;
+  } else if (keyCode==73) {
+    open=!open;
   } else {
     downPressed = zPressed = rightPressed = leftPressed = upPressed = false;
   }
@@ -448,12 +465,24 @@ public void reposition() {
   }
 }
 
-public void pickup(){
+public void openInv() {
+  int x=200;
+  int y=200;
+  rect(100, 100, 400, 400);
+  for (Item i : inventory) {
+    i.setX(x);
+    i.setY(y);
+    i.display();
+    if (x==450) {
+      x=200;
+      y+=50;
+    } else {
+      x+=50;
+    }
+  }
 }
 
-public boolean nearItem(){
- 
-}
+
 
 public void wait(int t) {
   int s = millis();

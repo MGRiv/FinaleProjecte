@@ -23,6 +23,14 @@ public class Item{
     image(image, x, y, 25,25);
   }
   
+  public void setX(int xval){
+    x=xval;
+  }
+  
+  public void setY(int yval){
+    y=yval;
+  }
+  
   public int getX(){
     return x;
   }
