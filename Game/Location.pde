@@ -7,7 +7,6 @@ public class Location {
   private Location[] Links;
   private String name;
   private int nodeX, nodeY;
-  public Node[] doors;
 
   public Location() {
     bu = 0;
@@ -35,15 +34,15 @@ public class Location {
   public void setScene(boolean scene) {
     cutscene =  scene;
   }
-  /*
+
   public void setNodeX(int x) {
-   nodeX=x;
-   }
-   
-   public void setNodeY(int y) {
-   nodeY=y;
-   }
-   */
+    nodeX=x;
+  }
+
+  public void setNodeY(int y) {
+    nodeY=y;
+  }
+
   public void setLinks(Location[] l) {
     Links=l;
   }
@@ -65,15 +64,15 @@ public class Location {
   public boolean getScene() {
     return cutscene;
   }
-  /*
+
   public int getNodeX() {
-   return nodeX;
-   }
-   
-   public int getNodeY() {
-   return nodeY;
-   }
-   */
+    return nodeX;
+  }
+
+  public int getNodeY() {
+    return nodeY;
+  }
+
   public int getBU() {
     return bu;
   }
@@ -103,19 +102,14 @@ public class Location {
   public Location[] getLinks() {
     return Links;
   }
-  public Node[] getdoors() {
-    return doors;
-  }
   public boolean checkdoor(int x, int y) {
-    for (Node g : getdoors ()) {
-      if (Math.abs(((bd + bu)/2) - y) < Math.abs(((br + bl)/2) - x)) {
-        if (Math.abs(x - g.getNodeX()) < 6 && Math.abs(y - g.getNodeY()) < 18) {
-          return true;
-        }
-      } else {
-        if (Math.abs(x - g.getNodeX()) < 18 && Math.abs(y - g.getNodeY()) < 6) {
-          return true;
-        }
+    if (Math.abs(((bd + bu)/2) - y) < Math.abs(((br + bl)/2) - x)) {
+      if (Math.abs(x - nodeX) < 6 && Math.abs(y - nodeY) < 18) {
+        return true;
+      }
+    } else {
+      if (Math.abs(x - nodeX) < 18 && Math.abs(y - nodeY) < 6) {
+        return true;
       }
     }
     return false;

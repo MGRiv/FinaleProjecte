@@ -47,17 +47,16 @@ void setup() {
   size(600, 600);
   current = new Location(66, 502, 74, 502, firstNPCs, bg, false);
   current.setName("Start");
-  Node[] gate = new Node[1];
-  Node[] gate2 = new Node[1];
-  gate[0] = new Node(60, 285);
-  gate2[0] = new Node(504, 205);
+
   Location[] newLinks=new Location[1];
   Location[] otherLinks=new Location[1];
   otherLinks[0]=current;
-  otherLinks[0].doors = gate;
+  otherLinks[0].setNodeX(60);
+  otherLinks[0].setNodeY(285);
   newLinks[0]=new Location(92, 464, 62, 524, firstNPCs, loadImage("Locations/1.png"), false);
   newLinks[0].setName("class");
-  newLinks[0].doors = gate2;
+  newLinks[0].setNodeX(504);
+  newLinks[0].setNodeY(205);
   current.setLinks(newLinks);
   newLinks[0].setLinks(otherLinks);
   you=new Player("Link");
@@ -411,7 +410,7 @@ public Character findCharacter(String name) {
 
 public boolean inLink() {
   for (Location door : current.getLinks ()) {
-    if (door.checkdoor((int)you.getX(), (int)you.getY())) {
+    if (door.checkdoor((int)you.getX(),(int)you.getY())) {
       prev=current.getName();
       current=door;
       return true;
@@ -421,24 +420,22 @@ public boolean inLink() {
 }
 
 public void reposition() {
-  for (Location location : current.getLinks ()) {
-    for (Node door : location.getdoors ()) {
-      if (location.getName()==prev) {
-        if (Math.abs(((location.getBD() + location.getBU())/2) - door.getNodeY()) < Math.abs(((location.getBR() + location.getBL())/2) - door.getNodeX())) {
-          if (door.getNodeX() > ((location.getBR() + location.getBL())/2)) {
-            you.setX(door.getNodeX() - 32);
-          } else {
-            you.setX(door.getNodeX() + 32);
-          }
-          you.setY(door.getNodeY());
-        } else {
-          if (door.getNodeY() > ((location.getBD() + location.getBU())/2)) {
-            you.setY(door.getNodeY() - 32);
-          } else {
-            you.setY(door.getNodeY() + 32);
-          }
-          you.setX(door.getNodeX());
+  for (Location door : current.getLinks ()) {
+    if (door.getName()==prev) {
+      if(Math.abs(((door.getBD() + door.getBU())/2) - door.getNodeY()) < Math.abs(((door.getBR() + door.getBL())/2) - door.getNodeX())){
+        if(door.getNodeX() > ((door.getBR() + door.getBL())/2)){
+          you.setX(door.getNodeX() - 32);
+        }else{
+          you.setX(door.getNodeX() + 32);
         }
+        you.setY(door.getNodeY());
+      }else{
+        if(door.getNodeY() > ((door.getBD() + door.getBU())/2)){
+          you.setY(door.getNodeY() - 32);
+        }else{
+          
+        }
+        you.setX(door.getNodeX() + 32);
       }
     }
   }
