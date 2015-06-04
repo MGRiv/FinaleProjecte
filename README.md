@@ -38,6 +38,9 @@ Daily Log
 		
 		Tony-basic algorithm will work, if the maps were more consistent
 		Michael-Smoothed out transitions between rooms
+		
+	6/3
+		Michael-Added 1635 more sprites for possible use
 Goals
 
 	Fully functioning movement w/ animation & Interaction system w/ NPC's
