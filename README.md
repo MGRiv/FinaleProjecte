@@ -37,7 +37,6 @@ Daily Log
 	6/2
 		
 		Tony-basic algorithm will work, if the maps were more consistent
-		Michael-Smoothed out transitions between rooms
 Goals
 
 	Fully functioning movement w/ animation & Interaction system w/ NPC's
