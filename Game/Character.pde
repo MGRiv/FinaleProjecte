@@ -20,8 +20,7 @@ public class Character {
 
   public void display() {
     if (huzzah) {
-      image(loadImage("huzzah.png"),x,y);
-      
+      //image(loadImage("huzzah.png"),x,y);
     } else {
       if (dir==37) {
         image(leftpos, x, y);
@@ -118,9 +117,9 @@ public class Character {
       waitC(17);
     }
   }
-}
-public void waitC(int t) {
-  int s = millis();
-  while (millis () - s < t);
+  public void waitC(int t) {
+    int s = millis();
+    while (millis () - s < t);
+  }
 }
 
