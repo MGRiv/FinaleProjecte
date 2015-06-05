@@ -42,6 +42,10 @@ Daily Log
 	6/3
 		Michael-Added 1635 more sprites for possible use
 		Tony-added super basic inventory and pickup system
+
+	6/4
+	
+		Tony-attempted to make huzzah Link.
 Goals
 
 	Fully functioning movement w/ animation & Interaction system w/ NPC's
