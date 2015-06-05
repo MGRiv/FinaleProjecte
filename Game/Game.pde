@@ -123,15 +123,14 @@ void draw() {
     background(254);
     image(current.getBackground(), 0, 0, 600, 600);
     current.getNPC(0).display();
-    for (int i=0; i< testItems.size (); i++) {
-      testItems.get(i).display();
-      if (you.getX()>=testItems.get(i).getX()-25 && you.getX()<=testItems.get(i).getX()+25 &&
-        you.getY()>=testItems.get(i).getY()-25 && you.getY()<=testItems.get(i).getY()+25) {
-        Item temp=testItems.get(i);
-        testItems.remove(testItems.get(i));
-        inventory.add(temp);
-      }
+
+
+    pickup();
+    if (you.getHuzzah()) {
+      yay();
+      you.display();
     }
+    you.setHuzzah(false);
     you.display();
     processKeys();
     interact();
@@ -295,7 +294,7 @@ void keyReleased() {
     downPressed=false;
   } else if (keyCode==90) {
     zPressed=false;
-  } 
+  }
 }
 
 void keyPressed() {
@@ -465,6 +464,26 @@ public void reposition() {
   }
 }
 
+public void pickup() {
+  for (int i=0; i< testItems.size (); i++) {
+    testItems.get(i).display();
+    if (you.getX()>=testItems.get(i).getX()-15 && you.getX()<=testItems.get(i).getX()+15 &&
+      you.getY()>=testItems.get(i).getY()-15 && you.getY()<=testItems.get(i).getY()+15) {
+
+      you.setHuzzah(true);
+      Item temp=testItems.get(i);
+      testItems.remove(testItems.get(i));
+      inventory.add(temp);
+    }
+  }
+}
+
+public void yay() {
+  int s = millis();
+  while (millis () - s < 1500) {
+    you.display();
+  }
+}
 public void openInv() {
   int x=200;
   int y=200;

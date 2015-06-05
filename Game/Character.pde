@@ -8,6 +8,7 @@ public class Character {
   private PImage downpos;
   private float x, y;
   private int dir;
+  private boolean huzzah;
 
   public Character() {
     this("Bob");
@@ -18,14 +19,19 @@ public class Character {
   }
 
   public void display() {
-    if (dir==37) {
-      image(leftpos, x, y);
-    } else if (dir==38) {
-      image(uppos, x, y);
-    } else if (dir==39) {
-      image(rightpos, x, y);
-    } else if (dir==40) {
-      image(downpos, x, y);
+    if (huzzah) {
+      image(loadImage("huzzah.png"),x,y);
+      
+    } else {
+      if (dir==37) {
+        image(leftpos, x, y);
+      } else if (dir==38) {
+        image(uppos, x, y);
+      } else if (dir==39) {
+        image(rightpos, x, y);
+      } else if (dir==40) {
+        image(downpos, x, y);
+      }
     }
   }
 
@@ -57,20 +63,24 @@ public class Character {
     name=name_;
   }
 
-  public void setDir(int d){
+  public void setDir(int d) {
     dir=d;
   }
-  
-  public void setText(String t){
+
+  public void setText(String t) {
     text=t;
   }
-  
-  public String getText(){
+
+  public void setHuzzah(boolean h) {
+    huzzah=h;
+  }
+
+  public String getText() {
     return text;
   }
-  
-  public int getDir(){
-   return dir; 
+
+  public int getDir() {
+    return dir;
   }
 
   public float getX() {
@@ -84,23 +94,28 @@ public class Character {
   public String getName() {
     return name;
   }
-  public void move(int a, int b){
-    while(Math.abs(x - a) != 0 || Math.abs(y - b) != 0){
-     if(Math.abs(x - a) != 0){
-       if(x > a){
-        x -= 2; 
-       }else{
-        x += 2;
-       }
-     }
-     if(Math.abs(y - b) != 0){
-       if(y > b){
-         y -= 2;
-       }else{
-         y += 2;
-       }
-     }
-     waitC(17);
+
+  public boolean getHuzzah() {
+    return huzzah;
+  }
+
+  public void move(int a, int b) {
+    while (Math.abs (x - a) != 0 || Math.abs(y - b) != 0) {
+      if (Math.abs(x - a) != 0) {
+        if (x > a) {
+          x -= 2;
+        } else {
+          x += 2;
+        }
+      }
+      if (Math.abs(y - b) != 0) {
+        if (y > b) {
+          y -= 2;
+        } else {
+          y += 2;
+        }
+      }
+      waitC(17);
     }
   }
 }
@@ -108,3 +123,4 @@ public void waitC(int t) {
   int s = millis();
   while (millis () - s < t);
 }
+
