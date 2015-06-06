@@ -11,6 +11,7 @@ int counter, c2;
 int tcolor, bcolor;
 PImage img1;
 //-------------------------GAMEPLAY
+private int huzzahx;
 private Player you;
 private boolean rightPressed, leftPressed, upPressed, downPressed;
 private boolean rightReleased, leftReleased, upReleased, downReleased;
@@ -123,18 +124,24 @@ void draw() {
     background(254);
     image(current.getBackground(), 0, 0, 600, 600);
     current.getNPC(0).display();
-
-
-    pickup();
-    if (you.getHuzzah()) {
-      yay();
-      you.display();
-    }
-    you.setHuzzah(false);
-    you.display();
     processKeys();
     interact();
 
+    pickup();
+    you.display();
+    if (you.getHuzzah()) {
+      huzzahx++;
+    }
+    System.out.println(you.getHuzzah());
+
+
+    if (huzzahx==2) {
+      noLoopWait(1500);
+      System.out.println("?");
+      loop();
+      you.setHuzzah(false);
+      huzzahx=0;
+    }
     if (zbutton=="Talk") {
 
       newTextBox(current.getNPC(0).getName());
@@ -478,12 +485,7 @@ public void pickup() {
   }
 }
 
-public void yay() {
-  int s = millis();
-  while (millis () - s < 1500) {
-    you.display();
-  }
-}
+
 public void openInv() {
   int x=200;
   int y=200;
@@ -506,5 +508,12 @@ public void openInv() {
 public void wait(int t) {
   int s = millis();
   while (millis () - s < t);
+}
+
+public void noLoopWait(int t) {
+  int s=millis();
+  while (millis ()-s<1500) {
+    noLoop();
+  }
 }
 
