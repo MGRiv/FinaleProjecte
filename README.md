@@ -46,6 +46,7 @@ Daily Log
 	6/4
 	
 		Tony-attempted to make huzzah Link.
+		Michael-Kinda busy, sorry, but began drafting a story
 Goals
 
 	Fully functioning movement w/ animation & Interaction system w/ NPC's

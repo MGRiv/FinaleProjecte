@@ -1,0 +1,37 @@
+1. Murder already taken place
+	a. Role: Detective
+	b. Location: Museum?
+	c. Other Characters: Policeman, Custodian
+	d. Scene: Crimescene, body, weapon?
+	e. Ask policeman and custodian questions
+		i. Learn interaction feature
+
+
+2. Security Footage
+	a. Directed to go review security footage in meseum office
+		i. Allows player to explore the mesuem
+	b. Security footage leads to possible witnesses
+
+3. Witness Interrogation
+	a. Allows player to hear the accounts of an even number of
+	   witnesses, with one group suggesting one suspect, and a
+	   second group implicating another person
+		i. Present player with a choice as to who to
+		   investigate
+		ii. Each suspect will provide different clues,
+		    while also providing alibis. Although the clues
+		    will be different, they will lead towards the
+		    same person
+
+4. Subsequent Murders
+	a. Several more murders following the same pattern as the
+	   first provides more clues, allowing the player to guess
+	   where this murderer will strike next
+	b. These investigations will follow similar setups to the
+	   first
+
+5. Stakeout
+	a. The player finally stakesout a location
+	b. Possibly suspense gameplay added here
+	c. Prevent murder, hunt down murderer through multiple
+	   locations

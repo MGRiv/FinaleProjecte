@@ -319,7 +319,7 @@ void runFile() {
   file = new Scanner("scene"+fcount+".txt");
   while (file.hasNextLine ()) {
     line = file.nextLine();
-    String[] commands = split(line, ", ");
+    String[] commands = split(line, ",");
     if (commands[0].equals("MOVE")) {
       Character temp = findCharacter(commands[1]);
       temp.move(Integer.valueOf(commands[2]), Integer.valueOf(commands[3]));
