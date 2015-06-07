@@ -51,6 +51,7 @@ Daily Log
 	6/6     
 		
 		Tony-successfully made huzzah work, and interact is also fixed.
+		Michael-attempted to make fixes simultaneously without branching, did not go well
 Goals
 
 	Fully functioning movement w/ animation & Interaction system w/ NPC's
