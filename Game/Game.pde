@@ -28,6 +28,7 @@ private String zbutton;
 private Location[] maps;
 private ArrayList<Item> testItems;
 private ArrayList<Item> inventory;
+private boolean iventoryopen;
 //-------------------------DIALOGUE
 long lastTime;
 String words;
@@ -63,7 +64,7 @@ void setup() {
   current.setLinks(newLinks);
   newLinks[0].setLinks(otherLinks);
   you=new Player("Link");
-  System.out.println(you.getName());
+  //System.out.println(you.getName());
   pos=0;
   you.setX(width/2);
   you.setY(height/2);
@@ -124,28 +125,24 @@ void draw() {
     background(254);
     image(current.getBackground(), 0, 0, 600, 600);
     current.getNPC(0).display();
+    //System.out.println(huzzahx);
+    if (huzzahx==1) {
+      noLoopWait(1500);
+      //System.out.println("?");
+      loop();
+      you.setHuzzah(false);
+      huzzahx=0;
+    }
     if (zbutton!="Talk") {
       processKeys();
     }
     interact();
-
     pickup();
     you.display();
     if (you.getHuzzah()) {
       huzzahx++;
     }
-    System.out.println(you.getHuzzah());
-
-
-    if (huzzahx==2) {
-      noLoopWait(1500);
-      System.out.println("?");
-      loop();
-      you.setHuzzah(false);
-      huzzahx=0;
-    }
     if (zbutton=="Talk") {
-
       newTextBox(current.getNPC(0).getName());
       textAlign(LEFT);
       text(sets.get(nextset), width/24+75, height*3/4+30);
@@ -268,7 +265,7 @@ void processKeys() {
       }
     }
     pos++;
-    System.out.println("FFFFFFFFFFFFFFFFFFFFFF");
+    //System.out.println("FFFFFFFFFFFFFFFFFFFFFF");
     dirc = 37;
   }
 
@@ -285,10 +282,6 @@ void processKeys() {
   System.out.println("" + (int)you.getX() + ", " + (int)you.getY()+" "+pos);
   if (zPressed) {
     interact();
-  }
-  if (open) {
-
-    openInv();
   }
 }
 
@@ -318,7 +311,13 @@ void keyPressed() {
   } else if (keyCode==90) {
     zPressed=true;
   } else if (keyCode==73) {
-    open=!open;
+    open = !open;
+    if (open) {
+      openInv();
+      noLoop();
+    } else {
+      loop();
+    }
   } else {
     downPressed = zPressed = rightPressed = leftPressed = upPressed = false;
   }
@@ -391,12 +390,12 @@ void newTextBox(String person) {
 }
 
 void interact() {
-
+  System.out.println("BBO");
   if (you.getDir()==37) { //if you're facing left
     if (current.getNPC(0).getX()>=you.getX()-20 && current.getNPC(0).getX()<=you.getX()+20 &&
       current.getNPC(0).getY()<=you.getY()+14 && current.getNPC(0).getY()>=you.getY()-14) {
 
-      if (zPressed) {
+      if (zbutton != "Talk") {
         current.getNPC(0).setPosR(0);
         current.getNPC(0).setDir(39);
         zbutton="Talk";
@@ -405,8 +404,8 @@ void interact() {
   } else if (you.getDir()==38) { //if you're facing up
     if (current.getNPC(0).getY()>=you.getY()-20 && current.getNPC(0).getY()<=you.getY()+20 &&
       current.getNPC(0).getX()<=you.getX()+14 && current.getNPC(0).getX()>=you.getX()-14) {
-
-      if (zPressed) {
+System.out.println("HI");
+      if (zbutton != "Talk") {
         current.getNPC(0).setPosD(0);
         current.getNPC(0).setDir(40);
         zbutton="Talk";
@@ -480,13 +479,13 @@ public void reposition() {
 public void pickup() {
   for (int i=0; i< testItems.size (); i++) {
     testItems.get(i).display();
-    if (you.getX()>=testItems.get(i).getX()-15 && you.getX()<=testItems.get(i).getX()+15 &&
-      you.getY()>=testItems.get(i).getY()-15 && you.getY()<=testItems.get(i).getY()+15) {
-
-      you.setHuzzah(true);
+  }
+  for (int i=0; i< testItems.size (); i++) {
+    if (Math.abs(you.getX() - testItems.get(i).getX()) <= 15 && Math.abs(you.getY() - testItems.get(i).getY()) <= 15) {
       Item temp=testItems.get(i);
-      testItems.remove(testItems.get(i));
+      testItems.remove(i);
       inventory.add(temp);
+      you.setHuzzah(true);
     }
   }
 }

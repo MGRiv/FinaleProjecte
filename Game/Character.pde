@@ -20,7 +20,7 @@ public class Character {
 
   public void display() {
     if (huzzah) {
-      //image(loadImage("huzzah.png"),x,y);
+      image(loadImage("huzzah.png"),x,y);
     } else {
       if (dir==37) {
         image(leftpos, x, y);
