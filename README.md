@@ -47,6 +47,10 @@ Daily Log
 	
 		Tony-attempted to make huzzah Link.
 		Michael-Kinda busy, sorry, but began drafting a story
+
+	6/6     
+		
+		Tony-successfully made huzzah work, and interact is also fixed.
 Goals
 
 	Fully functioning movement w/ animation & Interaction system w/ NPC's
