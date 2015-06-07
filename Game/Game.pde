@@ -124,7 +124,9 @@ void draw() {
     background(254);
     image(current.getBackground(), 0, 0, 600, 600);
     current.getNPC(0).display();
-    processKeys();
+    if (zbutton!="Talk") {
+      processKeys();
+    }
     interact();
 
     pickup();
@@ -391,40 +393,44 @@ void newTextBox(String person) {
 void interact() {
 
   if (you.getDir()==37) { //if you're facing left
-    if (current.getNPC(0).getX()==you.getX()-24 &&
+    if (current.getNPC(0).getX()>=you.getX()-20 && current.getNPC(0).getX()<=you.getX()+20 &&
       current.getNPC(0).getY()<=you.getY()+14 && current.getNPC(0).getY()>=you.getY()-14) {
 
-
-      current.getNPC(0).setPosR(0);
-      current.getNPC(0).setDir(39);
-      zbutton="Talk";
+      if (zPressed) {
+        current.getNPC(0).setPosR(0);
+        current.getNPC(0).setDir(39);
+        zbutton="Talk";
+      }
     }
   } else if (you.getDir()==38) { //if you're facing up
-    if (current.getNPC(0).getY()==you.getY()-24 && 
+    if (current.getNPC(0).getY()>=you.getY()-20 && current.getNPC(0).getY()<=you.getY()+20 &&
       current.getNPC(0).getX()<=you.getX()+14 && current.getNPC(0).getX()>=you.getX()-14) {
 
-
-      current.getNPC(0).setPosD(0);
-      current.getNPC(0).setDir(40);
-      zbutton="Talk";
+      if (zPressed) {
+        current.getNPC(0).setPosD(0);
+        current.getNPC(0).setDir(40);
+        zbutton="Talk";
+      }
     }
   } else if (you.getDir()==39) { //if you're facing right
-    if (current.getNPC(0).getX()==you.getX()+24 && 
+    if (current.getNPC(0).getX()<=you.getX()+20 && current.getNPC(0).getX()>=you.getX()-20 &&
       current.getNPC(0).getY()<=you.getY()+14 && current.getNPC(0).getY()>=you.getY()-14) {
 
-
-      current.getNPC(0).setPosL(0);
-      current.getNPC(0).setDir(37);
-      zbutton="Talk";
+      if (zPressed) {
+        current.getNPC(0).setPosL(0);
+        current.getNPC(0).setDir(37);
+        zbutton="Talk";
+      }
     }
   } else if (you.getDir()==40) { //if you're facing down
-    if (current.getNPC(0).getY()==you.getY()+24 && 
+    if (current.getNPC(0).getY()<=you.getY()+24 && current.getNPC(0).getY()>=you.getY()-24 &&
       current.getNPC(0).getX()<=you.getX()+14 && current.getNPC(0).getX()>=you.getX()-14) {
 
-
-      current.getNPC(0).setPosU(0);
-      current.getNPC(0).setDir(38);
-      zbutton="Talk";
+      if (zPressed) {
+        current.getNPC(0).setPosU(0);
+        current.getNPC(0).setDir(38);
+        zbutton="Talk";
+      }
     }
   }
 }
