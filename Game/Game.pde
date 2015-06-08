@@ -3,7 +3,8 @@ import java.io.*;
 import java.lang.*;
 
 //------------------Scanner
-
+private ArrayList<Character>mvChars;
+boolean mvmt;
 
 //------------------MENU
 int mode;
@@ -32,6 +33,7 @@ private Location[] maps;
 private ArrayList<Item> testItems;
 private ArrayList<Item> inventory;
 private boolean first;
+
 //-------------------------DIALOGUE
 long lastTime;
 String words;
@@ -165,6 +167,13 @@ void draw() {
     }
     if (inLink()) {
       reposition();
+    }
+    if (mvmt==true) {
+      if (mvChars.size()==0) {
+        mvmt=false;
+      } else {
+        moveChars();
+      }
     }
     if (current.getScene()) {
       current.setScene(false);
@@ -343,23 +352,23 @@ void runFile() {
   File blah=new File("scene"+fcount+".txt");
   System.out.println(blah.getAbsolutePath());
   String commandlines[]=loadStrings("scene"+fcount+".txt");
-  System.out.println(commandlines[0]+":DDDDDDDDDDD");
+  mvChars=new ArrayList<Character>(0);
   for (int i=0; i<commandlines.length; i++) {
     String commands[]=split(commandlines[i], ",");
-    System.out.println(commandlines[0]+":DDDDDDDDDDD");
-    System.out.println(commands[0]+":DDDDDDDDDDD");
+
     if (commands[0].equals("MOVE")) {
+      mvmt=true;
       System.out.println(commands[1]);
       Character temp = findCharacter(commands[1]);
-
       temp.move(Integer.valueOf(commands[2]), Integer.valueOf(commands[3]));
+      mvChars.add(temp);
     } else {
       dialogue(commands[2]);
       newTextBox(commands[1]);
       textSize(16);
       if (nextset < 0) {
         text(sets.get(0), width/24+100, height*3/4+30);
-      }else{
+      } else {
         text(sets.get(nextset), width/24+100, height*3/4+30);
       }
     }
@@ -380,6 +389,17 @@ void runFile() {
    }
    }
    */
+}
+
+void moveChars() {
+
+  Character curr=mvChars.get(0);
+  if (curr.getStopX()!=curr.getX() && 
+    curr.getStopY()!=curr.getY()) {
+    curr.move(curr.getStopX(), curr.getStopY());
+  } else {
+    mvChars.remove(0);
+  }
 }
 
 void dialogue(String text) {

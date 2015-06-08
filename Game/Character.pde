@@ -7,7 +7,7 @@ public class Character {
   private PImage uppos;
   private PImage downpos;
   private float x, y;
-  private int dir;
+  private int dir, stopx, stopy;
   private boolean huzzah;
 
   public Character() {
@@ -74,6 +74,14 @@ public class Character {
     huzzah=h;
   }
 
+  public int getStopX(){
+    return stopx;
+  }
+  
+  public int getStopY(){
+    return stopy;
+  }
+  
   public String getText() {
     return text;
   }
@@ -99,7 +107,9 @@ public class Character {
   }
 
   public void move(int a, int b) {
-    while (Math.abs (x - a) != 0 || Math.abs(y - b) != 0) {
+    stopx=a;
+    stopy=b;
+    if (Math.abs (x - a) != 0 || Math.abs(y - b) != 0) {
       if (Math.abs(x - a) != 0) {
         if (x > a) {
           x -= 2;
