@@ -78,7 +78,7 @@ void setup() {
   newLinks[0].setNodeY(205);
   current.setLinks(newLinks);
   newLinks[0].setLinks(otherLinks);
-  you=new Player("Link");
+  you=new Player("Link",10);
   System.out.println(you.getName());
   pos=0;
   you.setX(width/2);
@@ -370,6 +370,7 @@ void runFile() {
       mvmt=true;
       System.out.println(commands[1]);
       Character temp = findCharacter(commands[1]);
+      temp.setIForm(0);
       temp.move(Integer.valueOf(commands[2]), Integer.valueOf(commands[3]));
       mvChars.add(temp);
     } else {

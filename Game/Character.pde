@@ -9,6 +9,8 @@ public class Character {
   private float x, y;
   private int dir, stopx, stopy;
   private boolean huzzah;
+  private int imageCount;
+  private int iform;
 
   public Character() {
     this("Bob");
@@ -16,6 +18,11 @@ public class Character {
 
   public Character(String name_) {
     setName(name_);
+  }
+  
+  public Character(String name_,int iC){
+     this(name_);
+     imageCount = iC;
   }
 
   public void display() {
@@ -32,6 +39,10 @@ public class Character {
         image(downpos, x, y);
       }
     }
+  }
+  
+  public void setIForm(int q){
+   iform = q; 
   }
 
   public void setPosR(int form) {
@@ -113,15 +124,23 @@ public class Character {
       if (Math.abs(x - a) != 0) {
         if (x > a) {
           x -= 2;
+          setPosL(iform % imageCount);
+          iform++;
         } else {
           x += 2;
+          setPosR(iform % imageCount);
+          iform++;
         }
       }
       if (Math.abs(y - b) != 0) {
         if (y > b) {
           y -= 2;
+          setPosU(iform % imageCount);
+          iform++;
         } else {
           y += 2;
+          setPosD(iform % imageCount);
+          iform++;
         }
       }
       display();
