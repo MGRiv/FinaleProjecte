@@ -2,6 +2,10 @@
 
 Team Don'tknowhowtodoRPG's
 
+Demos:
+	6/1:https://github.com/MGRiv/FinaleProjecte/tree/6-1-15-DEMO
+	6/8:https://github.com/MGRiv/FinaleProjecte/tree/6-8-15-DEMO
+
 Daily Log
 
 	5/24-5/25
@@ -52,6 +56,9 @@ Daily Log
 		
 		Tony-successfully made huzzah work, and interact is also fixed.
 		Michael-attempted to make fixes simultaneously without branching, did not go well
+		
+	6/7
+		Tony&Michael-Filereading, animation, NPCdialogue, location specific items and characters, bug fixing
 Goals
 
 	Fully functioning movement w/ animation & Interaction system w/ NPC's
