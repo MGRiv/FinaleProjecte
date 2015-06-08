@@ -41,9 +41,9 @@ ArrayList<String> sets;
 
 
 void setup() {
- 
+
   //---------------------------GAMEPLAY
-  firstNPCs=new Character[5];
+  firstNPCs=new Character[1];
   firstNPCs[0]=new Character("Boy1");
   firstNPCs[0].setX(200);
   firstNPCs[0].setY(200);
@@ -53,7 +53,7 @@ void setup() {
   PImage bg=loadImage("Locations/0.png");
   zbutton="DoNothing";
   size(600, 600);
-  current = new Location(66, 502, 74, 502, firstNPCs, bg, false);
+  current = new Location(66, 502, 74, 502, firstNPCs, bg, true);
   current.setName("Start");
 
   Location[] newLinks=new Location[1];
@@ -351,13 +351,17 @@ void runFile() {
     if (commands[0].equals("MOVE")) {
       System.out.println(commands[1]);
       Character temp = findCharacter(commands[1]);
-      
+
       temp.move(Integer.valueOf(commands[2]), Integer.valueOf(commands[3]));
     } else {
       dialogue(commands[2]);
       newTextBox(commands[1]);
       textSize(16);
-      text(sets.get(nextset), width/24+100, height*3/4+30);
+      if (nextset < 0) {
+        text(sets.get(0), width/24+100, height*3/4+30);
+      }else{
+        text(sets.get(nextset), width/24+100, height*3/4+30);
+      }
     }
   }
   /*
