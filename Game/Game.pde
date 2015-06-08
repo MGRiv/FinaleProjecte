@@ -168,7 +168,7 @@ void draw() {
     if (zbutton=="Talk") {
       newTextBox(current.getNPC(0).getName());
       textAlign(LEFT);
-      if (nextset < 0) {
+      if (nextset == -1) {
         text(sets.get(0), width/24+75, height*3/4+30);
       } else {
         text(sets.get(nextset), width/24+75, height*3/4+30);
@@ -376,7 +376,7 @@ void runFile() {
       dialogue(commands[2]);
       newTextBox(commands[1]);
       textSize(16);
-      if (nextset < 0) {
+      if (nextset == -1) {
         text(sets.get(0), width/24+100, height*3/4+30);
       } else {
         text(sets.get(nextset), width/24+100, height*3/4+30);
