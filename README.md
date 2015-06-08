@@ -4,8 +4,8 @@ Team Don'tknowhowtodoRPG's
 
 Demos:
 
-	6/1:https://github.com/MGRiv/FinaleProjecte/tree/6-1-15-DEMO
-	6/8:https://github.com/MGRiv/FinaleProjecte/tree/6-8-15-DEMO
+	6/1: https://github.com/MGRiv/FinaleProjecte/tree/6-1-15-DEMO
+	6/8: https://github.com/MGRiv/FinaleProjecte/tree/6-8-15-DEMO
 
 Daily Log
 
