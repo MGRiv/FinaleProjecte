@@ -27,6 +27,7 @@ private Scanner file;
 private String line;
 private int fcount;
 private Character[] firstNPCs;
+private Character[] seconNPCs;
 private String zbutton;
 private Location[] maps;
 private ArrayList<Item> testItems;
@@ -44,12 +45,20 @@ void setup() {
 
   //---------------------------GAMEPLAY
   firstNPCs=new Character[1];
+  seconNPCs=new Character[1];
   firstNPCs[0]=new Character("Boy1");
   firstNPCs[0].setX(200);
   firstNPCs[0].setY(200);
   firstNPCs[0].setDir(40);
   firstNPCs[0].setPosD(0);
   firstNPCs[0].setText("Hi my name is Boy1. I am the first guinea pig of this world. Hi my name is Boy1. I am the first guinea pig of this world. Hi my name is Boy1. I am the first guinea pig of this world. Hi my name is Boy1. I am the first guinea pig of this world.");
+  seconNPCs[0]=new Character("Boy1");
+  seconNPCs[0].setX(300);
+  seconNPCs[0].setY(200);
+  seconNPCs[0].setDir(40);
+  seconNPCs[0].setPosD(0);
+  seconNPCs[0].setText("Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world.");
+ 
   PImage bg=loadImage("Locations/0.png");
   zbutton="DoNothing";
   size(600, 600);
@@ -61,7 +70,7 @@ void setup() {
   otherLinks[0]=current;
   otherLinks[0].setNodeX(60);
   otherLinks[0].setNodeY(285);
-  newLinks[0]=new Location(92, 464, 62, 524, firstNPCs, loadImage("Locations/1.png"), false);
+  newLinks[0]=new Location(92, 464, 62, 524, seconNPCs, loadImage("Locations/1.png"), false);
   newLinks[0].setName("class");
   newLinks[0].setNodeX(504);
   newLinks[0].setNodeY(205);
@@ -417,7 +426,7 @@ void talk() {
       zbutton="DoNothing";
       nextset= -1;
       textAlign(CENTER, CENTER);
-      // sets=new ArrayList<String>(1);
+      sets.clear();
     }
   }
 }
@@ -493,6 +502,7 @@ public boolean inLink() {
     if (door.checkdoor((int)you.getX(), (int)you.getY())) {
       prev=current.getName();
       current=door;
+      dialogue(current.getNPC(0).getText()); 
       return true;
     }
   }
