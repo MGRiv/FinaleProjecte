@@ -28,11 +28,12 @@ private String zbutton;
 private Location[] maps;
 private ArrayList<Item> testItems;
 private ArrayList<Item> inventory;
+private boolean first;
 //-------------------------DIALOGUE
 long lastTime;
 String words;
 boolean zPressed;
-int nextset;
+int nextset = -1;
 ArrayList<String> sets;
 
 
@@ -93,7 +94,7 @@ void setup() {
   sets=new ArrayList<String>(1);
   dialogue(current.getNPC(0).getText()); 
   lastTime=millis();
-  nextset=0;
+  nextset= -1;
 }
 
 void draw() {
@@ -151,7 +152,11 @@ void draw() {
     if (zbutton=="Talk") {
       newTextBox(current.getNPC(0).getName());
       textAlign(LEFT);
-      text(sets.get(nextset), width/24+75, height*3/4+30);
+      if(nextset < 0){
+      text(sets.get(0), width/24+75, height*3/4+30);
+      }else{
+        text(sets.get(nextset), width/24+75, height*3/4+30);
+      }
       talk();
     }
     if (inLink()) {
@@ -374,12 +379,13 @@ void dialogue(String text) {
 
 void talk() {
   System.out.println(zPressed);
+  System.out.println(nextset);
   if (zPressed) {
     zPressed=false;
     nextset++;
     if (nextset==sets.size()) {
       zbutton="DoNothing";
-      nextset=0;
+      nextset= -1;
       textAlign(CENTER, CENTER);
       // sets=new ArrayList<String>(1);
     }
