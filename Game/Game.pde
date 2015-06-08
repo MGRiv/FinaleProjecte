@@ -28,6 +28,7 @@ private Scanner file;
 private String line;
 private int fcount;
 private Character[] firstNPCs;
+private Character[] seconNPCs;
 private String zbutton;
 private Location[] maps;
 private ArrayList<Item> testItems;
@@ -46,12 +47,20 @@ void setup() {
 
   //---------------------------GAMEPLAY
   firstNPCs=new Character[1];
+  seconNPCs=new Character[1];
   firstNPCs[0]=new Character("Boy1");
   firstNPCs[0].setX(200);
   firstNPCs[0].setY(200);
   firstNPCs[0].setDir(40);
   firstNPCs[0].setPosD(0);
   firstNPCs[0].setText("Hi my name is Boy1. I am the first guinea pig of this world. Hi my name is Boy1. I am the first guinea pig of this world. Hi my name is Boy1. I am the first guinea pig of this world. Hi my name is Boy1. I am the first guinea pig of this world.");
+  seconNPCs[0]=new Character("Boy1");
+  seconNPCs[0].setX(300);
+  seconNPCs[0].setY(200);
+  seconNPCs[0].setDir(40);
+  seconNPCs[0].setPosD(0);
+  seconNPCs[0].setText("Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world.");
+ 
   PImage bg=loadImage("Locations/0.png");
   zbutton="DoNothing";
   size(600, 600);
@@ -63,7 +72,7 @@ void setup() {
   otherLinks[0]=current;
   otherLinks[0].setNodeX(60);
   otherLinks[0].setNodeY(285);
-  newLinks[0]=new Location(92, 464, 62, 524, firstNPCs, loadImage("Locations/1.png"), false);
+  newLinks[0]=new Location(92, 464, 62, 524, seconNPCs, loadImage("Locations/1.png"), false);
   newLinks[0].setName("class");
   newLinks[0].setNodeX(504);
   newLinks[0].setNodeY(205);
@@ -79,11 +88,12 @@ void setup() {
   prev="";
   maps=new Location[10];
   inventory=new ArrayList<Item>(1);
-  testItems=new ArrayList<Item>(1);
-  testItems.add(new Item("J", loadImage("Letters/0.png"), 75, 75));
-  testItems.add(new Item("O", loadImage("Letters/1.png"), 100, 100));
-  testItems.add(new Item("H", loadImage("Letters/2.png"), 150, 150));
-  testItems.add(new Item("N", loadImage("Letters/3.png"), 400, 200));
+  current.catalog=new ArrayList<Item>(1);
+  newLinks[0].catalog=new ArrayList<Item>();
+  current.catalog.add(new Item("J", loadImage("Letters/0.png"), 75, 75));
+  current.catalog.add(new Item("O", loadImage("Letters/1.png"), 100, 100));
+  current.catalog.add(new Item("H", loadImage("Letters/2.png"), 150, 150));
+  current.catalog.add(new Item("N", loadImage("Letters/3.png"), 400, 200));
 
   //-----------------------------MENU
   START=new Button(width/4 - 60, 3*height/4 - 60, 2*buttonSize, 2*buttonSize, 5, "START");
@@ -437,7 +447,7 @@ void talk() {
       zbutton="DoNothing";
       nextset= -1;
       textAlign(CENTER, CENTER);
-      // sets=new ArrayList<String>(1);
+      sets.clear();
     }
   }
 }
@@ -513,6 +523,7 @@ public boolean inLink() {
     if (door.checkdoor((int)you.getX(), (int)you.getY())) {
       prev=current.getName();
       current=door;
+      dialogue(current.getNPC(0).getText()); 
       return true;
     }
   }
@@ -541,23 +552,23 @@ public void reposition() {
 }
 
 public void pickup() {
-  for (int i=0; i< testItems.size (); i++) {
+  for (int i=0; i< current.catalog.size (); i++) {
     //testItems.get(i).display();
-    if (you.getX()>=testItems.get(i).getX()-15 && you.getX()<=testItems.get(i).getX()+15 &&
-      you.getY()>=testItems.get(i).getY()-15 && you.getY()<=testItems.get(i).getY()+15) {
+    if (you.getX()>=current.catalog.get(i).getX()-15 && you.getX()<=current.catalog.get(i).getX()+15 &&
+      you.getY()>=current.catalog.get(i).getY()-15 && you.getY()<=current.catalog.get(i).getY()+15) {
 
       you.setHuzzah(true);
-      Item temp=testItems.get(i);
+      Item temp=current.catalog.get(i);
 
-      testItems.remove(temp);
+      current.catalog.remove(temp);
       inventory.add(temp);
     }
   }
 }
 
 public void showItems() {
-  for (int i=0; i< testItems.size (); i++) {
-    testItems.get(i).display();
+  for (int i=0; i< current.catalog.size (); i++) {
+    current.catalog.get(i).display();
   }
 }
 
