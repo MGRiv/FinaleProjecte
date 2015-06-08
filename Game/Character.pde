@@ -14,15 +14,21 @@ public class Character {
 
   public Character() {
     this("Bob");
+    if (imageCount==0) {
+      imageCount = 1;
+    }
   }
 
   public Character(String name_) {
     setName(name_);
+    if (imageCount==0) {
+      imageCount = 1;
+    }
   }
-  
-  public Character(String name_,int iC){
-     this(name_);
-     imageCount = iC;
+
+  public Character(String name_, int iC) {
+    this(name_);
+    imageCount = iC;
   }
 
   public void display() {
@@ -40,9 +46,9 @@ public class Character {
       }
     }
   }
-  
-  public void setIForm(int q){
-   iform = q; 
+
+  public void setIForm(int q) {
+    iform = q;
   }
 
   public void setPosR(int form) {
@@ -85,14 +91,14 @@ public class Character {
     huzzah=h;
   }
 
-  public int getStopX(){
+  public int getStopX() {
     return stopx;
   }
-  
-  public int getStopY(){
+
+  public int getStopY() {
     return stopy;
   }
-  
+
   public String getText() {
     return text;
   }
