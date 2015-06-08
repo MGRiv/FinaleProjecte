@@ -2,6 +2,9 @@ import java.util.*;
 import java.io.*;
 import java.lang.*;
 
+//------------------Scanner
+
+
 //------------------MENU
 int mode;
 Button START, HELP;
@@ -38,8 +41,9 @@ ArrayList<String> sets;
 
 
 void setup() {
+ 
   //---------------------------GAMEPLAY
-  firstNPCs=new Character[1];
+  firstNPCs=new Character[5];
   firstNPCs[0]=new Character("Boy1");
   firstNPCs[0].setX(200);
   firstNPCs[0].setY(200);
@@ -125,7 +129,7 @@ void draw() {
     background(254);
     image(current.getBackground(), 0, 0, 600, 600);
     current.getNPC(0).display();
-    
+
     interact();
 
     pickup();
@@ -136,15 +140,15 @@ void draw() {
     }
     //you.getHuzzah());
 
-    if (huzzahx==1){
+    if (huzzahx==1) {
       inventory.get(inventory.size()-1).setX((int)you.getX()+10);
       inventory.get(inventory.size()-1).setY((int)you.getY()-13);
       inventory.get(inventory.size()-1).display();
     }
     if (huzzahx==2) {
-      
+
       noLoopWait(1500);
-    
+
       loop();
       you.setHuzzah(false);
       huzzahx=0;
@@ -152,9 +156,9 @@ void draw() {
     if (zbutton=="Talk") {
       newTextBox(current.getNPC(0).getName());
       textAlign(LEFT);
-      if(nextset < 0){
-      text(sets.get(0), width/24+75, height*3/4+30);
-      }else{
+      if (nextset < 0) {
+        text(sets.get(0), width/24+75, height*3/4+30);
+      } else {
         text(sets.get(nextset), width/24+75, height*3/4+30);
       }
       talk();
@@ -336,12 +340,18 @@ void keyPressed() {
 }
 
 void runFile() {
-  file = new Scanner("scene"+fcount+".txt");
-  while (file.hasNextLine ()) {
-    line = file.nextLine();
-    String[] commands = split(line, ",");
+  File blah=new File("scene"+fcount+".txt");
+  System.out.println(blah.getAbsolutePath());
+  String commandlines[]=loadStrings("scene"+fcount+".txt");
+  System.out.println(commandlines[0]+":DDDDDDDDDDD");
+  for (int i=0; i<commandlines.length; i++) {
+    String commands[]=split(commandlines[i], ",");
+    System.out.println(commandlines[0]+":DDDDDDDDDDD");
+    System.out.println(commands[0]+":DDDDDDDDDDD");
     if (commands[0].equals("MOVE")) {
+      System.out.println(commands[1]);
       Character temp = findCharacter(commands[1]);
+      
       temp.move(Integer.valueOf(commands[2]), Integer.valueOf(commands[3]));
     } else {
       dialogue(commands[2]);
@@ -350,6 +360,22 @@ void runFile() {
       text(sets.get(nextset), width/24+100, height*3/4+30);
     }
   }
+  /*
+  file = new Scanner("scene"+fcount+".txt");
+   while (file.hasNextLine ()) {
+   line = file.nextLine();
+   String[] commands = split(line, ",");
+   if (commands[0].equals("MOVE")) {
+   Character temp = findCharacter(commands[1]);
+   temp.move(Integer.valueOf(commands[2]), Integer.valueOf(commands[3]));
+   } else {
+   dialogue(commands[2]);
+   newTextBox(commands[1]);
+   textSize(16);
+   text(sets.get(nextset), width/24+100, height*3/4+30);
+   }
+   }
+   */
 }
 
 void dialogue(String text) {
@@ -498,14 +524,14 @@ public void pickup() {
 
       you.setHuzzah(true);
       Item temp=testItems.get(i);
-     
+
       testItems.remove(temp);
       inventory.add(temp);
     }
   }
 }
 
-public void showItems(){
+public void showItems() {
   for (int i=0; i< testItems.size (); i++) {
     testItems.get(i).display();
   }

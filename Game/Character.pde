@@ -114,6 +114,7 @@ public class Character {
           y += 2;
         }
       }
+      display();
       waitC(17);
     }
   }
