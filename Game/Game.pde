@@ -86,11 +86,12 @@ void setup() {
   prev="";
   maps=new Location[10];
   inventory=new ArrayList<Item>(1);
-  testItems=new ArrayList<Item>(1);
-  testItems.add(new Item("J", loadImage("Letters/0.png"), 75, 75));
-  testItems.add(new Item("O", loadImage("Letters/1.png"), 100, 100));
-  testItems.add(new Item("H", loadImage("Letters/2.png"), 150, 150));
-  testItems.add(new Item("N", loadImage("Letters/3.png"), 400, 200));
+  current.catalog=new ArrayList<Item>(1);
+  newLinks[0].catalog=new ArrayList<Item>();
+  current.catalog.add(new Item("J", loadImage("Letters/0.png"), 75, 75));
+  current.catalog.add(new Item("O", loadImage("Letters/1.png"), 100, 100));
+  current.catalog.add(new Item("H", loadImage("Letters/2.png"), 150, 150));
+  current.catalog.add(new Item("N", loadImage("Letters/3.png"), 400, 200));
 
   //-----------------------------MENU
   START=new Button(width/4 - 60, 3*height/4 - 60, 2*buttonSize, 2*buttonSize, 5, "START");
@@ -531,23 +532,23 @@ public void reposition() {
 }
 
 public void pickup() {
-  for (int i=0; i< testItems.size (); i++) {
+  for (int i=0; i< current.catalog.size (); i++) {
     //testItems.get(i).display();
-    if (you.getX()>=testItems.get(i).getX()-15 && you.getX()<=testItems.get(i).getX()+15 &&
-      you.getY()>=testItems.get(i).getY()-15 && you.getY()<=testItems.get(i).getY()+15) {
+    if (you.getX()>=current.catalog.get(i).getX()-15 && you.getX()<=current.catalog.get(i).getX()+15 &&
+      you.getY()>=current.catalog.get(i).getY()-15 && you.getY()<=current.catalog.get(i).getY()+15) {
 
       you.setHuzzah(true);
-      Item temp=testItems.get(i);
+      Item temp=current.catalog.get(i);
 
-      testItems.remove(temp);
+      current.catalog.remove(temp);
       inventory.add(temp);
     }
   }
 }
 
 public void showItems() {
-  for (int i=0; i< testItems.size (); i++) {
-    testItems.get(i).display();
+  for (int i=0; i< current.catalog.size (); i++) {
+    current.catalog.get(i).display();
   }
 }
 

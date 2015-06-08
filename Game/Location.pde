@@ -1,7 +1,7 @@
 public class Location {
 
   private Character[] NPC;
-  private Item[] catalog;
+  public ArrayList<Item> catalog;
   private PImage background;
   private int bu, bd, bl, br;
   private boolean cutscene;
