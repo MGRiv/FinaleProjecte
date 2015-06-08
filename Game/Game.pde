@@ -133,7 +133,7 @@ void draw() {
     if (you.getHuzzah()) {
       huzzahx++;
     }
-    System.out.println(you.getHuzzah());
+    //you.getHuzzah());
 
     if (huzzahx==1){
       inventory.get(inventory.size()-1).setX((int)you.getX()+10);
@@ -149,7 +149,6 @@ void draw() {
       huzzahx=0;
     }
     if (zbutton=="Talk") {
-
       newTextBox(current.getNPC(0).getName());
       textAlign(LEFT);
       text(sets.get(nextset), width/24+75, height*3/4+30);
@@ -374,6 +373,7 @@ void dialogue(String text) {
 }
 
 void talk() {
+  System.out.println(zPressed);
   if (zPressed) {
     zPressed=false;
     nextset++;
