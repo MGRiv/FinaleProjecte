@@ -449,6 +449,7 @@ void talk() {
       nextset= -1;
       textAlign(CENTER, CENTER);
       sets.clear();
+      dialogue(current.getNPC(0).getText());
     }
   }
 }
@@ -524,6 +525,7 @@ public boolean inLink() {
     if (door.checkdoor((int)you.getX(), (int)you.getY())) {
       prev=current.getName();
       current=door;
+      sets.clear();
       dialogue(current.getNPC(0).getText()); 
       return true;
     }
