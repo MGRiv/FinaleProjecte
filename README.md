@@ -62,6 +62,7 @@ Daily Log
 		
 	6/8
 		Michael-Got cutscene dialogue to work, improved slightly on cutscene animation
+		Tony-general fxns for loading data
 Goals
 
 	Fully functioning movement w/ animation & Interaction system w/ NPC's
