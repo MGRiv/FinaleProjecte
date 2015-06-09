@@ -126,7 +126,7 @@ public class Character {
   public void move(int a, int b) {
     stopx=a;
     stopy=b;
-    if(Math.abs (x - a) != 0 || Math.abs(y - b) != 0) {
+    if (Math.abs (x - a) != 0 || Math.abs(y - b) != 0) {
       if (Math.abs(x - a) != 0) {
         if (x > a) {
           x -= 2;
@@ -150,7 +150,7 @@ public class Character {
         }
       }
       display();
-      waitC(100);
+      waitC(17);
     }
   }
   public void waitC(int t) {
