@@ -44,40 +44,47 @@ ArrayList<String> sets;
 
 
 void setup() {
-
+  maps=new Location[2];
   //---------------------------GAMEPLAY
+  /*
   firstNPCs=new Character[1];
-  seconNPCs=new Character[1];
-  firstNPCs[0]=new Character("Boy1");
-  firstNPCs[0].setX(200);
-  firstNPCs[0].setY(200);
-  firstNPCs[0].setDir(40);
-  firstNPCs[0].setPosD(0);
-  firstNPCs[0].setText("Hi my name is Boy1. I am the first guinea pig of this world. Hi my name is Boy1. I am the first guinea pig of this world. Hi my name is Boy1. I am the first guinea pig of this world. Hi my name is Boy1. I am the first guinea pig of this world.");
-  seconNPCs[0]=new Character("Boy1");
-  seconNPCs[0].setX(300);
-  seconNPCs[0].setY(200);
-  seconNPCs[0].setDir(40);
-  seconNPCs[0].setPosD(0);
-  seconNPCs[0].setText("Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world.");
-
-  PImage bg=loadImage("Locations/0.png");
+   seconNPCs=new Character[1];
+   firstNPCs[0]=new Character("Boy1");
+   firstNPCs[0].setX(200);
+   firstNPCs[0].setY(200);
+   firstNPCs[0].setDir(40);
+   firstNPCs[0].setPosD(0);
+   firstNPCs[0].setText("Hi my name is Boy1. I am the first guinea pig of this world. Hi my name is Boy1. I am the first guinea pig of this world. Hi my name is Boy1. I am the first guinea pig of this world. Hi my name is Boy1. I am the first guinea pig of this world.");
+   seconNPCs[0]=new Character("Boy1");
+   seconNPCs[0].setX(300);
+   seconNPCs[0].setY(200);
+   seconNPCs[0].setDir(40);
+   seconNPCs[0].setPosD(0);
+   seconNPCs[0].setText("Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world.");
+   
+   PImage bg=loadImage("Locations/0.png");
+   */
+  loadLocations();
+  loadLinks();
+  current=maps[0];
   zbutton="DoNothing";
   size(600, 600);
+  /*
   current = new Location(66, 502, 74, 502, firstNPCs, bg, true);
-  current.setName("Start");
-
-  Location[] newLinks=new Location[1];
-  Location[] otherLinks=new Location[1];
-  otherLinks[0]=current;
-  otherLinks[0].setNodeX(60);
-  otherLinks[0].setNodeY(285);
-  newLinks[0]=new Location(92, 464, 62, 524, seconNPCs, loadImage("Locations/1.png"), false);
-  newLinks[0].setName("class");
-  newLinks[0].setNodeX(504);
-  newLinks[0].setNodeY(205);
-  current.setLinks(newLinks);
-  newLinks[0].setLinks(otherLinks);
+   current.setName("Start");
+   
+   Location[] newLinks=new Location[1];
+   Location[] otherLinks=new Location[1];
+   otherLinks[0]=current;
+   otherLinks[0].setNodeX(60);
+   otherLinks[0].setNodeY(285);
+   newLinks[0]=new Location(92, 464, 62, 524, seconNPCs, loadImage("Locations/1.png"), false);
+   newLinks[0].setName("class");
+   newLinks[0].setNodeX(504);
+   newLinks[0].setNodeY(205);
+   current.setLinks(newLinks);
+   newLinks[0].setLinks(otherLinks);
+   */
   you=new Player("Link", 10);
   System.out.println(you.getName());
   pos=0;
@@ -86,10 +93,11 @@ void setup() {
   you.setPosD(0);
   dirc = 40;
   prev="";
-  maps=new Location[10];
+  //maps=new Location[10];
   inventory=new ArrayList<Item>(1);
   current.catalog=new ArrayList<Item>(1);
-  newLinks[0].catalog=new ArrayList<Item>();
+ 
+  maps[0].getLinks()[0].catalog=new ArrayList<Item>();
   current.catalog.add(new Item("J", loadImage("Letters/0.png"), 75, 75));
   current.catalog.add(new Item("O", loadImage("Letters/1.png"), 100, 100));
   current.catalog.add(new Item("H", loadImage("Letters/2.png"), 150, 150));
@@ -114,7 +122,7 @@ void setup() {
 }
 
 void draw() {
-  System.out.println(keyCode);
+  //System.out.println(keyCode);
   if (mode == 0) {
     c2++;
     if (c2 % 180 == 179) {
@@ -199,7 +207,7 @@ void draw() {
       processKeys();
     }
 
-    you.display();
+  //  you.display();
   } else if (mode==2) {
     loadInstructions();
     processButtons();
@@ -361,6 +369,65 @@ void keyPressed() {
     open=!open;
   } else {
     downPressed = zPressed = rightPressed = leftPressed = upPressed = false;
+  }
+}
+
+void loadLocations() {
+
+  String lines[]=loadStrings("LOCATIONS.txt");
+  for (int i=0; i<lines.length; i++) {
+    String room[]=split(lines[i], ",");
+    // NAME, BU, BD, BL, BR, PATH, SCENE?, FIRSTChar,..LASTChar
+    Character newchars[]=new Character[0];
+    boolean scene;
+    if (room.length>6) {
+      newchars=new Character[(room.length-6)/4];
+      for (int j=7, x=0; j<room.length; j+=4, x++) {
+        newchars[x]=new Character(room[j]);
+        newchars[x].setX(Integer.valueOf(room[j+1]));
+        newchars[x].setY(Integer.valueOf(room[j+2]));
+        newchars[x].setText(room[j+3]);
+        newchars[x].setDir(40);
+        newchars[x].setPosD(0);
+      }
+    }
+    if (room[6]=="FALSE") {
+      scene=false;
+    } else {
+      scene=true;
+    }
+    
+    maps[i]=new Location(Integer.valueOf(room[1]), Integer.valueOf(room[2]), Integer.valueOf(room[3]), Integer.valueOf(room[4]), newchars, loadImage(room[5]), scene);
+    maps[i].setName(room[0]);
+    System.out.println(newchars.length+"saqeqwe");
+  }
+}
+
+void loadLinks() {
+  int mapctr=0;
+  int placectr=0;
+  String lines[]=loadStrings("LINKS.txt");
+  for (int i=0; i<lines.length; i++) {
+    String links[]=split(lines[i], ",");
+
+    Location newLocs[]=new Location[1];
+    for (int j=0; j<links.length; j+=3) {
+      int loop=0;
+      for (Location place : maps) {
+        
+        if (place.getName().equals(links[j])) {
+        //  System.out.println(maps[0].getName()+"::::::::::::::::::::::::::"+links[j]);
+          newLocs[placectr]=place;
+          System.out.println(newLocs[0].getName()+"dadadsdadaaasdsaddadasd");
+          newLocs[placectr].setNodeX(Integer.valueOf(links[j+1]));
+          newLocs[placectr].setNodeY(Integer.valueOf(links[j+2]));
+          placectr++;
+        }
+      }
+      placectr=0;
+    }
+    maps[mapctr].setLinks(newLocs);
+    mapctr++;
   }
 }
 
