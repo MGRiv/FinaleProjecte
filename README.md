@@ -59,6 +59,9 @@ Daily Log
 		
 	6/7
 		Tony&Michael-Filereading, animation, NPCdialogue, location specific items and characters, bug fixing
+		
+	6/8
+		Michael-Got cutscene dialogue to work, improved slightly on cutscene animation
 Goals
 
 	Fully functioning movement w/ animation & Interaction system w/ NPC's
