@@ -60,7 +60,7 @@ void setup() {
   seconNPCs[0].setDir(40);
   seconNPCs[0].setPosD(0);
   seconNPCs[0].setText("Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world.");
- 
+
   PImage bg=loadImage("Locations/0.png");
   zbutton="DoNothing";
   size(600, 600);
@@ -78,7 +78,7 @@ void setup() {
   newLinks[0].setNodeY(205);
   current.setLinks(newLinks);
   newLinks[0].setLinks(otherLinks);
-  you=new Player("Link",10);
+  you=new Player("Link", 10);
   System.out.println(you.getName());
   pos=0;
   you.setX(width/2);
@@ -140,6 +140,24 @@ void draw() {
   } else if (mode == 1) {
     background(254);
     image(current.getBackground(), 0, 0, 600, 600);
+    if (current.getScene()) {
+      current.setScene(false);
+      runFile();
+      fcount++;
+    }
+    if (mvmt==true) {
+      if (mvChars.size()==0) {
+        mvmt=false;
+        if (sets.size() != 0) {
+          zbutton = "Talk";
+        }
+      } else {
+        moveChars();
+        showItems();
+        current.getNPC(0).display();
+        you.display();
+      }
+    }
     current.getNPC(0).display();
 
     interact();
@@ -158,9 +176,7 @@ void draw() {
       inventory.get(inventory.size()-1).display();
     }
     if (huzzahx==2) {
-
       noLoopWait(1500);
-
       loop();
       you.setHuzzah(false);
       huzzahx=0;
@@ -178,21 +194,12 @@ void draw() {
     if (inLink()) {
       reposition();
     }
-    if (mvmt==true) {
-      if (mvChars.size()==0) {
-        mvmt=false;
-      } else {
-        moveChars();
-      }
-    }
-    if (current.getScene()) {
-      current.setScene(false);
-      runFile();
-      fcount++;
-    }
+
     if (zbutton!="Talk") {
       processKeys();
     }
+
+    you.display();
   } else if (mode==2) {
     loadInstructions();
     processButtons();
@@ -321,7 +328,6 @@ void processKeys() {
     interact();
   }
   if (open) {
-
     openInv();
   }
 }
@@ -405,8 +411,10 @@ void runFile() {
 void moveChars() {
 
   Character curr=mvChars.get(0);
-  if (curr.getStopX()!=curr.getX() && 
+  if (curr.getStopX()!=curr.getX() || 
     curr.getStopY()!=curr.getY()) {
+    background(254);
+    image(current.getBackground(), 0, 0, 600, 600);
     curr.move(curr.getStopX(), curr.getStopY());
   } else {
     mvChars.remove(0);
