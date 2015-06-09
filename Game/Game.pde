@@ -60,7 +60,7 @@ void setup() {
   seconNPCs[0].setDir(40);
   seconNPCs[0].setPosD(0);
   seconNPCs[0].setText("Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world.");
- 
+
   PImage bg=loadImage("Locations/0.png");
   zbutton="DoNothing";
   size(600, 600);
@@ -78,7 +78,7 @@ void setup() {
   newLinks[0].setNodeY(205);
   current.setLinks(newLinks);
   newLinks[0].setLinks(otherLinks);
-  you=new Player("Link",10);
+  you=new Player("Link", 10);
   System.out.println(you.getName());
   pos=0;
   you.setX(width/2);
@@ -177,13 +177,6 @@ void draw() {
     }
     if (inLink()) {
       reposition();
-    }
-    if (mvmt==true) {
-      if (mvChars.size()==0) {
-        mvmt=false;
-      } else {
-        moveChars();
-      }
     }
     if (current.getScene()) {
       current.setScene(false);
@@ -365,15 +358,20 @@ void runFile() {
   mvChars=new ArrayList<Character>(0);
   for (int i=0; i<commandlines.length; i++) {
     String commands[]=split(commandlines[i], ",");
-
     if (commands[0].equals("MOVE")) {
-      mvmt=true;
       System.out.println(commands[1]);
       Character temp = findCharacter(commands[1]);
       temp.setIForm(0);
       temp.move(Integer.valueOf(commands[2]), Integer.valueOf(commands[3]));
       mvChars.add(temp);
+      if (mvChars.size()==0) {
+        mvmt=false;
+      } else {
+        moveChars();
+      }
     } else {
+      System.out.println("blah");
+      nextset = 0;
       dialogue(commands[2]);
       newTextBox(commands[1]);
       textSize(16);
@@ -382,6 +380,15 @@ void runFile() {
       } else {
         text(sets.get(nextset), width/24+100, height*3/4+30);
       }
+      //while (nextset < sets.size()) {
+      //wait(100);
+      //if (zPressed) {
+      //zPressed=false;
+      //nextset++;
+      //}
+      //}
+      //nextset = -1;
+      //sets.clear();
     }
   }
   /*
@@ -403,14 +410,15 @@ void runFile() {
 }
 
 void moveChars() {
-
   Character curr=mvChars.get(0);
-  if (curr.getStopX()!=curr.getX() && 
-    curr.getStopY()!=curr.getY()) {
+  //background(current.getBackground());
+  image(current.getBackground(), 0, 0, 600, 600);
+  while (curr.getStopX ()!=curr.getX() || curr.getStopY()!=curr.getY()) {
+    image(current.getBackground(), 0, 0, 600, 600);
     curr.move(curr.getStopX(), curr.getStopY());
-  } else {
-    mvChars.remove(0);
+    System.out.println("blt");
   }
+  mvChars.remove(0);
 }
 
 void dialogue(String text) {
