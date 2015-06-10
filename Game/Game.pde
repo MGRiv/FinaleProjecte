@@ -148,6 +148,7 @@ void draw() {
   } else if (mode == 1) {
     background(254);
     image(current.getBackground(), 0, 0, 600, 600);
+    System.out.println(current.getName()+"::::::"+current.getScene());
     if (current.getScene()) {
       current.setScene(false);
       runFile();
@@ -379,7 +380,7 @@ void loadLocations() {
     String room[]=split(lines[i], ",");
     // NAME, BU, BD, BL, BR, PATH, SCENE?, FIRSTChar,..LASTChar
     Character newchars[]=new Character[0];
-    boolean scene;
+    boolean scene=false;
     if (room.length>6) {
       newchars=new Character[(room.length-6)/4];
       for (int j=7, x=0; j<room.length; j+=4, x++) {
@@ -391,10 +392,12 @@ void loadLocations() {
         newchars[x].setPosD(0);
       }
     }
-    if (room[6]=="FALSE") {
+    
+    if (room[6].equals("FALSE")) {
       scene=false;
-    } else {
+    } else if (room[6].equals("TRUE")){
       scene=true;
+     
     }
     
     maps[i]=new Location(Integer.valueOf(room[1]), Integer.valueOf(room[2]), Integer.valueOf(room[3]), Integer.valueOf(room[4]), newchars, loadImage(room[5]), scene);
@@ -436,6 +439,7 @@ void runFile() {
   System.out.println(blah.getAbsolutePath());
   String commandlines[]=loadStrings("scene"+fcount+".txt");
   mvChars=new ArrayList<Character>(0);
+  
   for (int i=0; i<commandlines.length; i++) {
     String commands[]=split(commandlines[i], ",");
 
