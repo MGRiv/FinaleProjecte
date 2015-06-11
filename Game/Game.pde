@@ -443,6 +443,7 @@ void runFile() {
     String commands[]=split(commandlines[i], ",");
 
     if (commands[0].equals("MOVE")) {
+      //Command,Name,FinalX,FinalY
       mvmt=true;
       System.out.println(commands[1]);
       Character temp = findCharacter(commands[1]);
