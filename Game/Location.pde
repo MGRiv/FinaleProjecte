@@ -6,8 +6,8 @@ public class Location {
   private int bu, bd, bl, br;
   private boolean cutscene;
   private Location[] Links;
+  public ArrayList<Integer> nodes = new ArrayList<Integer>();
   private String name;
-  private int nodeX, nodeY;
 
   public Location() {
     bu = 0;
@@ -36,14 +36,6 @@ public class Location {
     cutscene =  scene;
   }
 
-  public void setNodeX(int x) {
-    nodeX=x;
-  }
-
-  public void setNodeY(int y) {
-    nodeY=y;
-  }
-
   public void setLinks(Location[] l) {
     Links=l;
   }
@@ -64,14 +56,6 @@ public class Location {
 
   public boolean getScene() {
     return cutscene;
-  }
-
-  public int getNodeX() {
-    return nodeX;
-  }
-
-  public int getNodeY() {
-    return nodeY;
   }
 
   public int getBU() {
@@ -104,16 +88,31 @@ public class Location {
     return Links;
   }
   public boolean checkdoor(int x, int y) {
-    if (Math.abs(((bd + bu)/2) - y) < Math.abs(((br + bl)/2) - x)) {
-      if (Math.abs(x - nodeX) < 6 && Math.abs(y - nodeY) < 18) {
-        return true;
-      }
-    } else {
-      if (Math.abs(x - nodeX) < 18 && Math.abs(y - nodeY) < 6) {
-        return true;
+    for (int i = 0; i < nodes.size (); i+=2) {
+      int nodeX = nodes.get(i);
+      int nodeY = nodes.get(i + 1);
+      if (Math.abs(((bd + bu)/2) - y) < Math.abs(((br + bl)/2) - x)) {
+        if (Math.abs(x - nodeX) < 6 && Math.abs(y - nodeY) < 18) {
+          return true;
+        }
+      } else {
+        if (Math.abs(x - nodeX) < 18 && Math.abs(y - nodeY) < 6) {
+          return true;
+        }
       }
     }
     return false;
   }
+  public int wdoor(int x, int y) {
+    for (int i = 0; i < nodes.size (); i+=2) {
+      int nodeX = nodes.get(i);
+      int nodeY = nodes.get(i + 1);
+      if (Math.abs(((bd + bu)/2) - y) < Math.abs(((br + bl)/2) - x)) {
+        if ((Math.abs(x - nodeX) < 6 && Math.abs(y - nodeY) < 18) || (Math.abs(x - nodeX) < 18 && Math.abs(y - nodeY) < 6)) {
+          return i;
+        }
+      }
+    }
+    return 0;
+  }
 }
-

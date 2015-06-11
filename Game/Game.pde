@@ -5,7 +5,7 @@ import java.lang.*;
 //------------------Scanner
 private ArrayList<Character>mvChars;
 boolean mvmt;
-
+Location prevL;
 //------------------MENU
 int mode;
 Button START, HELP;
@@ -44,7 +44,6 @@ ArrayList<String> sets;
 
 
 void setup() {
-  maps=new Location[2];
   //---------------------------GAMEPLAY
   /*
   firstNPCs=new Character[1];
@@ -201,7 +200,7 @@ void draw() {
       talk();
     }
     if (inLink()) {
-      reposition();
+      reposition(prevL.wdoor((int)you.getX(),(int)you.getY()));
     }
 
     if (zbutton!="Talk") {
@@ -374,8 +373,8 @@ void keyPressed() {
 }
 
 void loadLocations() {
-
   String lines[]=loadStrings("LOCATIONS.txt");
+  maps=new Location[lines.length];
   for (int i=0; i<lines.length; i++) {
     String room[]=split(lines[i], ",");
     // NAME, BU, BD, BL, BR, PATH, SCENE?, FIRSTChar,..LASTChar
@@ -413,7 +412,7 @@ void loadLinks() {
   for (int i=0; i<lines.length; i++) {
     String links[]=split(lines[i], ",");
 
-    Location newLocs[]=new Location[1];
+    Location newLocs[]=new Location[links.length/3];
     for (int j=0; j<links.length; j+=3) {
       int loop=0;
       for (Location place : maps) {
@@ -422,8 +421,8 @@ void loadLinks() {
         //  System.out.println(maps[0].getName()+"::::::::::::::::::::::::::"+links[j]);
           newLocs[placectr]=place;
           System.out.println(newLocs[0].getName()+"dadadsdadaaasdsaddadasd");
-          newLocs[placectr].setNodeX(Integer.valueOf(links[j+1]));
-          newLocs[placectr].setNodeY(Integer.valueOf(links[j+2]));
+          newLocs[placectr].nodes.add(Integer.valueOf(links[j+1]));
+          newLocs[placectr].nodes.add(Integer.valueOf(links[j+2]));
           placectr++;
         }
       }
@@ -603,6 +602,7 @@ public boolean inLink() {
   for (Location door : current.getLinks ()) {
     if (door.checkdoor((int)you.getX(), (int)you.getY())) {
       prev=current.getName();
+      prevL=current;
       current=door;
       sets.clear();
       dialogue(current.getNPC(0).getText()); 
@@ -612,22 +612,25 @@ public boolean inLink() {
   return false;
 }
 
-public void reposition() {
+public void reposition(int a) {
   for (Location door : current.getLinks ()) {
     if (door.getName()==prev) {
-      if (Math.abs(((door.getBD() + door.getBU())/2) - door.getNodeY()) < Math.abs(((door.getBR() + door.getBL())/2) - door.getNodeX())) {
-        if (door.getNodeX() > ((door.getBR() + door.getBL())/2)) {
-          you.setX(door.getNodeX() - 32);
+      int NodeX = door.nodes.get(a);
+      int NodeY = door.nodes.get(a + 1);
+      if (Math.abs(((door.getBD() + door.getBU())/2) - NodeY) < Math.abs(((door.getBR() + door.getBL())/2) - NodeX)) {
+        if (NodeX > ((door.getBR() + door.getBL())/2)) {
+          you.setX(NodeX - 32);
         } else {
-          you.setX(door.getNodeX() + 32);
+          you.setX(NodeX + 32);
         }
-        you.setY(door.getNodeY());
+        you.setY(NodeY);
       } else {
-        if (door.getNodeY() > ((door.getBD() + door.getBU())/2)) {
-          you.setY(door.getNodeY() - 32);
+        if (NodeY > ((door.getBD() + door.getBU())/2)) {
+          you.setY(NodeY - 32);
         } else {
+          you.setY(NodeY + 32);
         }
-        you.setX(door.getNodeX() + 32);
+        you.setX(NodeX + 32);
       }
     }
   }
