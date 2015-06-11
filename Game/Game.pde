@@ -203,7 +203,7 @@ void draw() {
       reposition(prevL.wdoor((int)you.getX(),(int)you.getY()));
     }
 
-    if (zbutton!="Talk") {
+    if (zbutton!="Talk" || mvmt == false) {
       processKeys();
     }
 
@@ -332,9 +332,9 @@ void processKeys() {
   }
   you.setDir(dirc);
   System.out.println("" + (int)you.getX() + ", " + (int)you.getY()+" "+pos);
-  if (zPressed) {
-    interact();
-  }
+  //if (zPressed) {
+    //interact();
+  //}
   if (open) {
     openInv();
   }
