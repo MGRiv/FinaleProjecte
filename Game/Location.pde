@@ -30,6 +30,7 @@ public class Location {
     NPC = l;
     background = q;
     cutscene = scene;
+    catalog=new ArrayList<Item> ();
   }
 
   public void setScene(boolean scene) {
@@ -72,9 +73,11 @@ public class Location {
   }
 
   public boolean environment(float x, float y) {
-    for (Character e : NPC) {
-      if (Math.abs(x - e.getX()) <= 12 && Math.abs(y - e.getY()) <= 12) {
-        return false;
+    if (NPC.length!=0) {
+      for (Character e : NPC) {
+        if (Math.abs(x - e.getX()) <= 12 && Math.abs(y - e.getY()) <= 12) {
+          return false;
+        }
       }
     }
     return true;
@@ -88,7 +91,12 @@ public class Location {
     return Links;
   }
   public boolean checkdoor(int x, int y) {
-    for (int i = 0; i < nodes.size (); i+=2) {
+    //System.out.println(nodes.get(0) + ", "+ nodes.get(1));
+    int i = 0;
+    int c = nodes.size();
+    while (i < c) {
+      System.out.println(i);
+      //System.out.println(nodes.get(i) + ", "+ nodes.get(i+1));
       int nodeX = nodes.get(i);
       int nodeY = nodes.get(i + 1);
       if (Math.abs(((bd + bu)/2) - y) < Math.abs(((br + bl)/2) - x)) {
@@ -99,7 +107,10 @@ public class Location {
         if (Math.abs(x - nodeX) < 18 && Math.abs(y - nodeY) < 6) {
           return true;
         }
+        //System.out.println(bu);
       }
+      System.out.println(bd);
+      i += 2;
     }
     return false;
   }
@@ -116,3 +127,4 @@ public class Location {
     return 0;
   }
 }
+

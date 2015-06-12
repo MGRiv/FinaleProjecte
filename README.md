@@ -67,8 +67,12 @@ Daily Log
 	6/9
 		Tony-fixed minor bug with moving to another location.
 		
-	6/10
+	6/11
 		Michael-Changed functions to support multiple entrances/ exits in a room
+		
+	6/12
+		Michael-Began debugging code from yesterday
+		Tony-fixed nullpointer bugs. Found new bugs.	
 Goals
 
 	Fully functioning movement w/ animation & Interaction system w/ NPC's
