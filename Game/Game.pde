@@ -377,10 +377,10 @@ void keyPressed() {
 }
 
 void loadLocations() {
-  String lines[]=loadStrings("LOCATIONS.txt");
+  String[] lines=loadStrings("LOCATIONS.txt");
   maps=new Location[lines.length];
   for (int i=0; i<lines.length; i++) {
-    String room[]=split(lines[i], ",");
+    String[] room=split(lines[i], ",");
     // NAME, BU, BD, BL, BR, PATH, SCENE?, FIRSTChar,..LASTChar
     Character newchars[]=new Character[0];
     boolean scene=false;
@@ -411,9 +411,9 @@ void loadLocations() {
 void loadLinks() {
   int mapctr=0;
   int placectr=0;
-  String lines[]=loadStrings("LINKS.txt");
+  String[] lines=loadStrings("LINKS.txt");
   for (int i=0; i<lines.length; i++) {
-    String links[]=split(lines[i], ",");
+    String[] links=split(lines[i], ",");
 
     Location newLocs[]=new Location[links.length/3];
     // System.out.println(newLocs.length+"hahahahahahahaha");
