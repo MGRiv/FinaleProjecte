@@ -115,7 +115,7 @@ void setup() {
   textAlign(CENTER, CENTER);
   //-----------------------------DIALOGUE
   sets=new ArrayList<String>(1);
-  dialogue(current.getNPC(0).getText()); 
+ // dialogue(current.getNPC(0).getText()); 
   lastTime=millis();
   nextset= -1;
 }
