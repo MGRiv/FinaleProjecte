@@ -71,7 +71,8 @@ Daily Log
 		Michael-Changed functions to support multiple entrances/ exits in a room
 		
 	6/12
-		Michael-Began debugging code from yesterday	
+		Michael-Began debugging code from yesterday
+		Tony-fixed nullpointer bugs. Found new bugs.	
 Goals
 
 	Fully functioning movement w/ animation & Interaction system w/ NPC's
