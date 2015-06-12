@@ -90,12 +90,13 @@ void setup() {
   you.setX(width/2);
   you.setY(height/2);
   you.setPosD(0);
+  you.setDir(40);
   dirc = 40;
   prev="";
   //maps=new Location[10];
   inventory=new ArrayList<Item>(1);
   current.catalog=new ArrayList<Item>(1);
- 
+
   maps[0].getLinks()[0].catalog=new ArrayList<Item>();
   current.catalog.add(new Item("J", loadImage("Letters/0.png"), 75, 75));
   current.catalog.add(new Item("O", loadImage("Letters/1.png"), 100, 100));
@@ -115,7 +116,7 @@ void setup() {
   textAlign(CENTER, CENTER);
   //-----------------------------DIALOGUE
   sets=new ArrayList<String>(1);
- // dialogue(current.getNPC(0).getText()); 
+  // dialogue(current.getNPC(0).getText()); 
   lastTime=millis();
   nextset= -1;
 }
@@ -199,15 +200,15 @@ void draw() {
       }
       talk();
     }
-    if (inLink()) {
-      reposition(prevL.wdoor((int)you.getX(),(int)you.getY()));
-    }
 
-    if (zbutton!="Talk" || mvmt == false) {
+    if (zbutton!="Talk" && mvmt == false) {
+      if (inLink()) {
+        reposition(prevL.wdoor((int)you.getX(), (int)you.getY()));
+      }
       processKeys();
     }
 
-  //  you.display();
+    //  you.display();
   } else if (mode==2) {
     loadInstructions();
     processButtons();
@@ -333,7 +334,7 @@ void processKeys() {
   you.setDir(dirc);
   System.out.println("" + (int)you.getX() + ", " + (int)you.getY()+" "+pos);
   //if (zPressed) {
-    //interact();
+  //interact();
   //}
   if (open) {
     openInv();
@@ -391,14 +392,13 @@ void loadLocations() {
         newchars[x].setPosD(0);
       }
     }
-    
+
     if (room[6].equals("FALSE")) {
       scene=false;
-    } else if (room[6].equals("TRUE")){
+    } else if (room[6].equals("TRUE")) {
       scene=true;
-     
     }
-    
+
     maps[i]=new Location(Integer.valueOf(room[1]), Integer.valueOf(room[2]), Integer.valueOf(room[3]), Integer.valueOf(room[4]), newchars, loadImage(room[5]), scene);
     maps[i].setName(room[0]);
     System.out.println(newchars.length+"saqeqwe");
@@ -416,11 +416,11 @@ void loadLinks() {
     for (int j=0; j<links.length; j+=3) {
       int loop=0;
       for (Location place : maps) {
-        
+
         if (place.getName().equals(links[j])) {
-        //  System.out.println(maps[0].getName()+"::::::::::::::::::::::::::"+links[j]);
+          //  System.out.println(maps[0].getName()+"::::::::::::::::::::::::::"+links[j]);
           newLocs[placectr]=place;
-          System.out.println(newLocs[0].getName()+"dadadsdadaaasdsaddadasd");
+          System.out.println(newLocs[placectr].getName()+"dadadsdadaaasdsaddadasd");
           newLocs[placectr].nodes.add(Integer.valueOf(links[j+1]));
           newLocs[placectr].nodes.add(Integer.valueOf(links[j+2]));
           placectr++;
@@ -438,7 +438,7 @@ void runFile() {
   System.out.println(blah.getAbsolutePath());
   String commandlines[]=loadStrings("scene"+fcount+".txt");
   mvChars=new ArrayList<Character>(0);
-  
+
   for (int i=0; i<commandlines.length; i++) {
     String commands[]=split(commandlines[i], ",");
 
