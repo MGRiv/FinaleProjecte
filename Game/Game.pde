@@ -4,6 +4,7 @@ import java.lang.*;
 
 //------------------Scanner
 private ArrayList<Character>mvChars;
+private ArrayList<Command>mvchars;
 boolean mvmt;
 Location prevL;
 //------------------MENU
@@ -68,6 +69,7 @@ void setup() {
   current=maps[0];
   zbutton="DoNothing";
   size(600, 600);
+  mvchars=new ArrayList<Command>();
   /*
   current = new Location(66, 502, 74, 502, firstNPCs, bg, true);
    current.setName("Start");
@@ -153,16 +155,18 @@ void draw() {
     if (current.getScene()) {
       current.setScene(false);
       runFile();
+      
       fcount++;
     }
     if (mvmt==true) {
-      if (mvChars.size()==0) {
+      if (mvchars.size()==0) {
         mvmt=false;
         if (sets.size() != 0) {
           zbutton = "Talk";
         }
       } else {
         moveChars();
+        //System.out.println(mvChars.get(0).getStopX()+"...................."+you.getX());
         showItems();
         current.getNPC(0).display();
         you.display();
@@ -452,8 +456,11 @@ void runFile() {
       mvmt=true;
       System.out.println(commands[1]);
       Character temp = findCharacter(commands[1]);
+
       temp.setIForm(0);
-      temp.move(Integer.valueOf(commands[2]), Integer.valueOf(commands[3]));
+      // temp.move(Integer.valueOf(commands[2]), Integer.valueOf(commands[3]));
+      Command lelouch=new Command(temp, Integer.valueOf(commands[2]), Integer.valueOf(commands[3]));
+      mvchars.add(lelouch);
       mvChars.add(temp);
     } else {
       dialogue(commands[2]);
@@ -486,14 +493,14 @@ void runFile() {
 
 void moveChars() {
 
-  Character curr=mvChars.get(0);
-  if (curr.getStopX()!=curr.getX() || 
-    curr.getStopY()!=curr.getY()) {
+  Command curr=mvchars.get(0);
+  if (curr.getStopX()!=curr.getChar().getX() || 
+    curr.getStopY()!=curr.getChar().getY()) {
     background(254);
     image(current.getBackground(), 0, 0, 600, 600);
-    curr.move(curr.getStopX(), curr.getStopY());
+    curr.getChar().move(curr.getStopX(), curr.getStopY());
   } else {
-    mvChars.remove(0);
+    mvchars.remove(0);
   }
 }
 
