@@ -1,3 +1,3 @@
-Start,66,502,74,502,Locations/0.png,TRUE,Boy1,200,200,WEE I'm a guinea pig. HAHAHAHHAHAHAHAHAHAHAHAHAHA. DUDUDUDUDUDUDUDUDU.
-class,92,464,62,524,Locations/1.png,FALSE,Boy2,300,200,WEEEEEEEEEEEE I'm a god. DUDUDUDUDUDUDUDDUDUUD.
+Start,66,502,74,502,Locations/0.png,TRUE,Boy1,200,200,Hmmmmm. This is a tough case to solve.
+class,92,464,62,524,Locations/1.png,TRUE,Boy2,300,200,Why did this happen?
 hall,0,600,0,600,Locations/2.png,FALSE
