@@ -206,7 +206,7 @@ void draw() {
 
     if (zbutton!="Talk" && mvmt == false) {
       if (inLink()) {
-        reposition(prevL.wdoor((int)you.getX(), (int)you.getY()));
+        reposition(current.wdoor((int)you.getX(), (int)you.getY()));
       }
       processKeys();
     }
