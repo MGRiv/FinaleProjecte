@@ -114,7 +114,14 @@ public class Location {
     }
     return false;
   }
-  public int wdoor(int x, int y) {
+  public int wdoor(int x, int y,Location prev) {
+    /*
+    for(int i = 0; i < Links.length;i++){
+      if(Links[i].getName().equals(prev.getName())){
+       return i; 
+      }
+    }
+    */
     for (int i = 0; i < nodes.size (); i+=2) {
       int nodeX = nodes.get(i);
       int nodeY = nodes.get(i + 1);
