@@ -151,7 +151,7 @@ void draw() {
   } else if (mode == 1) {
     background(254);
     image(current.getBackground(), 0, 0, 600, 600);
-    //System.out.println(current.getName()+"::::::"+current.getScene());
+    System.out.println(you.getX() + "," + you.getY());
     if (current.getScene()) {
       current.setScene(false);
       runFile();
@@ -614,7 +614,7 @@ public Character findCharacter(String name) {
 
 public boolean inLink() {
   for (Location door : current.getLinks ()) {
-    if (door.checkdoor((int)you.getX(), (int)you.getY())) {
+    if (door.checkdoor((int)you.getX(), (int)you.getY(), current)) {
       //System.out.println(door.getName());
       prev=current.getName();
       prevL=current;
@@ -641,22 +641,22 @@ public void reposition() {
       NodeX = prevL.nodes.get(2*i);
       NodeY = prevL.nodes.get((2*i) + 1);
     }
-  }  
-  if (Math.abs(((current.getBD() + current.getBU())/2) - NodeY) < Math.abs(((current.getBR() + current.getBL())/2) - NodeX)) {
-    if (NodeX > ((current.getBR() + current.getBL())/2)) {
-      you.setX(NodeX - 32);
-    } else {
-      you.setX(NodeX + 32);
-    }
-    you.setY(NodeY);
-  } else {
-    if (NodeY > ((current.getBD() + current.getBU())/2)) {
-      you.setY(NodeY - 32);
-    } else {
-      you.setY(NodeY + 32);
-    }
-    you.setX(NodeX + 32);
   }
+  int adjx = 0;
+  int adjy = 0;
+  if (Math.abs(NodeX - current.getBL()) <= 8) {
+    adjx = 24;
+  }else if(Math.abs(NodeX - current.getBR()) <=8){
+   adjx = -24; 
+  }
+  if (Math.abs(NodeY - current.getBU()) <= 8) {
+    adjy = 24;
+  }else if(Math.abs(NodeY - current.getBD()) <=8){
+   adjy = -24; 
+  }
+  you.setX(NodeX + adjx);
+  you.setY(NodeY + adjy);
+  System.out.println(NodeX + "," +NodeY+"gafhbg.akdjfnhbg.jfdg" + adjx + ","+ adjy);
 }
 
 
