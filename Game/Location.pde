@@ -95,7 +95,7 @@ public class Location {
     int i = 0;
     int c = nodes.size();
     while (i < c) {
-      System.out.println(i);
+      //System.out.println(i);
       //System.out.println(nodes.get(i) + ", "+ nodes.get(i+1));
       int nodeX = nodes.get(i);
       int nodeY = nodes.get(i + 1);
@@ -109,29 +109,21 @@ public class Location {
         }
         //System.out.println(bu);
       }
-      System.out.println(bd);
+      //System.out.println(bd);
       i += 2;
     }
     return false;
   }
-  public int wdoor(int x, int y,Location prev) {
     /*
-    for(int i = 0; i < Links.length;i++){
-      if(Links[i].getName().equals(prev.getName())){
-       return i; 
-      }
-    }
-    */
-    for (int i = 0; i < nodes.size (); i+=2) {
-      int nodeX = nodes.get(i);
-      int nodeY = nodes.get(i + 1);
-      if (Math.abs(((bd + bu)/2) - y) < Math.abs(((br + bl)/2) - x)) {
-        if ((Math.abs(x - nodeX) < 6 && Math.abs(y - nodeY) < 18) || (Math.abs(x - nodeX) < 18 && Math.abs(y - nodeY) < 6)) {
-          return i;
-        }
+      int nodeX = nodes.get((2*q));
+      int nodeY = nodes.get((2*q) 1);
+      if ((Math.abs(x - nodeX) < 6 && Math.abs(y - nodeY) < 18) || (Math.abs(x - nodeX) < 18 && Math.abs(y - nodeY) < 6)) {
+        System.out.println("jkasfjbdf");
+        return i/2;
       }
     }
     return 0;
-  }
+    */
+
 }
 

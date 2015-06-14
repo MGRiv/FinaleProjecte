@@ -87,7 +87,7 @@ void setup() {
    newLinks[0].setLinks(otherLinks);
    */
   you=new Player("Link", 10);
-  System.out.println(you.getName());
+  //System.out.println(you.getName());
   pos=0;
   you.setX(width/2);
   you.setY(height/2);
@@ -151,11 +151,11 @@ void draw() {
   } else if (mode == 1) {
     background(254);
     image(current.getBackground(), 0, 0, 600, 600);
-    System.out.println(current.getName()+"::::::"+current.getScene());
+    //System.out.println(current.getName()+"::::::"+current.getScene());
     if (current.getScene()) {
       current.setScene(false);
       runFile();
-      
+
       fcount++;
     }
     if (mvmt==true) {
@@ -210,7 +210,7 @@ void draw() {
 
     if (zbutton!="Talk" && mvmt == false) {
       if (inLink()) {
-        reposition(current.wdoor((int)you.getX(), (int)you.getY(),prevL));
+        reposition();
       }
       processKeys();
     }
@@ -325,7 +325,7 @@ void processKeys() {
       }
     }
     pos++;
-    System.out.println("FFFFFFFFFFFFFFFFFFFFFF");
+    //System.out.println("FFFFFFFFFFFFFFFFFFFFFF");
     dirc = 37;
   }
 
@@ -339,7 +339,7 @@ void processKeys() {
     you.setPosD(pos % 10);
   }
   you.setDir(dirc);
-  System.out.println("" + (int)you.getX() + ", " + (int)you.getY()+" "+pos);
+  //System.out.println("" + (int)you.getX() + ", " + (int)you.getY()+" "+pos);
   //if (zPressed) {
   //interact();
   //}
@@ -408,7 +408,7 @@ void loadLocations() {
 
     maps[i]=new Location(Integer.valueOf(room[1]), Integer.valueOf(room[2]), Integer.valueOf(room[3]), Integer.valueOf(room[4]), newchars, loadImage(room[5]), scene);
     maps[i].setName(room[0]);
-    System.out.println(newchars.length+"saqeqwe");
+    //System.out.println(newchars.length+"saqeqwe");
   }
 }
 
@@ -437,14 +437,14 @@ void loadLinks() {
     }
     placectr=0;
     maps[mapctr].setLinks(newLocs);
-    System.out.println(maps[0].getName()+maps[0].getLinks()[0].getName());
+    //System.out.println(maps[0].getName()+maps[0].getLinks()[0].getName());
     mapctr++;
   }
 }
 
 void runFile() {
   File blah=new File("scene"+fcount+".txt");
-  System.out.println(blah.getAbsolutePath());
+  //System.out.println(blah.getAbsolutePath());
   String commandlines[]=loadStrings("scene"+fcount+".txt");
   mvChars=new ArrayList<Character>(0);
 
@@ -454,7 +454,7 @@ void runFile() {
     if (commands[0].equals("MOVE")) {
       //Command,Name,FinalX,FinalY
       mvmt=true;
-      System.out.println(commands[1]);
+      //System.out.println(commands[1]);
       Character temp = findCharacter(commands[1]);
 
       temp.setIForm(0);
@@ -530,8 +530,8 @@ void dialogue(String text) {
 }
 
 void talk() {
-  System.out.println(zPressed);
-  System.out.println(nextset);
+  //System.out.println(zPressed);
+  //System.out.println(nextset);
   if (zPressed) {
     zPressed=false;
     nextset++;
@@ -614,8 +614,8 @@ public Character findCharacter(String name) {
 
 public boolean inLink() {
   for (Location door : current.getLinks ()) {
-    System.out.println(door);
     if (door.checkdoor((int)you.getX(), (int)you.getY())) {
+      //System.out.println(door.getName());
       prev=current.getName();
       prevL=current;
       current=door;
@@ -629,32 +629,39 @@ public boolean inLink() {
   return false;
 }
 
-public void reposition(int a) {
-  for (Location door : current.getLinks ()) {
-    if (door.getName()==prev) {
-      int NodeX = door.nodes.get(a);
-      int NodeY = door.nodes.get(a + 1);
-      if (Math.abs(((door.getBD() + door.getBU())/2) - NodeY) < Math.abs(((door.getBR() + door.getBL())/2) - NodeX)) {
-        if (NodeX > ((door.getBR() + door.getBL())/2)) {
-          you.setX(NodeX - 32);
-        } else {
-          you.setX(NodeX + 32);
-        }
-        you.setY(NodeY);
-      } else {
-        if (NodeY > ((door.getBD() + door.getBU())/2)) {
-          you.setY(NodeY - 32);
-        } else {
-          you.setY(NodeY + 32);
-        }
-        you.setX(NodeX + 32);
-      }
+public void reposition() {
+  int NodeX = 0;
+  int NodeY = 0;
+  for (int i = 0; i < prevL.getLinks ().length; i++) {
+    if (prevL.getLinks()[i].getName().equals(current.getName())) {
+      //System.out.println(current.getLinks()[i].getName());
+      //System.out.println(current.nodes.get(2*i) + "," + current.nodes.get(2*i + 1));
+      //System.out.println(current.getName());
+      //System.out.println(Arrays.toString(current.getLinks()));
+      NodeX = prevL.nodes.get(2*i);
+      NodeY = prevL.nodes.get((2*i) + 1);
     }
+  }  
+  if (Math.abs(((current.getBD() + current.getBU())/2) - NodeY) < Math.abs(((current.getBR() + current.getBL())/2) - NodeX)) {
+    if (NodeX > ((current.getBR() + current.getBL())/2)) {
+      you.setX(NodeX - 32);
+    } else {
+      you.setX(NodeX + 32);
+    }
+    you.setY(NodeY);
+  } else {
+    if (NodeY > ((current.getBD() + current.getBU())/2)) {
+      you.setY(NodeY - 32);
+    } else {
+      you.setY(NodeY + 32);
+    }
+    you.setX(NodeX + 32);
   }
 }
 
+
 public void pickup() {
-  System.out.println(current.catalog);
+  //System.out.println(current.catalog);
   for (int i=0; i< current.catalog.size (); i++) {
     //testItems.get(i).display();
     if (you.getX()>=current.catalog.get(i).getX()-15 && you.getX()<=current.catalog.get(i).getX()+15 &&
