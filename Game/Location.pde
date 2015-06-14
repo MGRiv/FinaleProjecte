@@ -90,7 +90,7 @@ public class Location {
   public Location[] getLinks() {
     return Links;
   }
-  public boolean checkdoor(int x, int y) {
+  public boolean checkdoor(int x, int y, Location curr) {
     //System.out.println(nodes.get(0) + ", "+ nodes.get(1));
     int i = 0;
     int c = nodes.size();
@@ -101,11 +101,15 @@ public class Location {
       int nodeY = nodes.get(i + 1);
       if (Math.abs(((bd + bu)/2) - y) < Math.abs(((br + bl)/2) - x)) {
         if (Math.abs(x - nodeX) < 6 && Math.abs(y - nodeY) < 18) {
-          return true;
+          if (curr.getName().equals(Links[i/2].getName())) {
+            return true;
+          }
         }
       } else {
         if (Math.abs(x - nodeX) < 18 && Math.abs(y - nodeY) < 6) {
-          return true;
+          if (curr.getName().equals(Links[i/2].getName())) {
+            return true;
+          }
         }
         //System.out.println(bu);
       }
@@ -114,16 +118,15 @@ public class Location {
     }
     return false;
   }
-    /*
+  /*
       int nodeX = nodes.get((2*q));
-      int nodeY = nodes.get((2*q) 1);
-      if ((Math.abs(x - nodeX) < 6 && Math.abs(y - nodeY) < 18) || (Math.abs(x - nodeX) < 18 && Math.abs(y - nodeY) < 6)) {
-        System.out.println("jkasfjbdf");
-        return i/2;
-      }
-    }
-    return 0;
-    */
-
+   int nodeY = nodes.get((2*q) 1);
+   if ((Math.abs(x - nodeX) < 6 && Math.abs(y - nodeY) < 18) || (Math.abs(x - nodeX) < 18 && Math.abs(y - nodeY) < 6)) {
+   System.out.println("jkasfjbdf");
+   return i/2;
+   }
+   }
+   return 0;
+   */
 }
 
