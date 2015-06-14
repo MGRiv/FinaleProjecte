@@ -1,5 +1,3 @@
-MOVE,Boy1,250,200
-MOVE,Boy1,200,200
-MOVE,Boy1,250,200
-MOVE,Boy1,200,200
-TALK,POLICEMAN,Detective! Detective! The body was found on midnight. There are no signs of violence.
+MOVE,Boy1,200,250
+MOVE,Boy1,250,250
+TALK,POLICEMAN,"WAKKA WAKKA"
