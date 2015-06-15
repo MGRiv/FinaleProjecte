@@ -1,5 +1,5 @@
-Start,66,502,74,502,Locations/0.png,TRUE,0,Boy1,200,200,WEE I'm a guinea pig. HAHAHAHHAHAHAHAHAHAHAHAHAHA. DUDUDUDUDUDUDUDUDU.
-class,92,464,62,524,Locations/1.png,TRUE,1,Boy2,300,200,WEEEEEEEEEEEE I'm a god. DUDUDUDUDUDUDUDDUDUUD.
+Start,66,502,74,502,Locations/0.png,TRUE,0,Boy1,200,200,You should really start collecting those letters.
+class,92,464,62,524,Locations/1.png,TRUE,1,Boy2,300,200,You will be free when you learn his name.
 hall,66,498,118,462,Locations/2.png,TRUE,2
 library,100,474,108,470,Locations/8.png,FALSE
 freedom,132,464,82,498,Locations/6.png,FALSE

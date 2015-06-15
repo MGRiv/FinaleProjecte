@@ -75,8 +75,7 @@ void setup() {
    
    PImage bg=loadImage("Locations/0.png");
    */
-  minim = new Minim(this);
-  player = minim.loadFile("huzzah.wav");
+
   loadLocations();
   loadLinks();
   current=maps[0];
@@ -114,9 +113,9 @@ void setup() {
 
   maps[0].getLinks()[0].catalog=new ArrayList<Item>();
   current.catalog.add(new Item("J", loadImage("Letters/0.png"), 75, 75));
-  current.catalog.add(new Item("O", loadImage("Letters/1.png"), 100, 100));
-  current.catalog.add(new Item("H", loadImage("Letters/2.png"), 150, 150));
-  current.catalog.add(new Item("N", loadImage("Letters/3.png"), 400, 200));
+  maps[2].catalog.add(new Item("O", loadImage("Letters/1.png"), 300, 300));
+  maps[4].catalog.add(new Item("H", loadImage("Letters/2.png"), 150, 150));
+  maps[8].catalog.add(new Item("N", loadImage("Letters/3.png"), 400, 200));
 
   //-----------------------------MENU
   START=new Button(width/4 - 60, 3*height/4 - 60, 2*buttonSize, 2*buttonSize, 5, "START");
@@ -210,6 +209,9 @@ void draw() {
       inventory.get(inventory.size()-1).display();
     }
     if (huzzahx==2) {
+      
+      minim = new Minim(this);
+      player = minim.loadFile("huzzah.wav");
       player.play();
       noLoopWait(1900);
       loop();
@@ -546,7 +548,7 @@ void dialogue(String text) {
   int counter=0;
   int lines=0;
   for (String word : list) {
-    if (word.length()+counter>=38) {
+    if (word.length()+counter>=30) {
       lines+=1;
       str+="\n";
       counter=0;
@@ -690,20 +692,20 @@ public void reposition() {
     adjx = 24;
   } else if (Math.abs(NodeX - current.getBR()) <=8) {
     adjx = -24;
-  }else if (Math.abs(NodeY - current.getBU()) <= 8) {
+  } else if (Math.abs(NodeY - current.getBU()) <= 8) {
     adjy = 24;
   } else if (Math.abs(NodeY - current.getBD()) <=8) {
     adjy = -24;
-  }else{
-   if(dirc == 40){
-     adjy = 24;
-   }else if(dirc == 39){
-     adjx = 24;
-   }else if(dirc == 38){
-     adjy = -24;
-   }else if(dirc == 37){
-     adjx = -24;
-   }
+  } else {
+    if (dirc == 40) {
+      adjy = 24;
+    } else if (dirc == 39) {
+      adjx = 24;
+    } else if (dirc == 38) {
+      adjy = -24;
+    } else if (dirc == 37) {
+      adjx = -24;
+    }
   }
   you.setX(NodeX + adjx);
   you.setY(NodeY + adjy);
