@@ -58,7 +58,7 @@ ArrayList<String> sets;
 
 void setup() {
   //---------------------------GAMEPLAY
-<<<<<<< HEAD
+  //<<<<<<< HEAD
   //<<<<<<< HEAD
   /*
   firstNPCs=new Character[1];
@@ -85,15 +85,15 @@ void setup() {
   minim2=new Minim(this);
   intro=minim2.loadFile("maintheme.mp3");
   //>>>>>>> origin/master
-=======
+  //=======
   minim = new Minim(this);
   player = minim.loadFile("huzzah.wav");
 
-  
+
   minim2=new Minim(this);
   intro=minim2.loadFile("maintheme.mp3");
 
->>>>>>> origin/master
+  //>>>>>>> origin/master
   loadLocations();
   loadLinks();
   current=maps[0];
@@ -133,14 +133,14 @@ void setup() {
   textAlign(CENTER, CENTER);
   //-----------------------------DIALOGUE
   sets=new ArrayList<String>(1);
- 
+
   lastTime=millis();
   nextset= -1;
   talking = current.getNPC(0);
 }
 
 void draw() {
- 
+
   if (mode == 0) {
     c2++;
     intro.play();
@@ -204,7 +204,7 @@ void draw() {
     if (you.getHuzzah()) {
       huzzahx++;
     }
- 
+
 
     if (huzzahx==1) {
       inventory.get(inventory.size()-1).setX((int)you.getX()+10);
@@ -212,20 +212,20 @@ void draw() {
       inventory.get(inventory.size()-1).display();
     }
     if (huzzahx==2) {
-<<<<<<< HEAD
+      //<<<<<<< HEAD
       //<<<<<<< HEAD
       //=======
 
       minim = new Minim(this);
       player = minim.loadFile("huzzah.wav");
       //>>>>>>> origin/master
-=======
+      //=======
 
 
       minim = new Minim(this);
       player = minim.loadFile("huzzah.wav");
 
->>>>>>> origin/master
+      //>>>>>>> origin/master
       player.play();
       noLoopWait(1900);
       loop();
@@ -249,8 +249,6 @@ void draw() {
       }
       processKeys();
     }
-
-
   } else if (mode==2) {
     loadInstructions();
     processButtons();
@@ -648,7 +646,7 @@ public boolean inLink() {
   for (Location door : current.getLinks ()) {
     if (door.checkdoor((int)you.getX(), (int)you.getY(), current)) {
       if (door.getName().equals("end") && current.getName().equals("class")) {
-<<<<<<< HEAD
+        //<<<<<<< HEAD
         if (found) {
           prev=current.getName();
           prevL=current;
@@ -660,19 +658,7 @@ public boolean inLink() {
           }
           System.out.println(true);
           return true;
-=======
-        if(found){
-        prev=current.getName();
-        prevL=current;
-        current=door;
-        sets.clear();
-        for (int i = 0; i < current.getNPC ().length; i++) {
-          talking = current.getNPC(0);
-          dialogue(current.getNPC(i).getText());
-        }
-        
-        return true;
->>>>>>> origin/master
+          //=======
         }
       } else {
         prev=current.getName();
@@ -683,20 +669,20 @@ public boolean inLink() {
           talking = current.getNPC(0);
           dialogue(current.getNPC(i).getText());
         }
-        
+
         return true;
       }
-<<<<<<< HEAD
+      //<<<<<<< HEAD
       //<<<<<<< HEAD
       //=======
       //return true;
       //>>>>>>> origin/master
-=======
+      //=======
 
 
-      return true;
+      //return true;
 
->>>>>>> origin/master
+      //>>>>>>> origin/master
     }
   }
   return false;
@@ -739,7 +725,7 @@ public void reposition() {
 
 
 public void pickup() {
-  
+
   for (int i=0; i< current.catalog.size (); i++) {
     //testItems.get(i).display();
     if (you.getX()>=current.catalog.get(i).getX()-15 && you.getX()<=current.catalog.get(i).getX()+15 &&
