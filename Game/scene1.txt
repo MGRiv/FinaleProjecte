@@ -1,0 +1,3 @@
+MOVE,DETECTIVE,300,285
+TALK,DETECTIVE,What's going on here?
+TALK,CUSTODIAN,Oh nothing much. Just found out about the murder. Today's a g- er sad day to die. You should stop hanging around, or it'd be the death of you.

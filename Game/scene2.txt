@@ -1,0 +1,2 @@
+TALK,DETECTIVE,Nothing seems to be out of the ordin- What's that?
+MOVE,DETECTIVE,322,200
