@@ -407,8 +407,18 @@ void loadLocations() {
     // NAME, BU, BD, BL, BR, PATH, SCENE?, FIRSTChar,..LASTChar
     Character newchars[]=new Character[0];
     boolean scene=false;
-    if (room.length>6) {
-      newchars=new Character[(room.length-6)/4];
+    if (room.length % 2 == 0) {
+      newchars=new Character[(room.length-8)/4];
+      for (int j=8, x=0; j<room.length; j+=4, x++) {
+        newchars[x]=new Character(room[j]);
+        newchars[x].setX(Integer.valueOf(room[j+1]));
+        newchars[x].setY(Integer.valueOf(room[j+2]));
+        newchars[x].setText(room[j+3]);
+        newchars[x].setDir(40);
+        newchars[x].setPosD(0);
+      }
+    } else {
+      newchars=new Character[(room.length-7)/4];
       for (int j=7, x=0; j<room.length; j+=4, x++) {
         newchars[x]=new Character(room[j]);
         newchars[x].setX(Integer.valueOf(room[j+1]));
@@ -418,17 +428,19 @@ void loadLocations() {
         newchars[x].setPosD(0);
       }
     }
-
     if (room[6].equals("FALSE")) {
       scene=false;
     } else if (room[6].equals("TRUE")) {
       scene=true;
     }
-
     maps[i]=new Location(Integer.valueOf(room[1]), Integer.valueOf(room[2]), Integer.valueOf(room[3]), Integer.valueOf(room[4]), newchars, loadImage(room[5]), scene);
     maps[i].setName(room[0]);
+    if (room.length % 2 == 0) {
+      maps[i].scenenum= Integer.valueOf(room[7]);
+    }
     //System.out.println(newchars.length+"saqeqwe");
   }
+  System.out.println(Arrays.toString(maps));
 }
 
 void loadLinks() {
@@ -462,9 +474,13 @@ void loadLinks() {
 }
 
 void runFile() {
-  File blah=new File("scene"+fcount+".txt");
+  String commandlines[];
+  if (current.scenenum != -1) {
+    commandlines=loadStrings("scene"+current.scenenum+".txt");
+  } else {
+    commandlines=loadStrings("scene"+fcount+".txt");
+  }
   //System.out.println(blah.getAbsolutePath());
-  String commandlines[]=loadStrings("scene"+fcount+".txt");
   mvChars=new ArrayList<Character>(0);
 
   for (int i=0; i<commandlines.length; i++) {

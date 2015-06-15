@@ -8,6 +8,7 @@ public class Location {
   private Location[] Links;
   public ArrayList<Integer> nodes = new ArrayList<Integer>();
   private String name;
+  public int scenenum = -1;
 
   public Location() {
     bu = 0;
