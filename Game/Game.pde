@@ -57,25 +57,7 @@ ArrayList<String> sets;
 
 void setup() {
   //---------------------------GAMEPLAY
-  /*
-  firstNPCs=new Character[1];
-   seconNPCs=new Character[1];
-   firstNPCs[0]=new Character("Boy1");
-   firstNPCs[0].setX(200);
-   firstNPCs[0].setY(200);
-   firstNPCs[0].setDir(40);
-   firstNPCs[0].setPosD(0);
-   firstNPCs[0].setText("Hi my name is Boy1. I am the first guinea pig of this world. Hi my name is Boy1. I am the first guinea pig of this world. Hi my name is Boy1. I am the first guinea pig of this world. Hi my name is Boy1. I am the first guinea pig of this world.");
-   seconNPCs[0]=new Character("Boy1");
-   seconNPCs[0].setX(300);
-   seconNPCs[0].setY(200);
-   seconNPCs[0].setDir(40);
-   seconNPCs[0].setPosD(0);
-   seconNPCs[0].setText("Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world.");
-   
-   PImage bg=loadImage("Locations/0.png");
-   */
- 
+  
   minim2=new Minim(this);
   intro=minim2.loadFile("maintheme.mp3");
   loadLocations();
@@ -84,24 +66,9 @@ void setup() {
   zbutton="DoNothing";
   size(600, 600);
   mvchars=new ArrayList<Command>();
-  /*
-  current = new Location(66, 502, 74, 502, firstNPCs, bg, true);
-   current.setName("Start");
-   
-   Location[] newLinks=new Location[1];
-   Location[] otherLinks=new Location[1];
-   otherLinks[0]=current;
-   otherLinks[0].setNodeX(60);
-   otherLinks[0].setNodeY(285);
-   newLinks[0]=new Location(92, 464, 62, 524, seconNPCs, loadImage("Locations/1.png"), false);
-   newLinks[0].setName("class");
-   newLinks[0].setNodeX(504);
-   newLinks[0].setNodeY(205);
-   current.setLinks(newLinks);
-   newLinks[0].setLinks(otherLinks);
-   */
+ 
   you=new Player("Link", 10);
-  //System.out.println(you.getName());
+  
   pos=0;
   you.setX(width/2);
   you.setY(height/2);
@@ -109,7 +76,7 @@ void setup() {
   you.setDir(40);
   dirc = 40;
   prev="";
-  //maps=new Location[10];
+ 
   inventory=new ArrayList<Item>(1);
   current.catalog=new ArrayList<Item>(1);
 
@@ -163,12 +130,10 @@ void draw() {
     fill(bcolor);
     START.display(bcolor, tcolor);
     HELP.display(bcolor, tcolor);
-    // System.out.println(maps[0].getLinks()[0]);
   } else if (mode == 1) {
     intro.close();
     background(254);
     image(current.getBackground(), 0, 0, 600, 600);
-    System.out.println(you.getX() + "," + you.getY());
     if (current.getScene()) {
       current.setScene(false);
       runFile();
@@ -183,7 +148,7 @@ void draw() {
         }
       } else {
         moveChars();
-        //System.out.println(mvChars.get(0).getStopX()+"...................."+you.getX());
+       
         showItems();
         for (int i = 0; i < current.getNPC ().length; i++) {
           current.getNPC(i).display();
@@ -350,7 +315,6 @@ void processKeys() {
       }
     }
     pos++;
-    //System.out.println("FFFFFFFFFFFFFFFFFFFFFF");
     dirc = 37;
   }
 
@@ -364,10 +328,6 @@ void processKeys() {
     you.setPosD(pos % 10);
   }
   you.setDir(dirc);
-  //System.out.println("" + (int)you.getX() + ", " + (int)you.getY()+" "+pos);
-  //if (zPressed) {
-  //interact();
-  //}
   if (open) {
     openInv();
   }
@@ -444,9 +404,8 @@ void loadLocations() {
     if (room.length % 2 == 0) {
       maps[i].scenenum= Integer.valueOf(room[7]);
     }
-    //System.out.println(newchars.length+"saqeqwe");
   }
-  System.out.println(Arrays.toString(maps));
+  
 }
 
 void loadLinks() {
@@ -457,15 +416,15 @@ void loadLinks() {
     String[] links=split(lines[i], ",");
 
     Location newLocs[]=new Location[links.length/3];
-    // System.out.println(newLocs.length+"hahahahahahahaha");
+   
     for (int j=0; j<links.length; j+=3) {
       int loop=0;
       for (Location place : maps) {
 
         if (place.getName().equals(links[j])) {
-          //  System.out.println(maps[0].getName()+"::::::::::::::::::::::::::"+links[j]);
+        
           newLocs[placectr]=place;
-          //System.out.println(newLocs[placectr]+"dadadsdadaaasdsaddadasd");
+        
           newLocs[placectr].nodes.add(Integer.valueOf(links[j+1]));
           newLocs[placectr].nodes.add(Integer.valueOf(links[j+2]));
           placectr++;
@@ -474,7 +433,7 @@ void loadLinks() {
     }
     placectr=0;
     maps[mapctr].setLinks(newLocs);
-    //System.out.println(maps[0].getName()+maps[0].getLinks()[0].getName());
+  
     mapctr++;
   }
 }
@@ -486,7 +445,7 @@ void runFile() {
   } else {
     commandlines=loadStrings("scene"+fcount+".txt");
   }
-  //System.out.println(blah.getAbsolutePath());
+  
   mvChars=new ArrayList<Character>(0);
 
   for (int i=0; i<commandlines.length; i++) {
@@ -495,11 +454,11 @@ void runFile() {
     if (commands[0].equals("MOVE")) {
       //Command,Name,FinalX,FinalY
       mvmt=true;
-      //System.out.println(commands[1]);
+   
       Character temp = findCharacter(commands[1]);
 
       temp.setIForm(0);
-      // temp.move(Integer.valueOf(commands[2]), Integer.valueOf(commands[3]));
+   
       Command lelouch=new Command(temp, Integer.valueOf(commands[2]), Integer.valueOf(commands[3]));
       mvchars.add(lelouch);
       mvChars.add(temp);
@@ -515,22 +474,7 @@ void runFile() {
       }
     }
   }
-  /*
-  file = new Scanner("scene"+fcount+".txt");
-   while (file.hasNextLine ()) {
-   line = file.nextLine();
-   String[] commands = split(line, ",");
-   if (commands[0].equals("MOVE")) {
-   Character temp = findCharacter(commands[1]);
-   temp.move(Integer.valueOf(commands[2]), Integer.valueOf(commands[3]));
-   } else {
-   dialogue(commands[2]);
-   newTextBox(commands[1]);
-   textSize(16);
-   text(sets.get(nextset), width/24+100, height*3/4+30);
-   }
-   }
-   */
+
 }
 
 void moveChars() {
@@ -572,8 +516,7 @@ void dialogue(String text) {
 }
 
 void talk() {
-  //System.out.println(zPressed);
-  //System.out.println(nextset);
+ 
   if (zPressed) {
     zPressed=false;
     nextset++;
@@ -660,7 +603,6 @@ public Character findCharacter(String name) {
 
 public boolean inLink() {
   for (Location door : current.getLinks ()) {
-    System.out.println(current.getName());
     if (door.checkdoor((int)you.getX(), (int)you.getY(), current)) {
       prev=current.getName();
       prevL=current;
@@ -670,7 +612,6 @@ public boolean inLink() {
         talking = current.getNPC(0);
         dialogue(current.getNPC(i).getText());
       }
-      System.out.println(true);
       return true;
     }
   }
@@ -682,10 +623,7 @@ public void reposition() {
   int NodeY = 0;
   for (int i = 0; i < prevL.getLinks ().length; i++) {
     if (prevL.getLinks()[i].getName().equals(current.getName())) {
-      //System.out.println(current.getLinks()[i].getName());
-      //System.out.println(current.nodes.get(2*i) + "," + current.nodes.get(2*i + 1));
-      //System.out.println(current.getName());
-      //System.out.println(Arrays.toString(current.getLinks()));
+   
       NodeX = prevL.nodes.get(2*i);
       NodeY = prevL.nodes.get((2*i) + 1);
     }
@@ -713,7 +651,6 @@ public void reposition() {
   }
   you.setX(NodeX + adjx);
   you.setY(NodeY + adjy);
-  System.out.println(NodeX + "," +NodeY+"gafhbg.akdjfnhbg.jfdg" + adjx + ","+ adjy);
 }
 
 
