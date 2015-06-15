@@ -35,6 +35,7 @@ private Location[] maps;
 private ArrayList<Item> testItems;
 private ArrayList<Item> inventory;
 private boolean first;
+private Character talking;
 
 //-------------------------DIALOGUE
 long lastTime;
@@ -121,6 +122,7 @@ void setup() {
   // dialogue(current.getNPC(0).getText()); 
   lastTime=millis();
   nextset= -1;
+  talking = current.getNPC(0);
 }
 
 void draw() {
@@ -168,12 +170,16 @@ void draw() {
         moveChars();
         //System.out.println(mvChars.get(0).getStopX()+"...................."+you.getX());
         showItems();
-        current.getNPC(0).display();
+        for (int i = 0; i < current.getNPC ().length; i++) {
+          current.getNPC(i).display();
+        }
         you.display();
       }
     }
     if (current.getNPC().length!=0) {
-      current.getNPC(0).display();
+      for (int i = 0; i < current.getNPC ().length; i++) {
+        current.getNPC(i).display();
+      }
     }
 
     interact();
@@ -198,7 +204,7 @@ void draw() {
       huzzahx=0;
     }
     if (zbutton=="Talk") {
-      newTextBox(current.getNPC(0).getName());
+      newTextBox(talking.getName());
       textAlign(LEFT);
       if (nextset == -1) {
         text(sets.get(0), width/24+75, height*3/4+30);
@@ -540,7 +546,7 @@ void talk() {
       nextset= -1;
       textAlign(CENTER, CENTER);
       sets.clear();
-      dialogue(current.getNPC(0).getText());
+      dialogue(talking.getText());
     }
   }
 }
@@ -558,44 +564,47 @@ void newTextBox(String person) {
 
 void interact() {
   if (current.getNPC().length!=0) {
-    if (you.getDir()==37) { //if you're facing left
-      if (current.getNPC(0).getX()>=you.getX()-20 && current.getNPC(0).getX()<=you.getX()+20 &&
-        current.getNPC(0).getY()<=you.getY()+14 && current.getNPC(0).getY()>=you.getY()-14) {
+    for (int i = 0; i < current.getNPC ().length; i++) {
+      if (you.getDir()==37) { //if you're facing left
+        if (current.getNPC(i).getX()>=you.getX()-20 && current.getNPC(i).getX()<=you.getX()+20 &&
+          current.getNPC(i).getY()<=you.getY()+14 && current.getNPC(i).getY()>=you.getY()-14) {
 
-        if (zPressed) {
-          current.getNPC(0).setPosR(0);
-          current.getNPC(0).setDir(39);
-          zbutton="Talk";
+          if (zPressed) {
+            talking = current.getNPC(i);
+            current.getNPC(i).setPosR(0);
+            current.getNPC(i).setDir(39);
+            zbutton="Talk";
+          }
         }
-      }
-    } else if (you.getDir()==38) { //if you're facing up
-      if (current.getNPC(0).getY()>=you.getY()-20 && current.getNPC(0).getY()<=you.getY()+20 &&
-        current.getNPC(0).getX()<=you.getX()+14 && current.getNPC(0).getX()>=you.getX()-14) {
+      } else if (you.getDir()==38) { //if you're facing up
+        if (current.getNPC(i).getY()>=you.getY()-20 && current.getNPC(i).getY()<=you.getY()+20 &&
+          current.getNPC(i).getX()<=you.getX()+14 && current.getNPC(i).getX()>=you.getX()-14) {
 
-        if (zPressed) {
-          current.getNPC(0).setPosD(0);
-          current.getNPC(0).setDir(40);
-          zbutton="Talk";
+          if (zPressed) {
+            current.getNPC(i).setPosD(0);
+            current.getNPC(i).setDir(40);
+            zbutton="Talk";
+          }
         }
-      }
-    } else if (you.getDir()==39) { //if you're facing right
-      if (current.getNPC(0).getX()<=you.getX()+20 && current.getNPC(0).getX()>=you.getX()-20 &&
-        current.getNPC(0).getY()<=you.getY()+14 && current.getNPC(0).getY()>=you.getY()-14) {
+      } else if (you.getDir()==39) { //if you're facing right
+        if (current.getNPC(i).getX()<=you.getX()+20 && current.getNPC(i).getX()>=you.getX()-20 &&
+          current.getNPC(i).getY()<=you.getY()+14 && current.getNPC(i).getY()>=you.getY()-14) {
 
-        if (zPressed) {
-          current.getNPC(0).setPosL(0);
-          current.getNPC(0).setDir(37);
-          zbutton="Talk";
+          if (zPressed) {
+            current.getNPC(i).setPosL(0);
+            current.getNPC(i).setDir(37);
+            zbutton="Talk";
+          }
         }
-      }
-    } else if (you.getDir()==40) { //if you're facing down
-      if (current.getNPC(0).getY()<=you.getY()+24 && current.getNPC(0).getY()>=you.getY()-24 &&
-        current.getNPC(0).getX()<=you.getX()+14 && current.getNPC(0).getX()>=you.getX()-14) {
+      } else if (you.getDir()==40) { //if you're facing down
+        if (current.getNPC(i).getY()<=you.getY()+24 && current.getNPC(i).getY()>=you.getY()-24 &&
+          current.getNPC(i).getX()<=you.getX()+14 && current.getNPC(i).getX()>=you.getX()-14) {
 
-        if (zPressed) {
-          current.getNPC(0).setPosU(0);
-          current.getNPC(0).setDir(38);
-          zbutton="Talk";
+          if (zPressed) {
+            current.getNPC(i).setPosU(0);
+            current.getNPC(i).setDir(38);
+            zbutton="Talk";
+          }
         }
       }
     }
@@ -620,8 +629,8 @@ public boolean inLink() {
       prevL=current;
       current=door;
       sets.clear();
-      if (current.getNPC().length!=0) {
-        dialogue(current.getNPC(0).getText());
+      for(int i = 0; i < current.getNPC().length; i++) {
+        dialogue(current.getNPC(i).getText());
       } 
       return true;
     }
@@ -646,13 +655,13 @@ public void reposition() {
   int adjy = 0;
   if (Math.abs(NodeX - current.getBL()) <= 8) {
     adjx = 24;
-  }else if(Math.abs(NodeX - current.getBR()) <=8){
-   adjx = -24; 
+  } else if (Math.abs(NodeX - current.getBR()) <=8) {
+    adjx = -24;
   }
   if (Math.abs(NodeY - current.getBU()) <= 8) {
     adjy = 24;
-  }else if(Math.abs(NodeY - current.getBD()) <=8){
-   adjy = -24; 
+  } else if (Math.abs(NodeY - current.getBD()) <=8) {
+    adjy = -24;
   }
   you.setX(NodeX + adjx);
   you.setY(NodeY + adjy);
