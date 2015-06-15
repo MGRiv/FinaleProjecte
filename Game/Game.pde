@@ -482,6 +482,7 @@ void runFile() {
       mvchars.add(lelouch);
       mvChars.add(temp);
     } else {
+      talking = findCharacter(commands[1]);
       dialogue(commands[2]);
       newTextBox(commands[1]);
       textSize(16);
@@ -559,7 +560,9 @@ void talk() {
       nextset= -1;
       textAlign(CENTER, CENTER);
       sets.clear();
-      dialogue(talking.getText());
+      if (current.getNPC().length != 0) {
+        dialogue(current.getNPC(0).getText());
+      }
     }
   }
 }
@@ -625,10 +628,9 @@ void interact() {
 }
 
 public Character findCharacter(String name) {
-  Character[] l = current.getNPC();
-  for (int p = 0; p < l.length; p++) {
-    if (l[p].getName().equals(name)) {
-      return l[p];
+  for (int p = 0; p < current.getNPC ().length; p++) {
+    if (current.getNPC(p).getName().equals(name)) {
+      return current.getNPC(p);
     }
   }
   return you;
