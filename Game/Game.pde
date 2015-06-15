@@ -58,7 +58,7 @@ ArrayList<String> sets;
 
 void setup() {
   //---------------------------GAMEPLAY
-<<<<<<< HEAD
+  //<<<<<<< HEAD
   /*
   firstNPCs=new Character[1];
    seconNPCs=new Character[1];
@@ -79,20 +79,20 @@ void setup() {
    */
   minim = new Minim(this);
   player = minim.loadFile("huzzah.wav");
-=======
-  
+  //=======
+
   minim2=new Minim(this);
   intro=minim2.loadFile("maintheme.mp3");
->>>>>>> origin/master
+  //>>>>>>> origin/master
   loadLocations();
   loadLinks();
   current=maps[0];
   zbutton="DoNothing";
   size(600, 600);
   mvchars=new ArrayList<Command>();
- 
+
   you=new Player("Link", 10);
-  
+
   pos=0;
   you.setX(width/2);
   you.setY(height/2);
@@ -100,7 +100,7 @@ void setup() {
   you.setDir(40);
   dirc = 40;
   prev="";
- 
+
   inventory=new ArrayList<Item>(1);
   current.catalog=new ArrayList<Item>(1);
 
@@ -172,7 +172,7 @@ void draw() {
         }
       } else {
         moveChars();
-       
+
         showItems();
         for (int i = 0; i < current.getNPC ().length; i++) {
           current.getNPC(i).display();
@@ -202,12 +202,12 @@ void draw() {
       inventory.get(inventory.size()-1).display();
     }
     if (huzzahx==2) {
-<<<<<<< HEAD
-=======
+      //<<<<<<< HEAD
+      //=======
 
       minim = new Minim(this);
       player = minim.loadFile("huzzah.wav");
->>>>>>> origin/master
+      //>>>>>>> origin/master
       player.play();
       noLoopWait(1900);
       loop();
@@ -432,7 +432,6 @@ void loadLocations() {
       maps[i].scenenum= Integer.valueOf(room[7]);
     }
   }
-  
 }
 
 void loadLinks() {
@@ -443,15 +442,15 @@ void loadLinks() {
     String[] links=split(lines[i], ",");
 
     Location newLocs[]=new Location[links.length/3];
-   
+
     for (int j=0; j<links.length; j+=3) {
       int loop=0;
       for (Location place : maps) {
 
         if (place.getName().equals(links[j])) {
-        
+
           newLocs[placectr]=place;
-        
+
           newLocs[placectr].nodes.add(Integer.valueOf(links[j+1]));
           newLocs[placectr].nodes.add(Integer.valueOf(links[j+2]));
           placectr++;
@@ -460,7 +459,7 @@ void loadLinks() {
     }
     placectr=0;
     maps[mapctr].setLinks(newLocs);
-  
+
     mapctr++;
   }
 }
@@ -472,7 +471,7 @@ void runFile() {
   } else {
     commandlines=loadStrings("scene"+fcount+".txt");
   }
-  
+
   mvChars=new ArrayList<Character>(0);
 
   for (int i=0; i<commandlines.length; i++) {
@@ -481,11 +480,11 @@ void runFile() {
     if (commands[0].equals("MOVE")) {
       //Command,Name,FinalX,FinalY
       mvmt=true;
-   
+
       Character temp = findCharacter(commands[1]);
 
       temp.setIForm(0);
-   
+
       Command lelouch=new Command(temp, Integer.valueOf(commands[2]), Integer.valueOf(commands[3]));
       mvchars.add(lelouch);
       mvChars.add(temp);
@@ -501,7 +500,6 @@ void runFile() {
       }
     }
   }
-
 }
 
 void moveChars() {
@@ -543,7 +541,7 @@ void dialogue(String text) {
 }
 
 void talk() {
- 
+
   if (zPressed) {
     zPressed=false;
     nextset++;
@@ -632,17 +630,17 @@ public boolean inLink() {
   for (Location door : current.getLinks ()) {
     if (door.checkdoor((int)you.getX(), (int)you.getY(), current)) {
       if (door.getName().equals("end") && current.getName().equals("class")) {
-        if(found){
-        prev=current.getName();
-        prevL=current;
-        current=door;
-        sets.clear();
-        for (int i = 0; i < current.getNPC ().length; i++) {
-          talking = current.getNPC(0);
-          dialogue(current.getNPC(i).getText());
-        }
-        System.out.println(true);
-        return true;
+        if (found) {
+          prev=current.getName();
+          prevL=current;
+          current=door;
+          sets.clear();
+          for (int i = 0; i < current.getNPC ().length; i++) {
+            talking = current.getNPC(0);
+            dialogue(current.getNPC(i).getText());
+          }
+          System.out.println(true);
+          return true;
         }
       } else {
         prev=current.getName();
@@ -656,10 +654,10 @@ public boolean inLink() {
         System.out.println(true);
         return true;
       }
-<<<<<<< HEAD
-=======
-      return true;
->>>>>>> origin/master
+      //<<<<<<< HEAD
+      //=======
+      //return true;
+      //>>>>>>> origin/master
     }
   }
   return false;
@@ -670,7 +668,7 @@ public void reposition() {
   int NodeY = 0;
   for (int i = 0; i < prevL.getLinks ().length; i++) {
     if (prevL.getLinks()[i].getName().equals(current.getName())) {
-   
+
       NodeX = prevL.nodes.get(2*i);
       NodeY = prevL.nodes.get((2*i) + 1);
     }
@@ -713,8 +711,8 @@ public void pickup() {
 
       current.catalog.remove(temp);
       inventory.add(temp);
-      if(inventory.size() == 4){
-       found = true; 
+      if (inventory.size() == 4) {
+        found = true;
       }
     }
   }
