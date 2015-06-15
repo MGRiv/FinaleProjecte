@@ -1,9 +1,9 @@
 class,504,205,hall,287,502,library,288,152
 Start,60,285
-Start,322,74
+Start,322,66
 freedom,70,70,center,440,70
 doubleblue,70,500
 center,500,500,halfroom,70,500
 library,300,68,staircase,70,524
 staircase,70,524,doubleblue,500,500
-start,300,60,freedom,300,524
+Start,296,100,freedom,294,462

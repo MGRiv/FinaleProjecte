@@ -654,8 +654,8 @@ public Character findCharacter(String name) {
 
 public boolean inLink() {
   for (Location door : current.getLinks ()) {
+    //System.out.println(door.getName());
     if (door.checkdoor((int)you.getX(), (int)you.getY(), current)) {
-      //System.out.println(door.getName());
       prev=current.getName();
       prevL=current;
       current=door;
@@ -663,7 +663,8 @@ public boolean inLink() {
       for (int i = 0; i < current.getNPC ().length; i++) {
         talking = current.getNPC(0);
         dialogue(current.getNPC(i).getText());
-      } 
+      }
+      System.out.println(true);
       return true;
     }
   }
@@ -689,11 +690,20 @@ public void reposition() {
     adjx = 24;
   } else if (Math.abs(NodeX - current.getBR()) <=8) {
     adjx = -24;
-  }
-  if (Math.abs(NodeY - current.getBU()) <= 8) {
+  }else if (Math.abs(NodeY - current.getBU()) <= 8) {
     adjy = 24;
   } else if (Math.abs(NodeY - current.getBD()) <=8) {
     adjy = -24;
+  }else{
+   if(dirc == 40){
+     adjy = 24;
+   }else if(dirc == 39){
+     adjx = 24;
+   }else if(dirc == 38){
+     adjy = -24;
+   }else if(dirc == 37){
+     adjx = -24;
+   }
   }
   you.setX(NodeX + adjx);
   you.setY(NodeY + adjy);

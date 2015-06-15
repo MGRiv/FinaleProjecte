@@ -6,4 +6,4 @@ halfroom,66,498,118,462,Locations/4.png,FALSE
 doubleblue,66,498,118,462,Locations/5.png,FALSE
 freedom,66,498,118,462,Locations/6.png,FALSE
 center,66,498,118,462,Locations/7.png,FALSE
-library,66,498,118,462,Locations/8.png,FALSE
+library,100,498,118,462,Locations/8.png,FALSE

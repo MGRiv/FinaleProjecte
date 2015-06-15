@@ -101,6 +101,7 @@ public class Location {
       int nodeX = nodes.get(i);
       int nodeY = nodes.get(i + 1);
       if (Math.abs(((bd + bu)/2) - y) < Math.abs(((br + bl)/2) - x)) {
+        System.out.println("beep");
         if (Math.abs(x - nodeX) < 6 && Math.abs(y - nodeY) < 18) {
           if (curr.getName().equals(Links[i/2].getName())) {
             return true;
@@ -108,7 +109,10 @@ public class Location {
         }
       } else {
         if (Math.abs(x - nodeX) < 18 && Math.abs(y - nodeY) < 6) {
+          System.out.println(i);
+          System.out.println(Links[i/2].getName());
           if (curr.getName().equals(Links[i/2].getName())) {
+            System.out.println("baa");
             return true;
           }
         }
