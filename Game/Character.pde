@@ -131,10 +131,12 @@ public class Character {
         if (x > a) {
           x -= 2;
           setPosL(iform % imageCount);
+          setDir(37);
           iform++;
         } else {
           x += 2;
           setPosR(iform % imageCount);
+          setDir(39);
           iform++;
         }
       }
@@ -142,10 +144,12 @@ public class Character {
         if (y > b) {
           y -= 2;
           setPosU(iform % imageCount);
+          setDir(38);
           iform++;
         } else {
           y += 2;
           setPosD(iform % imageCount);
+          setDir(40);
           iform++;
         }
       }
