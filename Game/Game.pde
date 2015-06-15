@@ -654,7 +654,7 @@ public Character findCharacter(String name) {
 
 public boolean inLink() {
   for (Location door : current.getLinks ()) {
-    //System.out.println(door.getName());
+    System.out.println(current.getName());
     if (door.checkdoor((int)you.getX(), (int)you.getY(), current)) {
       prev=current.getName();
       prevL=current;
