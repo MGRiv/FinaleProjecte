@@ -58,32 +58,13 @@ ArrayList<String> sets;
 
 void setup() {
   //---------------------------GAMEPLAY
-<<<<<<< HEAD
-  /*
-  firstNPCs=new Character[1];
-   seconNPCs=new Character[1];
-   firstNPCs[0]=new Character("Boy1");
-   firstNPCs[0].setX(200);
-   firstNPCs[0].setY(200);
-   firstNPCs[0].setDir(40);
-   firstNPCs[0].setPosD(0);
-   firstNPCs[0].setText("Hi my name is Boy1. I am the first guinea pig of this world. Hi my name is Boy1. I am the first guinea pig of this world. Hi my name is Boy1. I am the first guinea pig of this world. Hi my name is Boy1. I am the first guinea pig of this world.");
-   seconNPCs[0]=new Character("Boy1");
-   seconNPCs[0].setX(300);
-   seconNPCs[0].setY(200);
-   seconNPCs[0].setDir(40);
-   seconNPCs[0].setPosD(0);
-   seconNPCs[0].setText("Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world. Hi my name is Boy2. I am the first guinea pig of this world.");
-   
-   PImage bg=loadImage("Locations/0.png");
-   */
   minim = new Minim(this);
   player = minim.loadFile("huzzah.wav");
-=======
+
   
   minim2=new Minim(this);
   intro=minim2.loadFile("maintheme.mp3");
->>>>>>> origin/master
+
   loadLocations();
   loadLinks();
   current=maps[0];
@@ -106,9 +87,9 @@ void setup() {
 
   maps[0].getLinks()[0].catalog=new ArrayList<Item>();
   current.catalog.add(new Item("J", loadImage("Letters/0.png"), 75, 75));
-  current.catalog.add(new Item("O", loadImage("Letters/1.png"), 100, 100));
-  current.catalog.add(new Item("H", loadImage("Letters/2.png"), 150, 150));
-  current.catalog.add(new Item("N", loadImage("Letters/3.png"), 400, 200));
+  maps[2].catalog.add(new Item("O", loadImage("Letters/1.png"), 300, 300));
+  maps[4].catalog.add(new Item("H", loadImage("Letters/2.png"), 150, 150));
+  maps[8].catalog.add(new Item("N", loadImage("Letters/3.png"), 400, 200));
 
   //-----------------------------MENU
   START=new Button(width/4 - 60, 3*height/4 - 60, 2*buttonSize, 2*buttonSize, 5, "START");
@@ -123,14 +104,14 @@ void setup() {
   textAlign(CENTER, CENTER);
   //-----------------------------DIALOGUE
   sets=new ArrayList<String>(1);
-  // dialogue(current.getNPC(0).getText()); 
+ 
   lastTime=millis();
   nextset= -1;
   talking = current.getNPC(0);
 }
 
 void draw() {
-  //System.out.println(keyCode);
+ 
   if (mode == 0) {
     c2++;
     intro.play();
@@ -194,7 +175,7 @@ void draw() {
     if (you.getHuzzah()) {
       huzzahx++;
     }
-    //you.getHuzzah());
+ 
 
     if (huzzahx==1) {
       inventory.get(inventory.size()-1).setX((int)you.getX()+10);
@@ -202,12 +183,11 @@ void draw() {
       inventory.get(inventory.size()-1).display();
     }
     if (huzzahx==2) {
-<<<<<<< HEAD
-=======
+
 
       minim = new Minim(this);
       player = minim.loadFile("huzzah.wav");
->>>>>>> origin/master
+
       player.play();
       noLoopWait(1900);
       loop();
@@ -232,7 +212,7 @@ void draw() {
       processKeys();
     }
 
-    //  you.display();
+
   } else if (mode==2) {
     loadInstructions();
     processButtons();
@@ -523,7 +503,7 @@ void dialogue(String text) {
   int counter=0;
   int lines=0;
   for (String word : list) {
-    if (word.length()+counter>=38) {
+    if (word.length()+counter>=32) {
       lines+=1;
       str+="\n";
       counter=0;
@@ -641,7 +621,7 @@ public boolean inLink() {
           talking = current.getNPC(0);
           dialogue(current.getNPC(i).getText());
         }
-        System.out.println(true);
+        
         return true;
         }
       } else {
@@ -653,13 +633,13 @@ public boolean inLink() {
           talking = current.getNPC(0);
           dialogue(current.getNPC(i).getText());
         }
-        System.out.println(true);
+        
         return true;
       }
-<<<<<<< HEAD
-=======
+
+
       return true;
->>>>>>> origin/master
+
     }
   }
   return false;
@@ -702,7 +682,7 @@ public void reposition() {
 
 
 public void pickup() {
-  //System.out.println(current.catalog);
+  
   for (int i=0; i< current.catalog.size (); i++) {
     //testItems.get(i).display();
     if (you.getX()>=current.catalog.get(i).getX()-15 && you.getX()<=current.catalog.get(i).getX()+15 &&
