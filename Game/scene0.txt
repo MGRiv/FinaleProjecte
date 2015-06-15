@@ -1,3 +1,3 @@
-MOVE,Boy1,200,250
-MOVE,Boy1,250,250
-TALK,POLICEMAN,Hey! You're stuck in a dungeon. The only way to escape is to learn the keeper's name and exit in the room to your right.
+MOVE,Boy,200,250
+MOVE,Boy,250,250
+TALK,Boy,Hey! You're stuck in a dungeon. The only way to escape is to learn the keeper's name and exit in the room to your right.

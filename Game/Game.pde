@@ -665,9 +665,11 @@ public boolean inLink() {
         prevL=current;
         current=door;
         sets.clear();
-        for (int i = 0; i < current.getNPC ().length; i++) {
-          talking = current.getNPC(0);
-          dialogue(current.getNPC(i).getText());
+        if (!current.getScene()) {
+          for (int i = 0; i < current.getNPC ().length; i++) {
+            talking = current.getNPC(0);
+            dialogue(current.getNPC(i).getText());
+          }
         }
 
         return true;
