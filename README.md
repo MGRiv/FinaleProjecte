@@ -72,7 +72,13 @@ Daily Log
 		
 	6/12
 		Michael-Began debugging code from yesterday
-		Tony-fixed nullpointer bugs. Found new bugs.	
+		Tony-fixed nullpointer bugs. Found new bugs.
+		
+	6/13
+		Michael-More bug fixing
+		
+	6/14-15
+		Michael&Tony-major content boosts + bug fixing
 Goals
 
 	Fully functioning movement w/ animation & Interaction system w/ NPC's
