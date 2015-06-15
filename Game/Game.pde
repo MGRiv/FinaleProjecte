@@ -197,7 +197,7 @@ void draw() {
     }
 
     interact();
-
+    System.out.println(you.getX() + ","+ you.getY());
     pickup();
     showItems();
     you.display();

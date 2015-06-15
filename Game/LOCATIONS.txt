@@ -1,7 +1,7 @@
 Start,66,502,74,502,Locations/0.png,TRUE,0,Boy,200,200,You should really start collecting those letters.
 class,92,464,62,524,Locations/1.png,TRUE,1,Boy,300,200,You will be free when you learn his name.
 hall,66,498,118,462,Locations/2.png,TRUE,2
-library,100,474,108,470,Locations/8.png,FALSE
+library,100,474,108,470,Locations/8.png,TRUE,3,John,800,800,...
 freedom,132,464,82,498,Locations/6.png,FALSE
 staircase,138,428,84,496,Locations/3.png,FALSE
 center,132,462,82,498,Locations/7.png,FALSE

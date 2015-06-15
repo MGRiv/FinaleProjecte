@@ -1,0 +1,2 @@
+MOVE,DETECTIVE,300,300
+TALK,John,Welcome boy! I've been waiting. It's good to see that you have the mental acumen to look downstairs.

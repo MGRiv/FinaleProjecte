@@ -1,3 +1,6 @@
-MOVE,Boy,200,250
-MOVE,Boy,250,250
-TALK,Boy,Hey! You're stuck in a dungeon. The only way to escape is to learn the keeper's name and exit in the room to your right.
+MOVE,Boy,200,300
+MOVE,Boy,264,300
+TALK,Boy,Hey! You're stuck here too! It's been ages since they've sent someone down here.
+TALK,Boy,How do we get out? You're not supposed to. Didn't they tell you it's impossible?
+TALK,Boy,They said you need to collect items to escape? That's the first I've ever heard of this.
+TALK,Boy,Anything I've noticed? All I've noticed is that there are letters scattered about this dungeon.

@@ -1,3 +1,3 @@
 MOVE,DETECTIVE,300,285
-TALK,DETECTIVE,What's going on here?
-TALK,Boy,Be wary of warp mats!
+TALK,Boy,What's going on here? I really don't know.
+TALK,Boy,Advice? The other door is blocked. You should also be wary of warp mats!
