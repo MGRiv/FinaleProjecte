@@ -10,8 +10,8 @@ import java.io.*;
 import java.lang.*;
 
 //Sound 
-AudioPlayer player;
-Minim minim;//audio context
+AudioPlayer player, intro;
+Minim minim, minim2;//audio context
 //------------------Scanner
 private ArrayList<Character>mvChars;
 private ArrayList<Command>mvchars;
@@ -75,7 +75,9 @@ void setup() {
    
    PImage bg=loadImage("Locations/0.png");
    */
-
+ 
+  minim2=new Minim(this);
+  intro=minim2.loadFile("maintheme.mp3");
   loadLocations();
   loadLinks();
   current=maps[0];
@@ -140,6 +142,7 @@ void draw() {
   //System.out.println(keyCode);
   if (mode == 0) {
     c2++;
+    intro.play();
     if (c2 % 180 == 179) {
       counter++;
     }
@@ -162,6 +165,7 @@ void draw() {
     HELP.display(bcolor, tcolor);
     // System.out.println(maps[0].getLinks()[0]);
   } else if (mode == 1) {
+    intro.close();
     background(254);
     image(current.getBackground(), 0, 0, 600, 600);
     System.out.println(you.getX() + "," + you.getY());
@@ -209,7 +213,7 @@ void draw() {
       inventory.get(inventory.size()-1).display();
     }
     if (huzzahx==2) {
-      
+
       minim = new Minim(this);
       player = minim.loadFile("huzzah.wav");
       player.play();
