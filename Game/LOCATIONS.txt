@@ -1,3 +1,9 @@
 Start,66,502,74,502,Locations/0.png,TRUE,0,Boy1,200,200,WEE I'm a guinea pig. HAHAHAHHAHAHAHAHAHAHAHAHAHA. DUDUDUDUDUDUDUDUDU.
 class,92,464,62,524,Locations/1.png,TRUE,1,Boy2,300,200,WEEEEEEEEEEEE I'm a god. DUDUDUDUDUDUDUDDUDUUD.
 hall,66,498,118,462,Locations/2.png,TRUE,2
+staircase,66,498,118,462,Locations/3.png,FALSE
+halfroom,66,498,118,462,Locations/4.png,FALSE
+doubleblue,66,498,118,462,Locations/5.png,FALSE
+freedom,66,498,118,462,Locations/6.png,FALSE
+center,66,498,118,462,Locations/7.png,FALSE
+library,66,498,118,462,Locations/8.png,FALSE
