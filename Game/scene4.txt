@@ -1,0 +1,3 @@
+MOVE,DETECTIVE,300,250
+TALK,John,Am I making this too easy?
+TALK,John,I assure you that you'll not find anymore.

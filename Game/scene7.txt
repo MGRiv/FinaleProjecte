@@ -1,0 +1,2 @@
+MOVE,DETECTIVE,300,400
+TALK,John,Where did you go? I can't see you anymore.

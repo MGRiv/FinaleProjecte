@@ -1,0 +1,4 @@
+MOVE,DETECTIVE,300,300
+TALK,John,Well it seems you've completed the course in record time.
+TALK,John,Please report to the operation room. We need to scrap you for your DNA to create better test subjects for our future mazes.
+TALK,John,Nothing personal.

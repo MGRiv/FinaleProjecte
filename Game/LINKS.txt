@@ -5,6 +5,7 @@ Start,296,100,freedom,294,462
 library,300,132,staircase,136,464
 freedom,166,138,center,364,138
 staircase,134,464,doubleblue,456,136
-center,416,208,halfroom,134,462
-doubleblue,130,462
-class,300,300
+doubleblue,132,470,windowdr,498,356
+center,416,208,halfroom,132,460,windowdr,152,206
+halfroom,300,300,doubleblue,292,538
+class,220,206

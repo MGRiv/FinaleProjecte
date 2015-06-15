@@ -1,0 +1,2 @@
+MOVE,DETECTIVE,300,300
+TALK,John,I see you have managed to get into this room. How are you getting out?

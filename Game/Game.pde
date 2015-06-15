@@ -26,6 +26,7 @@ int counter, c2;
 int tcolor, bcolor;
 PImage img1;
 //-------------------------GAMEPLAY
+private boolean visit = true;
 private boolean found;
 private int huzzahx;
 private Player you;
@@ -115,10 +116,10 @@ void setup() {
   current.catalog=new ArrayList<Item>(1);
 
   maps[0].getLinks()[0].catalog=new ArrayList<Item>();
-  current.catalog.add(new Item("J", loadImage("Letters/0.png"), 75, 75));
+  maps[3].catalog.add(new Item("J", loadImage("Letters/0.png"), 102, 134));
   maps[2].catalog.add(new Item("O", loadImage("Letters/1.png"), 300, 300));
   maps[4].catalog.add(new Item("H", loadImage("Letters/2.png"), 150, 150));
-  maps[8].catalog.add(new Item("N", loadImage("Letters/3.png"), 400, 200));
+  maps[7].catalog.add(new Item("N", loadImage("Letters/3.png"), 400, 200));
 
   //-----------------------------MENU
   START=new Button(width/4 - 60, 3*height/4 - 60, 2*buttonSize, 2*buttonSize, 5, "START");
@@ -158,14 +159,19 @@ void draw() {
     background(bcolor);
     fill(tcolor);
     textSize(64);
-    text("PHASE SHIFT", width/2, height/3);
+    text("PRELIMINARY TESTS", width/2, height/3);
     textSize(32);
-    text("PHASE SHIFT", width/2, height/3);
+    text("PRELIMINARY TESTS", width/2, height/3);
     fill(bcolor);
     START.display(bcolor, tcolor);
     HELP.display(bcolor, tcolor);
   } else if (mode == 1) {
     intro.close();
+    for (int i=0; i< current.catalog.size (); i++) {
+      if (current.catalog.get(i).getName().equals("J")) {
+        current.catalog.get(i).display();
+      }
+    }
     background(254);
     image(current.getBackground(), 0, 0, 600, 600);
     if (current.getScene()) {
@@ -197,7 +203,7 @@ void draw() {
     }
 
     interact();
-    System.out.println(you.getX() + ","+ you.getY());
+    //System.out.println(you.getX() + ","+ you.getY());
     pickup();
     showItems();
     you.display();
@@ -249,10 +255,21 @@ void draw() {
       }
       processKeys();
     }
+    if (current.getName().equals("end") && sets.size() == 0) {
+      mode = 3;
+    }
   } else if (mode==2) {
     loadInstructions();
     processButtons();
     START.display(bcolor, tcolor);
+  } else if (mode == 3) {
+    background(10);
+    fill(245);
+    PFont myFont = createFont("Mongolian Baiti", 64);
+    textFont(myFont);
+    textAlign(CENTER, CENTER);
+    textSize(64);
+    text("THE END?", width/2, height/3);
   }
 }
 
@@ -569,6 +586,9 @@ void talk() {
       if (current.getNPC().length != 0) {
         dialogue(current.getNPC(0).getText());
       }
+      if (current.getName().equals("end")) {
+        mode = 3;
+      }
     }
   }
 }
@@ -646,7 +666,6 @@ public boolean inLink() {
   for (Location door : current.getLinks ()) {
     if (door.checkdoor((int)you.getX(), (int)you.getY(), current)) {
       if (door.getName().equals("end") && current.getName().equals("class")) {
-        //<<<<<<< HEAD
         if (found) {
           prev=current.getName();
           prevL=current;
@@ -656,9 +675,34 @@ public boolean inLink() {
             talking = current.getNPC(0);
             dialogue(current.getNPC(i).getText());
           }
-          System.out.println(true);
+          //System.out.println(true);
           return true;
-          //=======
+        }
+      } else if (door.getName().equals("windowdr") && current.getName().equals("doubleblue")) {
+        if (visit) {
+          prev=current.getName();
+          prevL=current;
+          current=door;
+          sets.clear();
+          for (int i = 0; i < current.getNPC ().length; i++) {
+            talking = current.getNPC(0);
+            dialogue(current.getNPC(i).getText());
+          }
+          //System.out.println(true);
+          return true;
+        }
+      } else if (door.getName().equals("halfroom") && current.getName().equals("doubleblue")) {
+        if (visit) {
+          prev=current.getName();
+          prevL=current;
+          current=door;
+          sets.clear();
+          for (int i = 0; i < current.getNPC ().length; i++) {
+            talking = current.getNPC(0);
+            dialogue(current.getNPC(i).getText());
+          }
+          //System.out.println(true);
+          return true;
         }
       } else {
         prev=current.getName();
@@ -674,23 +718,15 @@ public boolean inLink() {
 
         return true;
       }
-      //<<<<<<< HEAD
-      //<<<<<<< HEAD
-      //=======
-      //return true;
-      //>>>>>>> origin/master
-      //=======
-
-
-      //return true;
-
-      //>>>>>>> origin/master
     }
   }
   return false;
 }
 
 public void reposition() {
+  if (current.getName().equals("halfroom")) {
+    visit = false;
+  }
   int NodeX = 0;
   int NodeY = 0;
   for (int i = 0; i < prevL.getLinks ().length; i++) {
@@ -747,7 +783,9 @@ public void pickup() {
 
 public void showItems() {
   for (int i=0; i< current.catalog.size (); i++) {
-    current.catalog.get(i).display();
+    if (!current.catalog.get(i).getName().equals("J")) {
+      current.catalog.get(i).display();
+    }
   }
 }
 
