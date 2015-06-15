@@ -7,3 +7,4 @@ staircase,138,428,84,496,Locations/3.png,FALSE
 center,132,462,82,498,Locations/7.png,FALSE
 doubleblue,132,462,82,498,Locations/5.png,FALSE
 halfroom,132,462,82,498,Locations/4.png,FALSE
+end,0,600,0,600,Locations/9.png,FALSE

@@ -109,7 +109,8 @@ public class Location {
         }
       } else {
         if (Math.abs(x - nodeX) < 18 && Math.abs(y - nodeY) < 6) {
-          System.out.println(i);
+          System.out.println("boop");
+          System.out.println(curr.getName() + Links[i/2].getName());
           if (curr.getName().equals(Links[i/2].getName())) {
             System.out.println("baa");
             return true;
