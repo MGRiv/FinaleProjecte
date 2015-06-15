@@ -1,3 +1,3 @@
 MOVE,DETECTIVE,300,150
 TALK,John,How did you get in here?
-TALK,John,Not matter. I'll seal the entrance to the next room. Just one moment.
+TALK,John,Not matter. I'll seal the door to the next room. Just one moment.
