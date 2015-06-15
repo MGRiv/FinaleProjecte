@@ -1,7 +1,17 @@
+import ddf.minim.spi.*;
+import ddf.minim.signals.*;
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.ugens.*;
+import ddf.minim.effects.*;
+
 import java.util.*;
 import java.io.*;
 import java.lang.*;
 
+//Sound 
+AudioPlayer player;
+Minim minim;//audio context
 //------------------Scanner
 private ArrayList<Character>mvChars;
 private ArrayList<Command>mvchars;
@@ -65,6 +75,8 @@ void setup() {
    
    PImage bg=loadImage("Locations/0.png");
    */
+  minim = new Minim(this);
+  player = minim.loadFile("huzzah.wav");
   loadLocations();
   loadLinks();
   current=maps[0];
@@ -198,7 +210,8 @@ void draw() {
       inventory.get(inventory.size()-1).display();
     }
     if (huzzahx==2) {
-      noLoopWait(1500);
+      player.play();
+      noLoopWait(1900);
       loop();
       you.setHuzzah(false);
       huzzahx=0;
@@ -629,7 +642,7 @@ public boolean inLink() {
       prevL=current;
       current=door;
       sets.clear();
-      for(int i = 0; i < current.getNPC().length; i++) {
+      for (int i = 0; i < current.getNPC ().length; i++) {
         dialogue(current.getNPC(i).getText());
       } 
       return true;
@@ -718,7 +731,7 @@ public void wait(int t) {
 
 public void noLoopWait(int t) {
   int s=millis();
-  while (millis ()-s<1500) {
+  while (millis ()-s<t) {
     noLoop();
   }
 }
